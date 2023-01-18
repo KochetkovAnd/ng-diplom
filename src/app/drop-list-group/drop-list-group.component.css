@@ -1,0 +1,81 @@
+.command-block {
+    width: 20vw;  
+}
+
+.program-block {
+    width: 40vw;
+    height: 40vh;    
+}
+
+
+
+.program-block > ul {
+    margin-left: 0;
+}
+
+.command-block li{
+    margin: 10px   
+}
+
+.program-ul {    
+    border-radius: 10px;
+    background-color: white;
+    min-height: 50px;
+    min-width: 200px;  
+    margin-left: 25px;  
+}
+
+.program-li {
+    list-style: none;
+    padding: 0px 10px;
+    border-radius: 10px;
+    /* border: 1px solid black; */
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    margin: 1px;  
+}
+
+.simple-block {     
+    width: 200px;
+    line-height: 25px;
+}
+
+.composite-block { 
+    display: inline-block;
+    padding: 5px;
+}
+
+.command-line {
+    width: 200px;    
+    height: 25px;
+    border-radius: 10px;
+} 
+
+.command-block .command-line {
+    margin: 10px;
+}
+
+/* Grid - Block */
+.grid-block {
+    width: 40vw;
+    height: 40vw;
+    border: 1px solid violet;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid .cell  {
+    background-color: tomato;
+} 
+
+.movebox {
+    position: fixed;
+    border-radius: 10px;
+}
+
+.movebox img {
+    margin: 10%;
+    width: 80%;
+    height: 80%;
+}
