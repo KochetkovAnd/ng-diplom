@@ -1,9 +1,9 @@
 .command-block {
-    width: 20vw;  
+    width: 25vw;  
 }
 
 .program-block {
-    width: 40vw;
+    width: 35vw;
     height: 40vh;    
 }
 
@@ -34,7 +34,7 @@
     margin: 1px;  
 }
 
-.simple-block {     
+.simple-block {
     width: 200px;
     line-height: 25px;
 }
@@ -55,10 +55,13 @@
 }
 
 /* Grid - Block */
+.grid-container {
+
+}
+
 .grid-block {
     width: 40vw;
     height: 40vw;
-    border: 1px solid violet;
 }
 
 .grid {
@@ -66,7 +69,7 @@
 }
 
 .grid .cell  {
-    background-color: tomato;
+    border: 1px solid black;
 } 
 
 .movebox {
@@ -78,4 +81,8 @@
     margin: 10%;
     width: 80%;
     height: 80%;
+}
+
+.play-button {
+    margin: 10px;
 }

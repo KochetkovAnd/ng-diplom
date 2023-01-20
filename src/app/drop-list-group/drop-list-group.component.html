@@ -1,6 +1,8 @@
-<button (click) = "rotateLeft()">Налево</button>
+<!-- <button (click) = "rotateLeft()">Налево</button>
 <button (click) = "rotateRight()">Направо</button>
-<button (click) = "stepForward()">Шаг вперед</button>
+<button (click) = "stepForward()">Шаг вперед</button> -->
+
+
 
 <div style="display:flex">
 
@@ -72,26 +74,31 @@
         </ul>
     </div>
 
-    <div class="grid-block" style="position: relative;">
-        <div class="movebox"
-        style="position: absolute;"
-        [@move] = "{value: state,params :{horizontalMargin: horizontalMargin, verticalMargin: verticalMargin}}" 
-        [@rotate]= "{value: angle, params :{angle:angle}}" [ngStyle]= "{
-            'width' : this.cellSize +'%',
-            'height' : this.cellSize +'%'
-        }"> <img src="assets/arrow.png"/></div>
-    
-        <div class="grid" [ngStyle] ="{
-            'grid-template-columns': 'repeat(' + this.m + ','+ this.cellSize +'%)',
-            'grid-auto-rows' : this.cellSize + '%',
-            'width' : (this.cellSize*max) +'%',
-            'height' : (this.cellSize*max) +'%'
-        }">
-            <div class="cell" *ngFor = "let symbol of data" [ngStyle] = "{
-                
+    <div class="grid-container">
+        <button (click) = "runProgram(program)" class="play-button">Запустить</button>
+        <div class="grid-block" style="position: relative;">
+            <div class="movebox"
+            style="position: absolute;"
+            [@move] = "{value: state,params :{horizontalMargin: horizontalMargin, verticalMargin: verticalMargin}}" 
+            [@rotate]= "{value: angle, params :{angle:angle}}" [ngStyle]= "{
+                'width' : this.cellSize +'%',
+                'height' : this.cellSize +'%'
+            }"> <img src="assets/arrow.png"/></div>
+        
+            <div class="grid" [ngStyle] ="{
+                'grid-template-columns': 'repeat(' + this.m + ','+ this.cellSize +'%)',
+                'grid-auto-rows' : this.cellSize + '%',
+                'width' : (this.cellSize*max) +'%',
+                'height' : (this.cellSize*max) +'%'
             }">
-                {{symbol}}
+                <div class="cell" *ngFor = "let symbol of data" [ngStyle] = "{
+                    
+                }">
+                    {{symbol}}
+                </div>
             </div>
         </div>
     </div>
+
+    
 </div>

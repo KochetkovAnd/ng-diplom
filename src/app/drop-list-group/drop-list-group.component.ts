@@ -3,6 +3,8 @@ import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray, transferArrayItem, 
 import { asapScheduler, asyncScheduler } from 'rxjs';
 import { Block } from '../models/block';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 @Component({
     selector: 'app-drop-list-group',
     templateUrl: './drop-list-group.component.html',
@@ -23,7 +25,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
                     }
                 }
             ),
-            transition("*=>*", animate('0.2s'))
+            transition("*=>*", animate('0.3s'))
         ]),
         trigger('rotate', [
             state('*',
@@ -38,7 +40,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
                     }
                 }
             ),
-            transition("*=>*", animate('0.2s'))
+            transition("*=>*", animate('0.3s'))
         ])
     ]
 })
@@ -47,8 +49,8 @@ export class DropListGroupComponent {
     commands: Block[] = [
         { "type": "simple", "text": "Шаг вперед", color: "rgb(83, 94, 245)", include: [] },
         { "type": "simple", "text": "Поворот налево", color: "rgb(83, 94, 245)", include: [] },
-        { "type": "simple", "text": "Поворот налево", color: "rgb(83, 94, 245)", include: [] },
-        { "type": "composite", "text": "Начало цикла", color: "rgb(226, 103, 31)", include: [] },
+        { "type": "simple", "text": "Поворот направо", color: "rgb(83, 94, 245)", include: [] },
+        { "type": "composite", "text": "Повторить", color: "rgb(226, 103, 31)", include: [] },
     ]
 
     program:Block[] =[]
@@ -129,9 +131,40 @@ export class DropListGroupComponent {
         }
     }
 
+    async runProgram(commands: Block[]) {
+        for (let i = 0; i < commands.length; i++) {
+            if (commands[i].type == "simple") {
+                switch (commands[i].text) {
+                    case "Шаг вперед":
+                        this.stepForward()
+                        await sleep(300)
+                        break;
+                    case "Поворот налево":
+                        this.rotateLeft()
+                        await sleep(300)
+                        break;
+                    case "Поворот направо":
+                        this.rotateRight()
+                        await sleep(300)
+                        break;
+                }
+            } else {
+                switch (commands[i].text) {
+                    case "Повторить":
+                        for (let j = 0; j < 2; j++) {
+                            await this.runProgram(commands[i].include)
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
     rotateRight(): void { this.angle += 90 }
 
-    rotateLeft(): void { this.angle -= 90 }
+    rotateLeft(): void { 
+        this.angle -= 90
+    }
 
     stepForward(): void {
         if (this.angle % 360 == 0) {
