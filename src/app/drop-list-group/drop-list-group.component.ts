@@ -8,7 +8,14 @@ import { trigger, state, style, transition, animate, useAnimation, keyframes } f
 const sleepTime = 300;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
+const cloneBlock = (block: Block) => {
+    return {
+        type: block.type,
+        text: block.text,
+        color: block.color,
+        include: []
+    }
+}
 
 @Component({
     selector: 'app-drop-list-group',
@@ -19,14 +26,14 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
             state('*',
                 style(
                     {
-                        marginLeft: '{{horizontalMargin}}%',
-                        marginTop: '{{verticalMargin}}%',
+                        marginLeft: '{{x}}%',
+                        marginTop: '{{y}}%',
                     }
                 ),
                 {
                     params: {
-                        horizontalMargin: 0,
-                        verticalMargin: 0
+                        x: 0,
+                        y: 0,
                     }
                 }
             ),
@@ -80,7 +87,7 @@ export class DropListGroupComponent {
     max = 0; cellSize = 0;
 
     x = 0; y = 0;
-    state = 0; horizontalMargin = 0; verticalMargin = 0; angle = 0;
+    xy = 0; angle = 0;
 
     shake = false;
 
@@ -114,19 +121,12 @@ export class DropListGroupComponent {
         }
     }
 
-    cloneBlock(block: Block): Block {
-        return {
-            type: block.type,
-            text: block.text,
-            color: block.color,
-            include: []
-        }
-    }
+
 
     drop(event: CdkDragDrop<Block[]>) {
         if (event.previousContainer.id == "from") {
 
-            let copy = this.cloneBlock(event.previousContainer.data[event.previousIndex])
+            let copy = cloneBlock(event.previousContainer.data[event.previousIndex])
             event.container.data.splice(event.currentIndex, 0, copy)
 
 
@@ -184,18 +184,14 @@ export class DropListGroupComponent {
     stepForward(): void {
         if (this.angle % 360 == 0) {
             this.y -=1
-            this.verticalMargin -= this.cellSize;
         } else if (this.angle % 360 == 90 || this.angle % 360 == -270) {
             this.x +=1
-            this.horizontalMargin += this.cellSize;
         } else if (this.angle % 360 == 180 || this.angle % 360 == -180) {
             this.y +=1
-            this.verticalMargin += this.cellSize;
         } else {
             this.x -=1
-            this.horizontalMargin -= this.cellSize;
         }
-        this.state = this.horizontalMargin + this.verticalMargin;
+        this.xy =this.x + this.y
     }
 
     canTakeStep(): boolean {
