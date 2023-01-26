@@ -80,7 +80,8 @@
             <div class="movebox"
             style="position: absolute;"
             [@move] = "{value: state,params :{horizontalMargin: horizontalMargin, verticalMargin: verticalMargin}}" 
-            [@rotate]= "{value: angle, params :{angle:angle}}" [ngStyle]= "{
+            [@rotate]= "{value: angle, params :{angle:angle}}"
+            [@shake] = "shake" [ngStyle]= "{
                 'width' : this.cellSize +'%',
                 'height' : this.cellSize +'%'
             }"> <img src="assets/arrow.png"/></div>
@@ -91,14 +92,11 @@
                 'width' : (this.cellSize*max) +'%',
                 'height' : (this.cellSize*max) +'%'
             }">
-                <div class="cell" *ngFor = "let symbol of data" [ngStyle] = "{
-                    
+                <div class="cell" *ngFor = "let symbol of cells" [ngStyle] = "{
+                    'background-color': symbol == '0' ? 'red' : 'green'
                 }">
-                    {{symbol}}
                 </div>
             </div>
         </div>
-    </div>
-
-    
+    </div>    
 </div>

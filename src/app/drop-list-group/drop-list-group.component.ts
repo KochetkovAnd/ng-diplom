@@ -2,9 +2,14 @@ import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray, transferArrayItem, copyArrayItem, CdkDragEnter, CdkDragExit, CdkDragStart } from '@angular/cdk/drag-drop';
 import { asapScheduler, asyncScheduler } from 'rxjs';
 import { Block } from '../models/block';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate, useAnimation, keyframes } from '@angular/animations';
+
+
+const sleepTime = 300;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+
 @Component({
     selector: 'app-drop-list-group',
     templateUrl: './drop-list-group.component.html',
@@ -41,6 +46,17 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
                 }
             ),
             transition("*=>*", animate('0.3s'))
+        ]),
+        trigger('shake', [            
+            transition("*=>*",[
+                animate('1s', keyframes([
+                    style({background: "rgba(211, 15, 15, 0.5)"}),
+                    style({background: "rgba(211, 15, 15, 0)"}),
+                    style({background: "rgba(211, 15, 15, 0.5)"}),
+                    style({background: "rgba(211, 15, 15, 0)"})
+                ]))
+            ])
+            
         ])
     ]
 })
@@ -53,28 +69,27 @@ export class DropListGroupComponent {
         { "type": "composite", "text": "Повторить", color: "rgb(226, 103, 31)", include: [] },
     ]
 
-    program:Block[] =[]
+    program: Block[] = []
 
     @ViewChildren(CdkDropList)
     private dlq?: QueryList<CdkDropList>;
 
     public dls: CdkDropList[] = [];
 
-    n = 6; m = 8; 
+    n = 5; m = 4;
     max = 0; cellSize = 0;
+
+    x = 0; y = 0;
     state = 0; horizontalMargin = 0; verticalMargin = 0; angle = 0;
 
-    data: string[] = [] // TO DO
+    shake = false;
+
+    cells = Array.from("11111111111111111111")
 
     ngOnInit(): void {
         this.max = this.n > this.m ? this.n : this.m;
         this.cellSize = 100 / this.max
-
-        for (let i = 0; i < this.n * this.m; i++) {
-            this.data.push(i.toString())
-        }
-        console.log(this.data)
-    }    
+    }
 
     ngAfterViewChecked() {
         let ldls: CdkDropList[] = [];
@@ -99,7 +114,7 @@ export class DropListGroupComponent {
         }
     }
 
-    cloneBlock(block: Block):Block {
+    cloneBlock(block: Block): Block {
         return {
             type: block.type,
             text: block.text,
@@ -114,7 +129,7 @@ export class DropListGroupComponent {
             let copy = this.cloneBlock(event.previousContainer.data[event.previousIndex])
             event.container.data.splice(event.currentIndex, 0, copy)
 
-        
+
         } else if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
@@ -134,27 +149,27 @@ export class DropListGroupComponent {
     async runProgram(commands: Block[]) {
         for (let i = 0; i < commands.length; i++) {
             if (commands[i].type == "simple") {
-                switch (commands[i].text) {
-                    case "Шаг вперед":
+                if (commands[i].text == "Шаг вперед") {
+                    if (this.canTakeStep()) {
                         this.stepForward()
-                        await sleep(300)
+                        await sleep(sleepTime)
+                    } else {
+                        console.log("fgfg")
+                        this.shake = !this.shake                        
                         break;
-                    case "Поворот налево":
-                        this.rotateLeft()
-                        await sleep(300)
-                        break;
-                    case "Поворот направо":
-                        this.rotateRight()
-                        await sleep(300)
-                        break;
+                    }
+                } else if (commands[i].text == "Поворот налево") {
+                    this.rotateLeft()
+                    await sleep(sleepTime)
+                } else if (commands[i].text == "Поворот направо") {
+                    this.rotateRight()
+                    await sleep(sleepTime)
                 }
             } else {
-                switch (commands[i].text) {
-                    case "Повторить":
-                        for (let j = 0; j < 2; j++) {
-                            await this.runProgram(commands[i].include)
-                        }
-                        break;
+                if (commands[i].text == "Повторить") {
+                    for (let j = 0; j < 2; j++) {
+                        await this.runProgram(commands[i].include)
+                    }
                 }
             }
         }
@@ -162,21 +177,38 @@ export class DropListGroupComponent {
 
     rotateRight(): void { this.angle += 90 }
 
-    rotateLeft(): void { 
+    rotateLeft(): void {
         this.angle -= 90
     }
 
     stepForward(): void {
         if (this.angle % 360 == 0) {
+            this.y -=1
             this.verticalMargin -= this.cellSize;
-        } else if (this.angle % 360 == 90) {
+        } else if (this.angle % 360 == 90 || this.angle % 360 == -270) {
+            this.x +=1
             this.horizontalMargin += this.cellSize;
-        } else if (this.angle % 360 == 180) {
+        } else if (this.angle % 360 == 180 || this.angle % 360 == -180) {
+            this.y +=1
             this.verticalMargin += this.cellSize;
         } else {
+            this.x -=1
             this.horizontalMargin -= this.cellSize;
         }
         this.state = this.horizontalMargin + this.verticalMargin;
     }
 
+    canTakeStep(): boolean {
+        console.log(this.angle)
+        console.log(this.angle % 360)
+        if (this.angle % 360 == 0) {
+            return !(this.y - 1 < 0 || this.cells[(this.y - 1) * this.m + this.x] == "0")
+        } else if (this.angle % 360 == 90 || this.angle % 360 == -270) {
+            return !(this.x + 1 >= this.m || this.cells[this.y * this.m + this.x + 1] == "0")
+        } else if (this.angle % 360 == 180 || this.angle % 360 == -180) {
+            return !(this.y + 1 >= this.n || this.cells[(this.y + 1) * this.m + this.x] == "0")
+        } else {
+            return !(this.x - 1 < 0 || this.cells[this.y * this.m + this.x - 1] == "0")
+        }
+    }
 }
