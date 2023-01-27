@@ -83,7 +83,7 @@ export class DropListGroupComponent {
 
     public dls: CdkDropList[] = [];
 
-    n = 5; m = 4;
+    n = 5; m = 8;
     max = 0; cellSize = 0;
 
     x = 0; y = 0;
@@ -154,7 +154,6 @@ export class DropListGroupComponent {
                         this.stepForward()
                         await sleep(sleepTime)
                     } else {
-                        console.log("fgfg")
                         this.shake = !this.shake                        
                         break;
                     }

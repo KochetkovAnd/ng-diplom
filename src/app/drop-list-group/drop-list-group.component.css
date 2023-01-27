@@ -1,67 +1,64 @@
-.command-block {
-    width: 25vw;  
+/* LEFT AND CENTRAL SIDE */
+.program-li {
+    list-style: none;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);   
+    font-size: 2.5vmin; 
 }
-
-.program-block {
-    width: 35vw;
-    height: 40vh;    
-}
-
-
-
-.program-block > ul {
-    margin-left: 0;
-}
-
-.command-block li{
-    margin: 10px   
-}
-
 .program-ul {    
     border-radius: 10px;
     background-color: white;
     min-height: 50px;
-    min-width: 200px;  
+    min-width: calc(20vw - 31px);  
     margin-left: 25px;  
 }
-
-.program-li {
-    list-style: none;
-    padding: 0px 10px;
-    border-radius: 10px;
-    /* border: 1px solid black; */
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-    margin: 1px;
-}
-
 .simple-block {
-    width: 200px;
-    line-height: 25px;
+    width: calc(20vw - 16px);
 }
-
 .composite-block { 
     display: inline-block;
-    padding: 5px;
 }
-
 .command-line {
-    width: 200px;    
+    width: calc(20vw - 16px);   
     height: 25px;
     border-radius: 10px;
 } 
+
+/* LEFT SIDE */
+.command-block {
+    width: 25vw;  
+}
+.command-block li {
+    margin: 5px;
+}
 
 .command-block .command-line {
     margin: 10px;
 }
 
-/* Grid - Block */
+
+/* CENTRAL SIDE */
+.program-block {
+    width: 35vw;
+    height: 40vh;    
+}
+
+.program-block > ul {
+    margin-left: 0px;
+    margin-top: 5px;
+}
+
+
+/* RIGHT SIDE */
 .grid-container {
 
 }
 
 .grid-block {
-    width: 40vw;
-    height: 40vw;
+    margin: 10px;
+    width: calc(40vw - 20px);
+    height: calc(40vw - 20px);
 }
 
 .grid {
