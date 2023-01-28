@@ -9,12 +9,17 @@ const sleepTime = 300;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const cloneBlock = (block: Block) => {
-    return {
+    let clone: Block =  {
         type: block.type,
         text: block.text,
         color: block.color,
-        include: []
+        include: [],
     }
+
+    if (block.numberofRepeates) {
+        clone.numberofRepeates = block.numberofRepeates
+    }
+    return clone
 }
 
 @Component({
@@ -73,7 +78,7 @@ export class DropListGroupComponent {
         { "type": "simple", "text": "Шаг вперед", color: "rgb(83, 94, 245)", include: [] },
         { "type": "simple", "text": "Поворот налево", color: "rgb(83, 94, 245)", include: [] },
         { "type": "simple", "text": "Поворот направо", color: "rgb(83, 94, 245)", include: [] },
-        { "type": "composite", "text": "Повторить", color: "rgb(226, 103, 31)", include: [] },
+        { "type": "composite", "text": "Повторить", color: "rgb(226, 103, 31)", include: [], numberofRepeates: 2},
     ]
 
     program: Block[] = []
@@ -83,7 +88,7 @@ export class DropListGroupComponent {
 
     public dls: CdkDropList[] = [];
 
-    n = 5; m = 8;
+    n = 5; m = 4;
     max = 0; cellSize = 0;
 
     x = 0; y = 0;
@@ -91,7 +96,10 @@ export class DropListGroupComponent {
 
     shake = false;
 
-    cells = Array.from("11111111111111111111")
+    cells = Array.from("11110001000100011111")
+
+    forOptions = [2,3,4,5,6,7]
+    
 
     ngOnInit(): void {
         this.max = this.n > this.m ? this.n : this.m;
@@ -166,7 +174,7 @@ export class DropListGroupComponent {
                 }
             } else {
                 if (commands[i].text == "Повторить") {
-                    for (let j = 0; j < 2; j++) {
+                    for (let j = 0; j < (commands[i].numberofRepeates || 2); j++) {
                         await this.runProgram(commands[i].include)
                     }
                 }
@@ -205,5 +213,9 @@ export class DropListGroupComponent {
         } else {
             return !(this.x - 1 < 0 || this.cells[this.y * this.m + this.x - 1] == "0")
         }
+    }
+
+    onChange(n: any) {
+        console.log(n);
     }
 }

@@ -5,8 +5,6 @@
 
 
 <div style="display:flex">
-
-
     <div class="command-block">
         <ul
             cdkDropList
@@ -23,11 +21,17 @@
                 class="program-li"
                 cdkDrag 
                 [ngStyle]="{'background-color' : item.color }">
-                <div class="command-line" *cdkDragPlaceholder style="background-color: blueviolet;"></div>
+                <div class="command-line" *cdkDragPlaceholder style="background-color: blueviolet;"></div>                
                 {{item.text}}
+                <span *ngIf="item.text == 'Повторить'">
+                    <select [(ngModel)] = "item.numberofRepeates">
+                        <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
+                    </select>
+                    Раз
+                </span>                
                 <ul 
                     *ngIf="item.type == 'composite'"
-                    class="program-ul">
+                    class="program-ul">                    
                 </ul>                
 
             </li>
@@ -46,6 +50,12 @@
                 'background-color' : item.color
             }">
                 {{item.text}}
+                <span *ngIf="item.text == 'Повторить'">
+                    <select [(ngModel)] = "item.numberofRepeates">
+                        <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
+                    </select>
+                    Раз
+                </span>
                 <div class="command-line" *cdkDragPlaceholder style="background-color: blueviolet;"></div>
 
                 <ng-template #recusiveItem let-item="item">
@@ -58,6 +68,12 @@
                         }">
                             <div class="command-line" *cdkDragPlaceholder style="background-color: blueviolet;"></div>
                             {{innerItem.text}}
+                            <span *ngIf="innerItem.text == 'Повторить'">
+                                <select [(ngModel)] = "innerItem.numberofRepeates">
+                                    <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
+                                </select>
+                                Раз
+                            </span>
                             <div *ngIf="innerItem.type == 'composite'">
                                 <ng-container *ngTemplateOutlet="recusiveItem; context:{ item: innerItem}">
                                 </ng-container>

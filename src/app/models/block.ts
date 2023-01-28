@@ -3,4 +3,5 @@ export interface Block {
     text: string;
     color: string;
     include: Block[];
+    numberofRepeates?: number;
 }
