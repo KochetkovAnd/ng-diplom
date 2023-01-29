@@ -7,11 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DropListGroupComponent } from './drop-list-group/drop-list-group.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DropListGroupComponent
+    DropListGroupComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

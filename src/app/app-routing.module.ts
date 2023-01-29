@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DropListGroupComponent } from './drop-list-group/drop-list-group.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 const routes: Routes = [
-    {path: '', component: DropListGroupComponent}
+    {path: '', component: DropListGroupComponent},
+    {path: 'login', component: LoginPageComponent}
 ];
 
 @NgModule({
