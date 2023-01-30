@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, ViewChild, ViewChildren, QueryList, OnInit, AfterViewInit } from '@angular/core';
 import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray, transferArrayItem, copyArrayItem, CdkDragEnter, CdkDragExit, CdkDragStart } from '@angular/cdk/drag-drop';
 import { asapScheduler, asyncScheduler } from 'rxjs';
 import { Block } from '../models/block';
