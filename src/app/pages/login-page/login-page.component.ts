@@ -22,7 +22,7 @@ export class LoginPageComponent {
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/switch-later'])
+      this.router.navigate(['/levels'])
     }
   }
 
@@ -31,7 +31,7 @@ export class LoginPageComponent {
     let response = await lastValueFrom(this.httpService.login(this.username, this.password))
     if (response.token) {
       this.authService.login(response.token)
-      this.router.navigate(['/switch-later'])
+      this.router.navigate(['/levels'])
     } else {
       this.error = "wrong login or password"           
     }

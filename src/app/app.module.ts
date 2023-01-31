@@ -11,12 +11,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthService } from './services/auth-service/auth.service';
 import { AuthGuard } from './guards/auth-guard/auth.guard';
+import { LevelsPageComponent } from './pages/levels-page/levels-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DropListGroupComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    LevelsPageComponent
   ],
   imports: [
     BrowserModule,
