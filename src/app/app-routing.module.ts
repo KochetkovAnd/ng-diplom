@@ -4,11 +4,13 @@ import { DropListGroupComponent } from './drop-list-group/drop-list-group.compon
 import { AuthGuard } from './guards/auth-guard/auth.guard';
 import { LevelsPageComponent } from './pages/levels-page/levels-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { SolvePageComponent } from './pages/solve-page/solve-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginPageComponent },
   { path: 'levels', component: LevelsPageComponent, canActivate: [AuthGuard]},
+  { path: 'level/:id', component: SolvePageComponent, canActivate: [AuthGuard]},
   { path: 'switch-later', component: DropListGroupComponent, canActivate: [AuthGuard] }  
 ];
 

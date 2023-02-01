@@ -1,9 +1,8 @@
 <div class="main-container">
-    <div class="block" *ngFor="let task of colorTasks, index as i">
+    <div class="block" *ngFor="let task of colorTasks, index as i" routerLink="/level/{{task.task.id}}">
         <div class="marker" [ngStyle] = "{
             'background-color': task.color
         }"></div>
         {{i + 1}}
-    </div>
-    
+    </div>    
 </div>

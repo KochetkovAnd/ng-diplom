@@ -23,10 +23,14 @@
     font-size: 40px;
 }
 
+.block:hover {
+    background-color: #842691;
+}
+
 .marker {
     width: 10px;
     height: 10px;
-    border: 1px solid black;
+    border: 1px solid rgb(100, 100, 100);
     position: absolute;
     margin-left: 110px;
     margin-top: 30px;

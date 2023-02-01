@@ -12,13 +12,17 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthService } from './services/auth-service/auth.service';
 import { AuthGuard } from './guards/auth-guard/auth.guard';
 import { LevelsPageComponent } from './pages/levels-page/levels-page.component';
+import { SolvePageComponent } from './pages/solve-page/solve-page.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DropListGroupComponent,
     LoginPageComponent,
-    LevelsPageComponent
+    LevelsPageComponent,
+    SolvePageComponent
+    
   ],
   imports: [
     BrowserModule,

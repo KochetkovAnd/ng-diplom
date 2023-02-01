@@ -42,4 +42,9 @@ export class HttpService {
     return this.http.get<Task[]>(this.baseURL+ "/task/getSolvedTasks", 
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}) 
   }
+
+  getTaskById(id: number) {
+    return this.http.get<Task>(this.baseURL + "/task/getById/" + id,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
 }
