@@ -27,7 +27,7 @@
 
 /* LEFT SIDE */
 .command-block {
-    width: 25vw;  
+    width: 25vw;
 }
 .command-block li {
     margin: 5px;
@@ -82,4 +82,61 @@
 
 .play-button {
     margin: 10px;
+    padding: 10px;
+    font-size: 2vmin;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(0, 218, 0);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2); 
+}
+
+
+.play-button:hover {
+    background-color: green;  
+}
+
+/* cells */
+.target {
+    background-color: yellow;
+}
+
+.active {
+    background-color: green;
+}
+
+.disable {
+    background-color: red;
+}
+
+.popup {
+    position: absolute;
+    background-color: white;
+    width: 40%;
+    height: 40%;
+    left: 30%;
+    top: 20%;
+    border: 5px solid green;
+    border-radius: 10px;
+}
+
+.exit-button {
+    position: absolute;
+    margin-left: calc(100% - 50px);
+    margin-top: 25px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+}
+
+.popup .main-message {
+    width: 100%;
+    text-align: center;
+    margin-top: 10%;
+    font-size: 5vh;
+    color: rgb(0, 60, 0);
 }

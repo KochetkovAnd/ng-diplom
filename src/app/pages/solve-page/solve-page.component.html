@@ -104,11 +104,22 @@
                 'width' : (this.cellSize*max) +'%',
                 'height' : (this.cellSize*max) +'%'
             }">
-                <div class="cell" *ngFor = "let symbol of cells" [ngStyle] = "{
-                    'background-color': symbol == '0' ? 'red' : 'green'
-                }">
+                <div class="cell" *ngFor = "let symbol of cells"
+                [class.target]="symbol == '2'"
+                [class.active]="symbol == '1'"
+                [class.disable]="symbol == '0'"
+                >
                 </div>
             </div>
         </div>
     </div>    
+</div>
+
+<!--  -->
+<div class="popup" @win *ngIf="win" >
+    <button class="exit-button" (click) = "win = false">
+        x
+    </button>
+    <p class="main-message">Уровень пройден</p>
+    
 </div>

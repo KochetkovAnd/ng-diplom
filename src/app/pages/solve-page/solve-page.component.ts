@@ -70,15 +70,35 @@ const cloneBlock = (block: Block) => {
       transition("*=>*", animate('{{time}}'), { params: { time: 2000 } })
     ]),
     trigger('shake', [
-      transition("*=>*", 
+      transition("*=>*",
         animate('{{time}}', keyframes([
           style({ background: "rgba(211, 15, 15, 0.5)" }),
           style({ background: "rgba(211, 15, 15, 0)" }),
           style({ background: "rgba(211, 15, 15, 0.5)" }),
           style({ background: "rgba(211, 15, 15, 0)" })
-        ])), 
+        ])),
         { params: { time: 2000 } }
       )
+    ]),
+    trigger('win', [
+      transition(':enter', [
+        style({
+          opacity: 0,
+          top: '-40%'
+        }),
+        animate('0.5s', style({
+          opacity: 1,
+          top: '20%'
+        })),
+      ]),
+      transition(':leave', [
+        style({
+        }),
+        animate('0.5s', style({
+          opacity: 0,
+          top: '-40%'
+        })),
+      ])
     ])
   ]
 })
@@ -129,18 +149,20 @@ export class SolvePageComponent {
     angle: 0
   }
   xy = 0;
-  defaultX = 0;defaultY = 0;defaultAngle = 0;
+  defaultX = 0; defaultY = 0; defaultAngle = 0;
 
 
   forOptions = [2, 3, 4, 5, 6, 7, 8]
   shake = false;
+
+  win = false
+
 
   async ngOnInit() {
     this.task = await lastValueFrom(this.httpService.getTaskById(this.id))
     this.max = this.task.n > this.task.m ? this.task.n : this.task.m;
     this.cellSize = 100 / this.max
     this.cells = Array.from(this.task.grid);
-    // this.xy = this.task.x + this.task.y
     this.defaultX = this.task.x
     this.defaultY = this.task.y
     this.defaultAngle = this.task.angle
@@ -198,11 +220,17 @@ export class SolvePageComponent {
     await this.run(commands)
     await sleep(sleepTime)
     this.animationTime = '0s'
+
+    if (this.checkWin()) {
+      this.win = true
+    }
+
+
+
     this.task.x = this.defaultX
-    this.task.y = this.defaultY 
+    this.task.y = this.defaultY
     this.task.angle = this.defaultAngle
-
-
+    this.cells = Array.from(this.task.grid);
   }
   async run(commands: Block[]) {
     for (let i = 0; i < commands.length; i++) {
@@ -238,6 +266,16 @@ export class SolvePageComponent {
     this.task.angle -= 90
   }
 
+  tryRecolor() {
+    if (this.cells[this.task.y * this.task.m + this.task.x] == "2") {
+      this.cells[this.task.y * this.task.m + this.task.x] = "1"
+    }
+  }
+
+  checkWin() {
+    return !this.cells.includes("2")
+  }
+
   stepForward(): void {
     if (this.task.angle % 360 == 0) {
       this.task.y -= 1
@@ -248,12 +286,10 @@ export class SolvePageComponent {
     } else {
       this.task.x -= 1
     }
-    this.xy = this.task.x + this.task.y
+    this.cells[this.task.y * this.task.m + this.task.x] = "1"
   }
 
   canTakeStep(): boolean {
-    console.log(this.task.angle)
-    console.log(this.task.angle % 360)
     if (this.task.angle % 360 == 0) {
       return !(this.task.y - 1 < 0 || this.cells[(this.task.y - 1) * this.task.m + this.task.x] == "0")
     } else if (this.task.angle % 360 == 90 || this.task.angle % 360 == -270) {
