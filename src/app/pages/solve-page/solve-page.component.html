@@ -1,15 +1,15 @@
-<div style="display:flex">
+<div style="display:flex" *ngIf="task">
     <div class="command-block">
         <ul
             cdkDropList
-            [cdkDropListData]="commands"
+            [cdkDropListData]="task.commands"
             [cdkDropListConnectedTo]="dls"
             cdkDropListSortingDisabled
             (cdkDropListDropped)="delete($event)"
             id = "from"
         >
             <li 
-                *ngFor="let item of commands" 
+                *ngFor="let item of task.commands" 
                 [class.simple-block]="item.type == 'simple'"
                 [class.composite-block]="item.type == 'composite'"
                 class="program-li"
@@ -18,7 +18,7 @@
                 <div class="command-line" *cdkDragPlaceholder style="background-color: blueviolet;"></div>                
                 {{item.text}}
                 <span *ngIf="item.text == 'Повторить'">
-                    <select [(ngModel)] = "item.numberofRepeates">
+                    <select [(ngModel)] = "item.numberOfRepeats">
                         <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
                     </select>
                     Раз
@@ -26,7 +26,7 @@
                 <ul 
                     *ngIf="item.type == 'composite'"
                     class="program-ul">                    
-                </ul>                
+                </ul>               
 
             </li>
 
@@ -45,7 +45,7 @@
             }">
                 {{item.text}}
                 <span *ngIf="item.text == 'Повторить'">
-                    <select [(ngModel)] = "item.numberofRepeates">
+                    <select [(ngModel)] = "item.numberOfRepeats">
                         <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
                     </select>
                     Раз
@@ -63,7 +63,7 @@
                             <div class="command-line" *cdkDragPlaceholder style="background-color: blueviolet;"></div>
                             {{innerItem.text}}
                             <span *ngIf="innerItem.text == 'Повторить'">
-                                <select [(ngModel)] = "innerItem.numberofRepeates">
+                                <select [(ngModel)] = "innerItem.numberOfRepeats">
                                     <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
                                 </select>
                                 Раз
@@ -87,7 +87,7 @@
     <div class="grid-container">
         <button (click) = "runProgram(program)" class="play-button">Запустить</button>
         <div class="grid-block" style="position: relative;">
-            <div class="movebox" *ngIf="task"
+            <div class="movebox"
             style="position: absolute;"
             [@horizontal] = "{value: task.x, params :{x:task.x * cellSize, time : animationTime}}"
             [@vertical] = "{value: task.y, params :{y:task.y * cellSize, time : animationTime}}"

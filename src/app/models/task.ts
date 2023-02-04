@@ -1,3 +1,4 @@
+import { Block } from "./block";
 import { User } from "./user";
 
 export interface Task {
@@ -8,5 +9,6 @@ export interface Task {
     grid: string,
     x: number,
     y: number,
-    angle: number
+    angle: number,
+    commands: Block[]
 }

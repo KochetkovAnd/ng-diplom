@@ -4,6 +4,7 @@ import { catchError, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { Task } from 'src/app/models/task';
 import { AuthService } from '../auth-service/auth.service';
+import { UserTask } from 'src/app/models/userTask';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,22 @@ export class HttpService {
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}) 
   }
 
+  getUserTaskByUserAndTask(task: Task) {
+    return this.http.post<UserTask>(this.baseURL + "/userTask/getByUserAndTask", task,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}).
+    pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    }))
+  }
+
   getTaskById(id: number) {
     return this.http.get<Task>(this.baseURL + "/task/getById/" + id,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
+
+  updateUserTask(userTask: UserTask) {
+    return this.http.post<UserTask>(this.baseURL + "/userTask/update", userTask,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+  
 }

@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DropListGroupComponent } from './drop-list-group/drop-list-group.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthService } from './services/auth-service/auth.service';
@@ -18,7 +17,6 @@ import { SolvePageComponent } from './pages/solve-page/solve-page.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DropListGroupComponent,
     LoginPageComponent,
     LevelsPageComponent,
     SolvePageComponent
