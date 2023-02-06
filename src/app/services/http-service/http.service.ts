@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { Task } from 'src/app/models/task';
 import { AuthService } from '../auth-service/auth.service';
 import { UserTask } from 'src/app/models/userTask';
+import { Group } from 'src/app/models/group';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,11 @@ export class HttpService {
 
   updateUserTask(userTask: UserTask) {
     return this.http.post<UserTask>(this.baseURL + "/userTask/update", userTask,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getGroupsByTeacher() {
+    return this.http.get<Group[]>(this.baseURL + "/group/getAllByTeacher",
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
   

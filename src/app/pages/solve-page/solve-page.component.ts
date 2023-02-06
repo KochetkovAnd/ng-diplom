@@ -12,7 +12,8 @@ const defaultTask: Task = {
   id: 0,
   owner: {
     username: "",
-    token: ""
+    token: "",
+    role: ""
   },
   n: 0,
   m: 0,

@@ -9,9 +9,12 @@ import { AppComponent } from './app.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthService } from './services/auth-service/auth.service';
-import { AuthGuard } from './guards/auth-guard/auth.guard';
 import { LevelsPageComponent } from './pages/levels-page/levels-page.component';
 import { SolvePageComponent } from './pages/solve-page/solve-page.component';
+import { GroupPageComponent } from './pages/group-page/group-page.component';
+import { StudentGuard } from './guards/student-guard/student.guard';
+import { TeacherGuard } from './guards/teacher-guard/teacher.guard';
+import { NavbarTeacherComponent } from './components/navbar-teacher/navbar-teacher.component';
 
 
 @NgModule({
@@ -19,7 +22,9 @@ import { SolvePageComponent } from './pages/solve-page/solve-page.component';
     AppComponent,
     LoginPageComponent,
     LevelsPageComponent,
-    SolvePageComponent
+    SolvePageComponent,
+    GroupPageComponent,
+    NavbarTeacherComponent
     
   ],
   imports: [
@@ -30,7 +35,7 @@ import { SolvePageComponent } from './pages/solve-page/solve-page.component';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, StudentGuard, TeacherGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

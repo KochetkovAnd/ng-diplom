@@ -22,7 +22,12 @@ export class LoginPageComponent {
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/levels'])
+      let role = this.authService.getRole()
+      if (role == "TEACHER") {
+        this.router.navigate(['/groups'])
+      } else if (role == "STUDENT") {
+        this.router.navigate(['/levels'])
+      }  
     }
   }
 
@@ -30,8 +35,12 @@ export class LoginPageComponent {
   async login() {
     let response = await lastValueFrom(this.httpService.login(this.username, this.password))
     if (response.token) {
-      this.authService.login(response.token)
-      this.router.navigate(['/levels'])
+      this.authService.login(response.token, response.role)
+      if (response.role == "TEACHER") {
+        this.router.navigate(['/groups'])
+      } else if (response.role == "STUDENT") {
+        this.router.navigate(['/levels'])
+      }      
     } else {
       this.error = "wrong login or password"           
     }
