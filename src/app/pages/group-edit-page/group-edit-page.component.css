@@ -4,8 +4,15 @@
 }
 
 .container {
-    width: 50%;
     height: 100%;
+}
+
+.left {
+    width: 40%;
+}
+
+.right {
+    width: 60%;
 }
 
 .group-name-container {
@@ -120,4 +127,12 @@
 
 .save-button:hover {
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+.left {
+
+}
+
+.right {
+
 }

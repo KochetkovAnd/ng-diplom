@@ -1,8 +1,131 @@
-p {
+.command {
+    list-style: none;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);   
+    font-size: 2.5vmin;
+    width: 80%; 
+    margin-left: 10px;
+}
+.program-ul {    
+    border-radius: 10px;
+    background-color: white;
+    min-height: 50px;
+    min-width: calc(20vw - 31px);  
+    margin-left: 25px;  
+}
+.simple-block {
+    /* width: calc(20vw - 16px); */
+}
+.composite-block { 
+    display: inline-block;
+}
+
+.check-block {
+    display: flex;
+    margin: 10px 0px;
+}
+
+.left-container {
+    width: calc(30vw - 40px);
+    height: calc(100vh - 140px);
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+}
+
+.central-container {
+    width: 30vw;
+}
+
+.right-container {
+    width: calc(40vw - 80px);
+    height: calc(100vh - 140px);
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+}
+
+.group-name-container {
+    margin: 20px;
+    width: calc(100% - 60px);
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+}
+
+.group-name-container p{
+    padding: 20px 0px 0px 30px;
+    font-size: 16px;
+    color: white;
+}
+
+.group-name-container input[type="text"]{
     margin: 10px;
-    width: 50px;
-    height: 25px;
-    border: 1px solid black;
-    word-wrap: break-word;
+    outline: none;
+    border: none;
+    padding: 10px;
+    width: calc(100% - 40px);
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.grid-block {
+    margin-right: 0px;
+    width: calc(40vw - 80px);
+    height: calc(40vw - 80px);
     overflow: hidden;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid .cell {
+    border: 1px solid black;
+}
+
+/* cells */
+.target {
+    background-color: yellow;
+}
+
+.active {
+    background-color: green;
+}
+
+.disable {
+    background-color: red;
+}
+
+
+.params-container {
+    margin: 20px;
+    width: calc(100% - 60px);
+    height: calc(100% - 200px);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 10px
+}
+
+.number-block {
+    margin: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+.number-block input[type ="number"] {
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: 50px;
+    font-size: 16px;
 }

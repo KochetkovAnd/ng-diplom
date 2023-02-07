@@ -1,6 +1,6 @@
 <navbar-teacher></navbar-teacher>
 <div class="main-container" *ngIf="group">
-    <div class="container">
+    <div class="container left">
         <div class="group-name-container">
             <p>Название группы</p>
             <input type="text"  placeholder="Название группы" [(ngModel)] = group.name>
@@ -15,15 +15,15 @@
         
         
     </div>
-    <div class="container">
+    <div class="container right">
         <div class="tasks-container">
-            <div [@add] ="isClosed ? 'closed':'open'" style="width: 100%;">
+            <div [@add] ="isClosed ? 'closed':'open'" style="width: 100%; overflow-y: auto;">
                 <div class="card" *ngFor = "let task of group.tasks; index as i">
                     <p class="number" *ngIf= "isClosed; else elseBlock">{{i+1}}</p>
                     <ng-template #elseBlock>
                         <p class="number" (click) = "transferBack(i)">-</p>
                     </ng-template>
-                    <p class="text">{{task.n}} x {{task.m}}</p>
+                    <p class="text">{{task.name}}</p>
                 </div>
                 <div class="card add" (click) ="onClick()" >
                     <p *ngIf = "isClosed; else elseBlock"> + </p>
@@ -33,10 +33,10 @@
 
 
 
-            <div [@reverse-add] ="isClosed ? 'closed':'open'" style="overflow: none;" *ngIf ="!isClosed" >
+            <div [@reverse-add] ="isClosed ? 'closed':'open'" style="overflow-y: auto;" *ngIf ="!isClosed" >
                 <div class="card" *ngFor = "let unusedTask of unusedTasks; index as i">
                     <p class="number" (click) = "transfer(i)">+</p>
-                    <p class="text">{{unusedTask.n}} x {{unusedTask.m}}</p>
+                    <p class="text">{{unusedTask.name}}</p>
                 </div>
             </div>
             

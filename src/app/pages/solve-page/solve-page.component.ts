@@ -20,6 +20,7 @@ const defaultTask: Task = {
   x: 0,
   y: 0,
   angle: 0,
+  name: '',
   commands: []
 }
 
@@ -51,6 +52,7 @@ const cloneTask = (task:Task) => {
     x: task.x,
     y: task.y,
     angle: task.angle,
+    name: task.name,
     commands: task.commands
   }
   return clone    

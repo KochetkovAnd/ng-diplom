@@ -1,2 +1,65 @@
-<p>level-edit-page works!</p>
+<navbar-teacher></navbar-teacher>
 
+<div *ngIf="task" style="display: flex;">
+
+    <div class="left-container">
+        <div *ngFor="let command of commands" >          
+
+            <div class="check-block">
+                <input type="checkbox" (change)="onChange(command)" [checked] = "getPos(command) != -1"/>
+                <div class="command"  [ngStyle]="{'background-color' : command.color }">
+                    {{command.text}}
+                    <span *ngIf="command.text == 'Повторить'">
+                        <select [(ngModel)]="command.numberOfRepeats">
+                            <option *ngFor="let option of forOptions" [value]="option" >{{option}}</option>
+                        </select>
+                        Раз
+                    </span>
+                    <ul *ngIf="command.type == 'composite'" class="program-ul">
+                    </ul>    
+                </div> 
+            </div>
+               
+        </div>
+    </div>
+
+    <div class="central-container">
+        <div class="group-name-container">
+            <p>Название задания</p>
+            <input type="text"  placeholder="Название задания" [(ngModel)] = task.name>
+        </div>
+
+        <div class="params-container">
+            <div class= "number-block">
+                n = <input type="number" [(ngModel)] = "task.n" (change) ="NMChange()" min="4" max="18"/> 
+            </div>
+            <div class= "number-block">
+                m = <input type="number" [(ngModel)] = "task.m" (change) ="NMChange()" min="4" max="18"/> 
+            </div>
+            <button (click) = "save()">save</button>
+        </div>
+        
+        
+    </div>
+
+    <div class="right-container">
+        <div class="grid-block">
+            <div class="grid" [ngStyle] ="{
+                'grid-template-columns': 'repeat(' + this.task.m + ','+ this.cellSize +'%)',
+                'grid-auto-rows' : this.cellSize + '%',
+                'width' : (this.cellSize*max) +'%',
+                'height' : (this.cellSize*max) +'%'
+            }">
+                <div class="cell" *ngFor = "let symbol of cells; index as i"
+                [class.target]="symbol == '2'"
+                [class.active]="symbol == '1'"
+                [class.disable]="symbol == '0'"
+                (click) = "onClickCell(i)"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>

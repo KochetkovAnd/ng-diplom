@@ -79,12 +79,6 @@ export class GroupEditPageComponent {
         }
       }
     }
-    
-    
-    console.log(this.group)
-    console.log(this.students)
-    console.log(this.tasks)
-    console.log(this.unusedTasks)
   }
 
   transfer(i: number) {
