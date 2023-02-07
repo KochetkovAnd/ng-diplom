@@ -80,7 +80,6 @@
 }
 
 .card .number{
-    display: block;
     margin: 10px;
     width: 30px;
     height: 30px;
@@ -88,15 +87,16 @@
     text-align: center;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.5);
-    font-size: 16px;    
+    font-size: 16px;  
 }
 
 .card .text {
-    display: block;
     margin: 10px 0;
+    width: calc(100% - 100px);
     line-height: 30px;
     color: white;
     font-size: 16px;
+    overflow: hidden;
 }
 
 .add {

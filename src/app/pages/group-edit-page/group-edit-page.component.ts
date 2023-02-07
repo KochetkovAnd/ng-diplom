@@ -8,6 +8,7 @@ import { Task } from 'src/app/models/task';
 import { User } from 'src/app/models/user';
 import { HttpService } from 'src/app/services/http-service/http.service';
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 @Component({
   selector: 'app-group-edit-page',
   templateUrl: './group-edit-page.component.html',
@@ -96,6 +97,11 @@ export class GroupEditPageComponent {
     if (this.group) {
       transferArrayItem(this.group?.tasks, this.unusedTasks, i, this.unusedTasks.length)
     } 
+  }
+
+  async onClick() {
+    this.isClosed = !this.isClosed
+    await sleep(200);
   }
 
   async save() {

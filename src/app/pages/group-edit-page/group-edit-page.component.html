@@ -25,7 +25,7 @@
                     </ng-template>
                     <p class="text">{{task.n}} x {{task.m}}</p>
                 </div>
-                <div class="card add" (click) ="isClosed = !isClosed" >
+                <div class="card add" (click) ="onClick()" >
                     <p *ngIf = "isClosed; else elseBlock"> + </p>
                     <ng-template #elseBlock> -> </ng-template>
                 </div>

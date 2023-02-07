@@ -16,6 +16,7 @@ import { StudentGuard } from './guards/student-guard/student.guard';
 import { TeacherGuard } from './guards/teacher-guard/teacher.guard';
 import { NavbarTeacherComponent } from './components/navbar-teacher/navbar-teacher.component';
 import { GroupEditPageComponent } from './pages/group-edit-page/group-edit-page.component';
+import { LevelEditPageComponent } from './pages/level-edit-page/level-edit-page.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { GroupEditPageComponent } from './pages/group-edit-page/group-edit-page.
     SolvePageComponent,
     GroupPageComponent,
     NavbarTeacherComponent,
-    GroupEditPageComponent
+    GroupEditPageComponent,
+    LevelEditPageComponent
     
   ],
   imports: [
