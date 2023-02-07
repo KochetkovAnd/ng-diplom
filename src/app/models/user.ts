@@ -1,5 +1,7 @@
+import { Group } from "./group";
+
 export interface User {
-    username: string,
-    token: string,
-    role: string
+    name: string,
+    role: string,
+    group?: Group
 }

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
-import { User } from 'src/app/models/user';
+import { RegisterUser } from 'src/app/models/registerUser';
 import { Task } from 'src/app/models/task';
 import { AuthService } from '../auth-service/auth.service';
 import { UserTask } from 'src/app/models/userTask';
 import { Group } from 'src/app/models/group';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class HttpService {
   ) { }
 
   login(username: string, password: string) {
-    return this.http.post<User>(this.baseURL + "/auth/login",
+    return this.http.post<RegisterUser>(this.baseURL + "/auth/login",
       {
         username,
         password
@@ -65,6 +66,26 @@ export class HttpService {
 
   getGroupsByTeacher() {
     return this.http.get<Group[]>(this.baseURL + "/group/getAllByTeacher",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getGroupById(id: number) {
+    return this.http.get<Group>(this.baseURL + "/group/getById/" + id,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getUsersByGroupId(id: number) {
+    return this.http.get<User[]>(this.baseURL + "/user/getAllByGroupId/" + id,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getAllTasks() {
+    return this.http.get<Task[]>(this.baseURL + "/task",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  updateGroup(group: Group) {
+    return this.http.post<Group>(this.baseURL + "/group/update", group,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
   
