@@ -19,6 +19,21 @@ const defaultTask: Task = {
   commands: []
 }
 
+const cloneTask = (task:Task) => {
+  let clone: Task = {
+    id: task.id,
+    owner: task.owner,
+    n: task.n,
+    m: task.m,
+    grid: task.grid,
+    x: task.x,
+    y: task.y,
+    angle: task.angle,
+    name: task.name,
+    commands: task.commands
+  }
+  return clone    
+}
 
 @Component({
   selector: 'app-level-edit-page',
@@ -36,7 +51,7 @@ export class LevelEditPageComponent {
     if (state) {      
       this.task = state['task']      
     } else {
-      this.task = defaultTask
+      this.task = cloneTask(defaultTask)
     }
   }
 
@@ -52,13 +67,7 @@ export class LevelEditPageComponent {
   async ngOnInit() {
     if (this.task) {
       this.commands = await lastValueFrom(this.httpService.getAllCommands())
-      this.max = this.task.n > this.task.m ? this.task.n : this.task.m;
-      this.cellSize = 100 / this.max
-      this.cells = Array.from(this.task.grid);
-      for (let i = 0; i < this.task.m * this.task.n ; i++) {
-        this.items[i] = []
-      }
-      this.items[this.task.y * this.task.m + this.task.x] = [1]
+      this.reset()
     }   
   }
 
@@ -86,13 +95,20 @@ export class LevelEditPageComponent {
   NMChange() {
     if (this.task) {
       this.task.grid = "0".repeat((this.task.n * this.task.m))
+      this.reset()      
+    }
+  }
+
+  reset() {
+    if (this.task) {
       this.cells = Array.from(this.task.grid);
       this.max = this.task.n > this.task.m ? this.task.n : this.task.m;
       this.cellSize = 100 / this.max
+      this.items = []
       for (let i = 0; i < this.task.m * this.task.n ; i++) {
         this.items[i] = []
       }
-      this.items[0] = [1]
+      this.items[this.task.y * this.task.m + this.task.x] = [1]
     }
   }
 
@@ -125,6 +141,12 @@ export class LevelEditPageComponent {
     }
   }
 
+  drop() {
+    this.task = cloneTask(defaultTask)
+    this.reset()
+    console.log(this.task)
+  }
+
   transfer(event: CdkDragDrop<number[]>) {
     transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
   }
@@ -147,7 +169,5 @@ export class LevelEditPageComponent {
         this.task.angle += 90
       }
     }
-  }
-
-  
+  }  
 }

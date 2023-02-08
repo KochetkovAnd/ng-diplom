@@ -1,8 +1,40 @@
-<div class="main-container">
+<navbar-student></navbar-student>
+
+<div style= "display: flex;">
+   
+    
+    <div class="main-container">
+        <div class="block" *ngFor="let task of tasks, index as i" routerLink="/level/{{task.id}}"
+        [class.green]="getColor(task) == 'green'"
+        [class.grey]="getColor(task) == 'grey'"
+        [class.white]="getColor(task) == 'white'">
+            <div class="marker"></div>
+            {{i + 1}}
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="box">
+            <div class="marker-legend " style="background-color: green;"></div>
+            <p>- сделанные</p>
+        </div>
+        <div class="box">
+            <div class="marker-legend " style="background-color: grey;"></div>
+            <p>- в процессе</p>
+        </div>
+        <div class="box">
+            <div class="marker-legend " style="background-color: white;"></div>
+            <p>- новые</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="main-container">
     <div class="block" *ngFor="let task of colorTasks, index as i" routerLink="/level/{{task.task.id}}">
         <div class="marker" [ngStyle] = "{
             'background-color': task.color
         }"></div>
         {{i + 1}}
     </div>    
-</div>
+</div> -->

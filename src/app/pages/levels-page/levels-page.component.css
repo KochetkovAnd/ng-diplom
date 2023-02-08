@@ -1,13 +1,20 @@
-.main-container {    
-    position: absolute;
-    width: 90%;    
-    height: 90%;
-    top: 5%;
-    left: 5%;    
-    background-color: rgba(255, 255, 255, 0.9);
+.legend {
+    width: 250px;
+    max-width: calc(30% - 20px);
+    margin: 33px 10px 0px 10px;
+    padding: 10px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.15);
-    
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.main-container {
+    margin: 10px 0% 10px 10%;
+    width: 60%;
+    height: calc(100% - 100px);    
+    overflow-y: auto;   
 }
 
 .block {
@@ -15,7 +22,7 @@
     height: 150px;
     margin: 20px;
     border-radius: 50px;
-    background-color: #a630b6;
+    background-color: rgba(0, 0, 0, 0.2);
     display: inline-block;
     text-align: center;
     line-height: 150px;
@@ -25,15 +32,56 @@
 }
 
 .block:hover {
-    background-color: #842691;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .marker {
-    width: 10px;
-    height: 10px;
-    border: 1px solid rgb(100, 100, 100);
+    width: 20px;
+    height: 20px;    
     position: absolute;
     margin-left: 110px;
     margin-top: 30px;
     border-radius: 20px;
+}
+
+.legend .box {
+    margin: 10px;
+    display: flex;
+}
+
+.legend p {
+    line-height: 20px;
+    color: white;
+    margin-left: 10px;
+}
+
+.marker-legend {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+}
+
+.green {
+    border: 3px solid green;
+}
+
+.green .marker {
+    background-color: green;
+}
+
+.white {
+    border: 3px solid white;
+}
+
+.white .marker {
+    background-color: white;
+}
+
+
+.grey {
+    border: 3px solid grey;
+}
+
+.grey .marker {
+    background-color: grey;
 }

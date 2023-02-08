@@ -44,14 +44,14 @@
                     <button (click) = "left()"><img src="assets/left.png" alt="Кнопка «button»"></button>
                     <button (click) = "right()"><img src="assets/right.png" alt="Кнопка «button»"></button>
                 </div>
-            </div>
-            
+            </div>            
             
 
-            <div class="drop-block" cdkDropList>
-
+            <div class="buttons-block">
+                <button (click)="save()" >Сохранить</button>
+                <button (click)="drop()" >Создать новый</button>
             </div>
-            <button (click)="save()" class="save-button">Сохранить</button>
+            
         </div>
 
 

@@ -18,6 +18,7 @@ import { NavbarTeacherComponent } from './components/navbar-teacher/navbar-teach
 import { GroupEditPageComponent } from './pages/group-edit-page/group-edit-page.component';
 import { LevelEditPageComponent } from './pages/level-edit-page/level-edit-page.component';
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
+import { NavbarStudentComponent } from './components/navbar-student/navbar-student.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
     NavbarTeacherComponent,
     GroupEditPageComponent,
     LevelEditPageComponent,
-    TasksPageComponent
+    TasksPageComponent,
+    NavbarStudentComponent
     
   ],
   imports: [
