@@ -1,3 +1,4 @@
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Block } from 'src/app/models/block';
@@ -5,7 +6,7 @@ import { Task } from 'src/app/models/task';
 import { HttpService } from 'src/app/services/http-service/http.service';
 
 
-const defaultTask: Task = {  
+const defaultTask: Task = {
   n: 5,
   m: 5,
   grid: "0000000000000000000000000",
@@ -24,15 +25,18 @@ const defaultTask: Task = {
 })
 export class LevelEditPageComponent {
 
-  constructor (
+  constructor(
     private httpService: HttpService,
-  ) {}
+  ) { }
 
   forOptions = [2, 3, 4, 5, 6, 7, 8]
   commands: Block[] = []
   task: Task | undefined;
   cells: string[] = [];
   max = 0; cellSize = 0;
+  a = 90
+
+  items: number[][] = []
 
   async ngOnInit() {
     this.commands = await lastValueFrom(this.httpService.getAllCommands())
@@ -40,17 +44,21 @@ export class LevelEditPageComponent {
     this.max = this.task.n > this.task.m ? this.task.n : this.task.m;
     this.cellSize = 100 / this.max
     this.cells = Array.from(this.task.grid);
+    for (let i = 0; i < this.task.m * this.task.n ; i++) {
+      this.items[i] = []
+    }
+    this.items[this.task.y * this.task.m + this.task.x] = [1]
   }
 
-  onChange(command: Block, ) {
+  onChange(command: Block,) {
     if (this.task) {
       let pos = this.getPos(command)
       if (pos == -1) {
         this.task.commands.push(command)
       } else {
-        this.task.commands.splice(pos,1)
+        this.task.commands.splice(pos, 1)
       }
-    }  
+    }
   }
   getPos(command: Block) {
     if (this.task) {
@@ -58,22 +66,26 @@ export class LevelEditPageComponent {
         if (this.task.commands[i].id == command.id) {
           return i
         }
-      }      
-    }  
+      }
+    }
     return -1
   }
 
   NMChange() {
-    if(this.task) {
+    if (this.task) {
       this.task.grid = "0".repeat((this.task.n * this.task.m))
       this.cells = Array.from(this.task.grid);
       this.max = this.task.n > this.task.m ? this.task.n : this.task.m;
       this.cellSize = 100 / this.max
+      for (let i = 0; i < this.task.m * this.task.n ; i++) {
+        this.items[i] = []
+      }
+      this.items[0] = [1]
     }
   }
 
   onClickCell(i: number) {
-    if(this.task) {
+    if (this.task) {
       if (this.cells[i] == "0") {
         this.cells[i] = "1"
       } else if (this.cells[i] == "1") {
@@ -85,11 +97,46 @@ export class LevelEditPageComponent {
   }
 
   async save() {
-    let str = ""
-    this.cells.forEach(s => str += s)
     if (this.task) {
+      for (let i = 0; i < this.task.n; i++) {
+        for (let j = 0; j < this.task.m; j++) {
+          if (this.items[i * this.task.m + j].length > 0) {
+            this.task.x = j
+            this.task.y = i
+          }
+        }
+      }
+      console.log(this.task)
+      let str = ""
+      this.cells.forEach(s => str += s)
       this.task.grid = str
       this.task = await lastValueFrom(this.httpService.updateTask(this.task))
     }
   }
+
+  transfer(event: CdkDragDrop<number[]>) {
+    transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
+  }
+
+  left() {
+    if (this.task) {
+      if (this.task.angle == 0) {
+        this.task.angle = 270
+      } else {
+        this.task.angle -= 90
+      }
+    }
+  }
+
+  right() {
+    if (this.task) {
+      if (this.task.angle == 270) {
+        this.task.angle = 0
+      } else {
+        this.task.angle += 90
+      }
+    }
+  }
+
+  
 }

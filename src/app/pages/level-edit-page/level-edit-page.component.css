@@ -77,7 +77,6 @@
 }
 
 .grid-block {
-    margin-right: 0px;
     width: calc(40vw - 80px);
     height: calc(40vw - 80px);
     overflow: hidden;
@@ -117,6 +116,10 @@
 
 .number-block {
     margin: 10px;
+    width: 150px;    
+}
+
+.number-block label {
     font-size: 16px;
     color: white;
 }
@@ -126,6 +129,54 @@
     border: none;
     padding: 10px;
     border-radius: 10px;
+    margin-left: 10px;
     width: 50px;
     font-size: 16px;
 }
+
+img {
+    margin: 20% 20% 0px 20%;
+    width: 60%;
+    height: 60%;
+}
+
+.rotate-block {
+    width: calc(100% - 170px);
+    
+}
+.rotate-block p {
+    color: white;
+    font-size: 16px;
+}
+
+.rotate-block button {
+    margin: 10px 2px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;    
+}
+
+.rotate-block button img {
+    margin: 20%;
+    width: 60%;
+    height: 60%;   
+}
+
+.save-button {
+    margin: 10px 30%;
+    width: 40%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    border: none;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+
