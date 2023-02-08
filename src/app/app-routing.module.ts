@@ -8,6 +8,7 @@ import { LevelEditPageComponent } from './pages/level-edit-page/level-edit-page.
 import { LevelsPageComponent } from './pages/levels-page/levels-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SolvePageComponent } from './pages/solve-page/solve-page.component';
+import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 
 const routes: Routes = [  
   { path: 'login', component: LoginPageComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'groups', component: GroupPageComponent, canActivate: [TeacherGuard]},
   { path: 'group/:id', component: GroupEditPageComponent, canActivate: [TeacherGuard]},
   { path: 'edit-level', component: LevelEditPageComponent, canActivate: [TeacherGuard]},
+  { path: 'tasks' , component: TasksPageComponent, canActivate: [TeacherGuard]},
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

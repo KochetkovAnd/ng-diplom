@@ -1,0 +1,12 @@
+<navbar-teacher></navbar-teacher>
+
+<div class="container">
+    <div class="task-card" *ngFor = "let task of tasks; index as i">
+        <p class="number">{{i+1}}</p>
+        <p class="text">{{task.name}}</p> 
+
+        <div class="img-box" *ngIf="isContain(task)" (click) = "onClick(task)">
+            <img src="assets/pen.png">
+        </div>
+    </div>
+</div>

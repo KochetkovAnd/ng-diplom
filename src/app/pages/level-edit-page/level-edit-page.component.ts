@@ -1,5 +1,7 @@
+import { style } from '@angular/animations';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Block } from 'src/app/models/block';
 import { Task } from 'src/app/models/task';
@@ -27,7 +29,16 @@ export class LevelEditPageComponent {
 
   constructor(
     private httpService: HttpService,
-  ) { }
+    private router: Router
+  ) 
+  {
+    let state = this.router.getCurrentNavigation()?.extras.state
+    if (state) {      
+      this.task = state['task']      
+    } else {
+      this.task = defaultTask
+    }
+  }
 
   forOptions = [2, 3, 4, 5, 6, 7, 8]
   commands: Block[] = []
@@ -39,15 +50,16 @@ export class LevelEditPageComponent {
   items: number[][] = []
 
   async ngOnInit() {
-    this.commands = await lastValueFrom(this.httpService.getAllCommands())
-    this.task = defaultTask
-    this.max = this.task.n > this.task.m ? this.task.n : this.task.m;
-    this.cellSize = 100 / this.max
-    this.cells = Array.from(this.task.grid);
-    for (let i = 0; i < this.task.m * this.task.n ; i++) {
-      this.items[i] = []
-    }
-    this.items[this.task.y * this.task.m + this.task.x] = [1]
+    if (this.task) {
+      this.commands = await lastValueFrom(this.httpService.getAllCommands())
+      this.max = this.task.n > this.task.m ? this.task.n : this.task.m;
+      this.cellSize = 100 / this.max
+      this.cells = Array.from(this.task.grid);
+      for (let i = 0; i < this.task.m * this.task.n ; i++) {
+        this.items[i] = []
+      }
+      this.items[this.task.y * this.task.m + this.task.x] = [1]
+    }   
   }
 
   onChange(command: Block,) {
@@ -106,7 +118,6 @@ export class LevelEditPageComponent {
           }
         }
       }
-      console.log(this.task)
       let str = ""
       this.cells.forEach(s => str += s)
       this.task.grid = str

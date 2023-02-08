@@ -99,5 +99,10 @@ export class HttpService {
     return this.http.post<Task>(this.baseURL + "/task/update", task,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
+
+  getAllTasksByUser() {
+    return this.http.get<Task[]>(this.baseURL + "/task/getAllByUser",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
   
 }
