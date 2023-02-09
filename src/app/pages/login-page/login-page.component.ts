@@ -27,7 +27,9 @@ export class LoginPageComponent {
         this.router.navigate(['/groups'])
       } else if (role == "STUDENT") {
         this.router.navigate(['/levels'])
-      }  
+      } else if (role == "ADMIN") {
+        this.router.navigate(['/users'])
+      }
     }
   }
 
@@ -40,6 +42,8 @@ export class LoginPageComponent {
         this.router.navigate(['/groups'])
       } else if (response.role == "STUDENT") {
         this.router.navigate(['/levels'])
+      } else if (response.role == "ADMIN") {
+        this.router.navigate(['/users'])
       }      
     } else {
       this.error = "wrong login or password"           

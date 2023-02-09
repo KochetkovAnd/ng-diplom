@@ -1,0 +1,39 @@
+<admin-navbar></admin-navbar>
+<div style="display: flex;">
+    <div class="container">
+        <p class="title">Ученики</p>
+        <div class="card" *ngFor="let student of students;index as i">
+            <p class="number">{{i + 1}}</p>
+            <p class="text">{{student}}</p>
+        </div>
+
+        <div class="card add">
+            <div class="register-block" *ngIf="add_user" [@add] = "add_user ? 'open' : 'closed'">
+                <div style="display: flex;">
+                    <input class="input" type="text" placeholder="Username" [(ngModel)] = "user_login">
+                    <input class="input" type="text" placeholder="Password" [(ngModel)] = "user_password">  
+                </div>   
+                <p class="error">{{error_user}}</p>             
+            </div>            
+            
+            <p (click) = "addUser()"> + </p>
+        </div>
+    </div>
+    <div class="container">
+        <p class="title">Учителя</p>
+        <div class="card" *ngFor="let teacher of teachers;index as i">
+            <p class="number">{{i + 1}}</p>
+            <p class="text">{{teacher}}</p>
+        </div>
+        <div class="card add">
+            <div class="register-block" *ngIf="add_teacher" [@add] = "add_teacher ? 'open' : 'closed'">
+                <div style="display: flex;">
+                    <input class="input" type="text" placeholder="Username" [(ngModel)] = "teacher_login">
+                    <input class="input" type="text" placeholder="Password" [(ngModel)] = "teacher_password">  
+                </div>   
+                <p class="error">{{error_teacher}}</p>             
+            </div>    
+            <p (click) = "addTeacher()"> + </p>
+        </div>
+    </div>
+</div>

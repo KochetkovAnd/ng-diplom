@@ -31,12 +31,12 @@
         <div class="params-container">
 
             <div style="display: flex;">
-                <div>
+                <div style="width: 50%;">
                     <div class="number-block">
-                        <label>n =</label> <input type="number" [(ngModel)]="task.n" (change)="NMChange()" min="4" max="18" />
+                        <label>n = </label> <input type="number" [(ngModel)]="task.n" (change)="NMChange()" min="4" max="18" />
                     </div>
                     <div class="number-block">
-                        <label>n =</label> <input type="number" [(ngModel)]="task.m" (change)="NMChange()" min="4" max="18" />
+                        <label>n = </label> <input type="number" [(ngModel)]="task.m" (change)="NMChange()" min="4" max="18" />
                     </div>
                 </div>
                 <div class="rotate-block">
@@ -49,6 +49,11 @@
                 <button (click)="save()" >Сохранить</button>
                 <button (click)="drop()" >Создать новый</button>
             </div>            
+        </div>
+
+        <div class="help-container">
+            Здесь будет небольшой гайд по созданию заданию
+
         </div>
     </div>
 

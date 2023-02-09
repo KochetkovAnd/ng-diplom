@@ -107,20 +107,33 @@
 .params-container {
     margin: 20px;
     width: calc(100% - 60px);
-    height: calc(100% - 200px);
+    height: 25%;
+    /* height: calc(100% - 200px); */
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 10px
 }
 
+.help-container {
+    margin: 20px;
+    width: calc(100% - 60px);
+    height: calc(75% - 240px);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    color: white;
+}
+
 .number-block {
-    margin: 10px;
-    width: 150px;    
+    margin: 10px 0px;
+    width: 100%;   
+    text-align: center; 
 }
 
 .number-block label {
-    font-size: 16px;
+    font-size: 1vw;
     color: white;
 }
 
@@ -129,9 +142,8 @@
     border: none;
     padding: 10px;
     border-radius: 10px;
-    margin-left: 10px;
-    width: 50px;
-    font-size: 16px;
+    width: 3vw;
+    font-size: 1vw;
 }
 
 img {
@@ -141,18 +153,20 @@ img {
 }
 
 .rotate-block {
-    width: calc(100% - 170px);
+    margin-top: 10px;
+    width: 50%;
+    text-align: center;
     
 }
 .rotate-block p {
     color: white;
-    font-size: 16px;
+    font-size: 1vw;
 }
 
 .rotate-block button {
     margin: 10px 2px;
-    width: 50px;
-    height: 50px;
+    width: 4vw;
+    height: 4vw;
     border-radius: 10px;
     border: none;    
 }
@@ -169,11 +183,12 @@ img {
 .buttons-block button {
     width: 40%;
     padding: 10px;
-    margin: 5%;
+    margin: 10px 5%;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
     border: none;
+    font-size: 1vw;
     color: white;
 }
 

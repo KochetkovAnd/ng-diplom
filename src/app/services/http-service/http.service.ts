@@ -32,6 +32,19 @@ export class HttpService {
       }))
   }
 
+  register(username: string, password: string, role: string) {
+    return this.http.post(this.baseURL+ "/auth/register", 
+    {
+      username,
+      password,
+      role
+    },
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+    .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    }))
+  }
+
   getAvailableTasks() {
     return this.http.get<Task[]>(this.baseURL+ "/task/getAvailableTasks", 
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}) 
@@ -102,6 +115,11 @@ export class HttpService {
 
   getAllTasksByUser() {
     return this.http.get<Task[]>(this.baseURL + "/task/getAllByUser",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getAllUsers() {
+    return this.http.get<User[]>(this.baseURL + "/user",
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
   

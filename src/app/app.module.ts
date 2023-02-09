@@ -19,6 +19,9 @@ import { GroupEditPageComponent } from './pages/group-edit-page/group-edit-page.
 import { LevelEditPageComponent } from './pages/level-edit-page/level-edit-page.component';
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 import { NavbarStudentComponent } from './components/navbar-student/navbar-student.component';
+import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { AdminGuard } from './guards/admin-guard/admin.guard';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 
 
 @NgModule({
@@ -32,7 +35,9 @@ import { NavbarStudentComponent } from './components/navbar-student/navbar-stude
     GroupEditPageComponent,
     LevelEditPageComponent,
     TasksPageComponent,
-    NavbarStudentComponent
+    NavbarStudentComponent,
+    UsersPageComponent,
+    AdminNavbarComponent
     
   ],
   imports: [
@@ -43,7 +48,7 @@ import { NavbarStudentComponent } from './components/navbar-student/navbar-stude
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [AuthService, StudentGuard, TeacherGuard],
+  providers: [AuthService, StudentGuard, TeacherGuard, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
