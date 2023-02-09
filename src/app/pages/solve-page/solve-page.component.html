@@ -1,4 +1,6 @@
-<div style="display:flex" *ngIf="task">
+<navbar-student></navbar-student>
+
+<div style="display: flex;" *ngIf= "task">
     <div class="command-block">
         <ul
             cdkDropList
@@ -26,15 +28,10 @@
                 <ul 
                     *ngIf="item.type == 'composite'"
                     class="program-ul">                    
-                </ul>               
-
+                </ul>
             </li>
-
         </ul>
     </div>
-
-
-
 
     <div class="program-block">
         <ul cdkDropList [cdkDropListData]="program" [cdkDropListConnectedTo]="dls" class="program-ul"
@@ -82,10 +79,11 @@
                 </div>
             </li>
         </ul>
+        <button (click) = "runProgram(program)" class="play-button">Запустить</button>
     </div>
 
     <div class="grid-container">
-        <button (click) = "runProgram(program)" class="play-button">Запустить</button>
+        
         <div class="grid-block" style="position: relative;">
             <div class="movebox"
             style="position: absolute;"
@@ -112,14 +110,12 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 
-<!--  -->
 <div class="popup" @win *ngIf="win" >
     <button class="exit-button" (click) = "win = false">
         x
     </button>
-    <p class="main-message">Уровень пройден</p>
-    
-</div>
+    <p class="main-message">Уровень пройден</p>    
+</div> 

@@ -10,3 +10,13 @@ body {
     height: 100vh;
     background: linear-gradient(90deg, #7a81f2,#a630b6,#e8664c);
 }
+
+*::-webkit-scrollbar {
+    width: 12px;
+    background-color: #a2e6fb;
+    border: 1px solid #4993c1;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: #4993c1;
+  }

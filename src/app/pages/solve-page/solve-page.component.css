@@ -3,7 +3,8 @@
     list-style: none;
     padding: 5px;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);   
+    /* box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);    */
+    border: 1px solid black;
     font-size: 2.5vmin; 
 }
 .program-ul {    
@@ -27,7 +28,13 @@
 
 /* LEFT SIDE */
 .command-block {
-    width: 25vw;
+    width: calc(25vw - 40px);
+    height: calc(100vh - 120px);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2); 
 }
 .command-block li {
     margin: 5px;
@@ -40,25 +47,36 @@
 
 /* CENTRAL SIDE */
 .program-block {
-    width: 35vw;
-    height: 40vh;    
+    width: calc(35vw - 40px);
+    height: calc(100vh - 120px);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);    
 }
 
 .program-block > ul {
     margin-left: 0px;
-    margin-top: 5px;
+    height: calc(100% - 50px);
+    overflow: auto;
 }
 
 
 /* RIGHT SIDE */
 .grid-container {
-
+    width: calc(40vw - 40px);
+    height: calc(40vw - 40px);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2); 
 }
 
 .grid-block {
-    margin: 10px;
-    width: calc(40vw - 20px);
-    height: calc(40vw - 20px);
+    width: calc(40vw - 40px);
+    height: calc(40vw - 40px);
 }
 
 .grid {
@@ -83,6 +101,7 @@
 .play-button {
     margin: 10px;
     padding: 10px;
+    height: 40px;
     font-size: 2vmin;
     color: white;
     font-weight: bold;
