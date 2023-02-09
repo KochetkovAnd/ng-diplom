@@ -53,10 +53,16 @@
     overflow-y:auto;
 }
 
+.students-container > p {
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: 600;
+}
+
 .tasks-container {
     margin: 10px 10%;
     width: 80%;
-    /*  height: calc(100% - 50px); */
     height: calc(100% - 100px); 
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -67,6 +73,23 @@
     display: flex;
 }
 
+.tasks-container > div {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tasks-container > div > p {
+    display: block;
+    white-space: nowrap;
+    width: 0px;
+    margin: 20px;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    font-weight: 600;
+
+}
+
 .card {
     display: flex;
     margin: 10px 50px;
@@ -75,6 +98,7 @@
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
 .card:hover {
@@ -99,11 +123,12 @@
 
 .card .text {
     margin: 10px 0;
-    width: calc(100% - 100px);
+    width: 0px;
+
     line-height: 30px;
     color: white;
     font-size: 16px;
-    overflow: hidden;
+    white-space: nowrap;
 }
 
 .add {

@@ -7,6 +7,7 @@
         </div>
 
         <div class="students-container" *ngIf= "students">
+            <p>Ученики</p>
             <div class="card" *ngFor = "let student of students; index as i">
                 <p class="number">{{i+1}}</p>
                 <p class="text">{{student.name}}</p>
@@ -17,7 +18,8 @@
     </div>
     <div class="container right">
         <div class="tasks-container">
-            <div [@add] ="isClosed ? 'closed':'open'" style="width: 100%; overflow-y: auto;">
+            <div [@add] ="isClosed ? 'closed':'open'" style="width: 100%;">
+                <p>Прикрепленные задания</p>
                 <div class="card" *ngFor = "let task of group.tasks; index as i">
                     <p class="number" *ngIf= "isClosed; else elseBlock">{{i+1}}</p>
                     <ng-template #elseBlock>
@@ -33,7 +35,8 @@
 
 
 
-            <div [@reverse-add] ="isClosed ? 'closed':'open'" style="overflow-y: auto;" *ngIf ="!isClosed" >
+            <div [@reverse-add] ="isClosed ? 'closed':'open'" *ngIf ="!isClosed">
+                <p>Не прикрепленные задания</p>
                 <div class="card" *ngFor = "let unusedTask of unusedTasks; index as i">
                     <p class="number" (click) = "transfer(i)">+</p>
                     <p class="text">{{unusedTask.name}}</p>
