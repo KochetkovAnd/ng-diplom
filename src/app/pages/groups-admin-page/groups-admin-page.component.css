@@ -1,0 +1,96 @@
+.container {    
+    width: 60%;   
+    margin-left: 20%; 
+}
+
+.group-card {
+    margin: 10px;
+    width: 100%;
+    height: 100px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.15);
+    display: flex;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.group-card .number{
+    display: block;
+    margin: 25px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    
+}
+
+.group-card .text {
+    display: block;
+    margin: 25px 0;
+    line-height: 50px;
+    color: white;
+    font-size: 20px;
+}
+
+.group-card:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.add-card {
+    margin: 10px;
+    margin-top: 0px;
+    width: 100%;
+    display: inline-block;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.button-block {
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgba(0, 128, 0, 0.5);    
+    display: flex;
+    align-items: center;
+}
+
+.button-block button {
+    width: 50%;
+    height: 100px;
+    display: block;
+    background-color: transparent;
+    border:none;
+    color: white;
+    font-size: 20px;
+}
+
+.error {
+    text-align: left;
+    font-size: 12px;
+    color: red;
+    margin-left: 5%;
+    line-height: 20px;
+}
+
+.register-block {
+    width: calc(100% - 20px);
+    margin: 0px 10px;
+    height: 0px;
+    /* border: 1px solid gray; */
+    overflow: hidden;
+}
+
+.input {
+    font-size: 14px;
+    border:none; 
+    outline: none;  
+    width: 90%; 
+    height: 40px;
+    margin: 0px 5%;
+    background-color: rgb(235, 235, 235);
+    border-radius: 10px;
+    padding-left: 10px;
+    transition: 0.3s;
+}

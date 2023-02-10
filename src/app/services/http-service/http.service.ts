@@ -122,5 +122,21 @@ export class HttpService {
     return this.http.get<User[]>(this.baseURL + "/user",
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
+
+  getAllGroups() {
+    return this.http.get<Group[]>(this.baseURL + "/group",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  createGroup(name: String) {
+    return this.http.post<Group>(this.baseURL + "/group/create", 
+    {
+      name
+    },
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+    .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    }))
+  }
   
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from './guards/role-guard/role.guard';
 import { GroupEditPageComponent } from './pages/group-edit-page/group-edit-page.component';
 import { GroupPageComponent } from './pages/group-page/group-page.component';
+import { GroupsAdminPageComponent } from './pages/groups-admin-page/groups-admin-page.component';
 import { LevelEditPageComponent } from './pages/level-edit-page/level-edit-page.component';
 import { LevelsPageComponent } from './pages/levels-page/levels-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'edit-level', component: LevelEditPageComponent, canActivate: [RoleGuard]},
   { path: 'tasks' , component: TasksPageComponent, canActivate: [RoleGuard]},
   { path: 'users', component: UsersPageComponent, canActivate: [RoleGuard]},
+  { path: 'groups-admin', component: GroupsAdminPageComponent, canActivate: [RoleGuard]},
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

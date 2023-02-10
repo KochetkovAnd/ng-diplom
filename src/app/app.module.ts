@@ -20,6 +20,7 @@ import { NavbarStudentComponent } from './components/navbar-student/navbar-stude
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { RoleGuard } from './guards/role-guard/role.guard';
+import { GroupsAdminPageComponent } from './pages/groups-admin-page/groups-admin-page.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RoleGuard } from './guards/role-guard/role.guard';
     TasksPageComponent,
     NavbarStudentComponent,
     UsersPageComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    GroupsAdminPageComponent
     
   ],
   imports: [

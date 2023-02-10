@@ -23,7 +23,7 @@ export class RoleGuard implements CanActivate {
       let isAdmin = role == "ADMIN"
       switch (route.routeConfig?.path) {
         case 'levels':
-          if (isStudent) { return true }            
+          if (isStudent) { return true }
           break
         case 'level/:id':
           if (isStudent) { return true }
@@ -37,10 +37,13 @@ export class RoleGuard implements CanActivate {
         case 'edit-level':
           if (isTeacher) { return true }
           break
-        case 'tasks':          
+        case 'tasks':
           if (isTeacher) { return true }
           break
         case 'users':
+          if (isAdmin) { return true }
+          break
+        case 'groups-admin':
           if (isAdmin) { return true }
           break
       }

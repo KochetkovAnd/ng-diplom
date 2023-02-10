@@ -1,0 +1,19 @@
+<admin-navbar></admin-navbar>
+<div class="container">
+    <div class="group-card" *ngFor="let group of groups; index as i">
+        <p class="number">{{i+1}}</p>
+        <p class="text">{{group.name}}</p>        
+    </div>
+    <div class="add-card">
+        <div class="register-block" *ngIf="isAdd" [@add] = "isAdd ? 'open' : 'closed'">
+            <div style="display: flex;">
+                <input class="input" type="text" placeholder="groupName" [(ngModel)] = "groupName">
+            </div>   
+            <p class="error">{{error}}</p>             
+        </div>   
+        <div class="button-block">
+            <button (click) = "add()"> + </button>
+            <button *ngIf= "isAdd" (click) = "hide()"> ^  </button>
+        </div>         
+    </div>
+</div>
