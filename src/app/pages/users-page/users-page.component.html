@@ -16,7 +16,10 @@
                 <p class="error">{{error_user}}</p>             
             </div>            
             
-            <p (click) = "addUser()"> + </p>
+            <div class="button-block">
+                <button (click) = "addUser()"> + </button>
+                <button *ngIf= "add_user"(click) = "hideUser()"> ^  </button>
+            </div> 
         </div>
     </div>
     <div class="container">
@@ -32,8 +35,12 @@
                     <input class="input" type="text" placeholder="Password" [(ngModel)] = "teacher_password">  
                 </div>   
                 <p class="error">{{error_teacher}}</p>             
-            </div>    
-            <p (click) = "addTeacher()"> + </p>
+            </div>   
+            <div class="button-block">
+                <button (click) = "addTeacher()"> + </button>
+                <button *ngIf= "add_teacher"(click) = "hideTeacher()"> ^  </button>
+            </div> 
+            
         </div>
     </div>
 </div>

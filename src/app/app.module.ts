@@ -12,16 +12,14 @@ import { AuthService } from './services/auth-service/auth.service';
 import { LevelsPageComponent } from './pages/levels-page/levels-page.component';
 import { SolvePageComponent } from './pages/solve-page/solve-page.component';
 import { GroupPageComponent } from './pages/group-page/group-page.component';
-import { StudentGuard } from './guards/student-guard/student.guard';
-import { TeacherGuard } from './guards/teacher-guard/teacher.guard';
 import { NavbarTeacherComponent } from './components/navbar-teacher/navbar-teacher.component';
 import { GroupEditPageComponent } from './pages/group-edit-page/group-edit-page.component';
 import { LevelEditPageComponent } from './pages/level-edit-page/level-edit-page.component';
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 import { NavbarStudentComponent } from './components/navbar-student/navbar-student.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
-import { AdminGuard } from './guards/admin-guard/admin.guard';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { RoleGuard } from './guards/role-guard/role.guard';
 
 
 @NgModule({
@@ -48,7 +46,7 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [AuthService, StudentGuard, TeacherGuard, AdminGuard],
+  providers: [AuthService, RoleGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

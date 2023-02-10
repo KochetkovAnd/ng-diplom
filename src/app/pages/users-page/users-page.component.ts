@@ -22,11 +22,11 @@ import { HttpService } from 'src/app/services/http-service/http.service';
         style(
           {
             height: "60px",
-            margin: "10px",
+            margin: "20px 10px 0px 10px",
           }
         )
       ),
-      transition("*=>open", animate('0.2s'))      
+      transition("*=>*", animate('0.2s'))      
     ])
     
   ]
@@ -95,5 +95,15 @@ export class UsersPageComponent {
     } else {
       this.add_teacher = true
     }
+  }
+
+  hideTeacher() {
+    this.error_teacher = ""
+    this.add_teacher = false
+  }
+
+  hideUser() {
+    this.error_user = ""
+    this.add_user = false
   }
 }

@@ -14,9 +14,11 @@ body {
 *::-webkit-scrollbar {
     width: 12px;
     background-color: #a2e6fb;
+    border-radius: 10px;
     border: 1px solid #4993c1;
   }
   
   *::-webkit-scrollbar-thumb {
     background-color: #4993c1;
+    border-radius: 10px;
   }
