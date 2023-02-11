@@ -22,7 +22,7 @@ import { HttpService } from 'src/app/services/http-service/http.service';
       state('open', 
         style(
           {
-            height: "60px",
+            height: "100px",
             margin: "20px 10px 0px 10px",
           }
         )

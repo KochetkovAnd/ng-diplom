@@ -30,7 +30,7 @@
     width: calc(30vw - 40px);
     height: calc(100vh - 140px);
     margin: 20px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #fbf7ff;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 10px;
@@ -44,9 +44,9 @@
     width: calc(40vw - 80px);
     height: calc(100vh - 140px);
     margin: 20px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #fbf7ff;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 10px;
 }
 
@@ -54,21 +54,20 @@
     margin: 20px;
     width: calc(100% - 60px);
     height: 100px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #fbf7ff;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 10px;
 }
 
 .group-name-container p{
     padding: 20px 0px 0px 30px;
     font-size: 16px;
-    color: white;
 }
 
 .group-name-container input[type="text"]{
     margin: 10px;
-    outline: none;
+    outline: 1px solid rgba(0, 0, 0, 0.25);
     border: none;
     padding: 10px;
     width: calc(100% - 40px);
@@ -87,20 +86,23 @@
 }
 
 .grid .cell {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 /* cells */
 .target {
-    background-color: yellow;
+    background-image: url('target-self.jpg');
+    background-size: contain;
 }
 
 .active {
-    background-color: green;
+    background-image: url('grass-self.jpg');
+    background-size: contain;
 }
 
 .disable {
-    background-color: red;
+    background-image: url('brick-self.jpg');
+    background-size: contain;
 }
 
 
@@ -109,9 +111,9 @@
     width: calc(100% - 60px);
     height: 25%;
     /* height: calc(100% - 200px); */
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #fbf7ff;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 10px
 }
 
@@ -119,11 +121,10 @@
     margin: 20px;
     width: calc(100% - 60px);
     height: calc(75% - 240px);
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #fbf7ff;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 10px;
-    color: white;
 }
 
 .number-block {
@@ -134,12 +135,11 @@
 
 .number-block label {
     font-size: 1vw;
-    color: white;
 }
 
 .number-block input[type ="number"] {
     outline: none;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.25);
     padding: 10px;
     border-radius: 10px;
     width: 3vw;
@@ -159,7 +159,6 @@ img {
     
 }
 .rotate-block p {
-    color: white;
     font-size: 1vw;
 }
 
@@ -168,7 +167,8 @@ img {
     width: 4vw;
     height: 4vw;
     border-radius: 10px;
-    border: none;    
+    border: none;
+    background-color: #9692bf;   
 }
 
 .rotate-block button img {
@@ -184,16 +184,16 @@ img {
     width: 40%;
     padding: 10px;
     margin: 10px 5%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #569ed7;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
     border: none;
     font-size: 1vw;
-    color: white;
+    color: #fbf7ff;
 }
 
 .buttons-block button:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    /* background-color: rgba(0, 0, 0, 0.3); */
 }
 
 

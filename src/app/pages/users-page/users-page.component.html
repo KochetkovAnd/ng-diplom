@@ -10,8 +10,8 @@
         <div class="card add">
             <div class="register-block" *ngIf="add_user" [@add] = "add_user ? 'open' : 'closed'">
                 <div style="display: flex;">
-                    <input class="input" type="text" placeholder="Username" [(ngModel)] = "user_login">
-                    <input class="input" type="text" placeholder="Password" [(ngModel)] = "user_password">  
+                    <input class="input" type="text" placeholder="Логин" [(ngModel)] = "user_login">
+                    <input class="input" type="text" placeholder="Пароль" [(ngModel)] = "user_password">  
                 </div>   
                 <p class="error">{{error_user}}</p>             
             </div>            
@@ -31,8 +31,8 @@
         <div class="card add">
             <div class="register-block" *ngIf="add_teacher" [@add] = "add_teacher ? 'open' : 'closed'">
                 <div style="display: flex;">
-                    <input class="input" type="text" placeholder="Username" [(ngModel)] = "teacher_login">
-                    <input class="input" type="text" placeholder="Password" [(ngModel)] = "teacher_password">  
+                    <input class="input" type="text" placeholder="Логин" [(ngModel)] = "teacher_login">
+                    <input class="input" type="text" placeholder="Пароль" [(ngModel)] = "teacher_password">  
                 </div>   
                 <p class="error">{{error_teacher}}</p>             
             </div>   

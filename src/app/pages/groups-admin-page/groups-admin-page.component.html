@@ -7,7 +7,7 @@
     <div class="add-card">
         <div class="register-block" *ngIf="isAdd" [@add] = "isAdd ? 'open' : 'closed'">
             <div style="display: flex;">
-                <input class="input" type="text" placeholder="groupName" [(ngModel)] = "groupName">
+                <input class="input" type="text" placeholder="Имя группы" [(ngModel)] = "groupName">
             </div>   
             <p class="error">{{error}}</p>             
         </div>   
