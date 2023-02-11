@@ -47,7 +47,7 @@ export class LoginPageComponent {
         this.router.navigate(['/users'])
       }      
     } else {
-      this.error = "wrong login or password"           
+      this.error = "неправильный логин или пароль"           
     }
   }
 }

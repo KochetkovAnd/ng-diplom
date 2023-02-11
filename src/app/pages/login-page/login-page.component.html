@@ -3,16 +3,16 @@
         <img src="assets/logo.jpg"/>
     </div>
     <div class="login-side">
-        <p class="big">Login</p>
+        <p class="big">Вход</p>
         <div class="input-container">
             <input class="input" type="text" id="username" name="username" placeholder="Username" [(ngModel)] = username>
-            <label class="input-label" for="username">Username</label>
+            <label class="input-label" for="username">Логин</label>
         </div>
         <div class="input-container">
             <input class="input" type="password" id="password" name="password" placeholder="Password" [(ngModel)] = password>
-            <label class="input-label" for="password">Password</label>
+            <label class="input-label" for="password">Пароль</label>
         </div>
         <p class="error-text">{{error}}</p>
-        <button class="login-button" (click) = "login()">Login</button>
+        <button class="login-button" (click) = "login()">Войти</button>
     </div>
 </div>
