@@ -3,7 +3,7 @@ nav {
     width: 100%;
     left: 0%;
     top:0%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #12263a;
 }
 
 nav ul {
@@ -19,7 +19,7 @@ nav ul li {
 nav a {
     display: block;
     padding: 0 10px;
-    color: #FFF;
+    color: #fbf7ff;
     line-height: 80px;
     font-size: 1vw;
     text-decoration: none;
@@ -27,7 +27,7 @@ nav a {
 }
 
 nav a:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    color: #f0e6fe;
 }
 
 .placeholder {    

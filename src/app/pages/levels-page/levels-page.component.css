@@ -1,47 +1,55 @@
+.legend-box {
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+}
+
 .legend {
     width: 250px;
-    max-width: calc(30% - 20px);
-    margin: 33px 10px 0px 10px;
+    margin-top: 30px;
     padding: 10px;
     height: 100px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #fbf7ff;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
 .main-container {
-    margin: 10px 0% 10px 10%;
-    width: 60%;
-    height: calc(100% - 100px);    
-    overflow-y: auto;   
+    margin: 30px 0% 30px 10%;
+    width: 60vw;
+    height: calc(100vh - 140px);    
+    overflow-y: auto;
+    background-color: #fbf7ff;
+    border-radius: 10px;
+    
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .block {
-    width: 150px;
-    height: 150px;
-    margin: 20px;
+    width: calc(12vw - 26px);
+    height: calc(12vw - 26px);
     border-radius: 50px;
-    background-color: rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    background-color: #569ed7;
     display: inline-block;
     text-align: center;
-    line-height: 150px;
-    color: white;
-    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
+    line-height: calc(12vw - 26px);
+    border: 3px solid;
     font-size: 40px;
 }
 
 .block:hover {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #4B8ABD;
 }
 
 .marker {
     width: 20px;
     height: 20px;    
-    position: absolute;
-    margin-left: 110px;
-    margin-top: 30px;
+    position: sticky;
     border-radius: 20px;
+    margin-top: calc(30px - 100%);
+    margin-left: calc(100% - 50px);
 }
 
 .legend .box {
@@ -51,7 +59,7 @@
 
 .legend p {
     line-height: 20px;
-    color: white;
+    font-weight: bold;
     margin-left: 10px;
 }
 
@@ -61,27 +69,27 @@
     border-radius: 20px;
 }
 
-.green {
-    border: 3px solid green;
+.completed {
+    border: 3px solid #00FF3D;
 }
 
-.green .marker {
-    background-color: green;
+.completed .marker {
+    background-color: #00FF3D;
 }
 
-.white {
-    border: 3px solid white;
+.new {
+    border: 3px solid #FF8F00;
 }
 
-.white .marker {
-    background-color: white;
+.new .marker {
+    background-color: #FF8F00;
 }
 
 
-.grey {
-    border: 3px solid grey;
+.in_process {
+    border: 3px solid #F2EA00;
 }
 
-.grey .marker {
-    background-color: grey;
+.in_process .marker {
+    background-color: #F2EA00;
 }

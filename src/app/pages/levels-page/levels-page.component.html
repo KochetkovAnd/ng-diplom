@@ -5,28 +5,30 @@
     
     <div class="main-container">
         <div class="block" *ngFor="let task of tasks, index as i" routerLink="/level/{{task.id}}"
-        [class.green]="getColor(task) == 'green'"
-        [class.grey]="getColor(task) == 'grey'"
-        [class.white]="getColor(task) == 'white'">
-            <div class="marker"></div>
+        [class.completed]="getColor(task) == 'completed'"
+        [class.in_process]="getColor(task) == 'in process'"
+        [class.new]="getColor(task) == 'new'">            
             {{i + 1}}
+            <div class="marker"></div>
         </div>
     </div>
 
-    <div class="legend">
-        <div class="box">
-            <div class="marker-legend " style="background-color: green;"></div>
-            <p>- сделанные</p>
+    <div class="legend-box">
+        <div class="legend">
+            <div class="box">
+                <div class="marker-legend " style="background-color: #00FF3D;"></div>
+                <p>- Cделанные</p>
+            </div>
+            <div class="box">
+                <div class="marker-legend " style="background-color: #F2EA00;"></div>
+                <p>- В процессе</p>
+            </div>
+            <div class="box">
+                <div class="marker-legend " style="background-color: #FF8F00;"></div>
+                <p>- Новые</p>
+            </div>
         </div>
-        <div class="box">
-            <div class="marker-legend " style="background-color: grey;"></div>
-            <p>- в процессе</p>
-        </div>
-        <div class="box">
-            <div class="marker-legend " style="background-color: white;"></div>
-            <p>- новые</p>
-        </div>
-    </div>
+    </div>    
 </div>
 
 

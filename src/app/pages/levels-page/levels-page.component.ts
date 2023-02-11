@@ -52,11 +52,11 @@ export class LevelsPageComponent {
 
   }
   getColor(task: Task) {
-    let color = "white"
+    let color = "new"
     if (contains(this.solveTasks, task)) {
-      color = "grey"
+      color = "in process"
     } else if (contains(this.solvedTasks, task)) {
-      color = "green"
+      color = "completed"
     }
     return color
   }
