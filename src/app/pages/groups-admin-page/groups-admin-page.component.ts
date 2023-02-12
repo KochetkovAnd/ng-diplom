@@ -50,15 +50,20 @@ export class GroupsAdminPageComponent {
 
   async add() {
     if (this.isAdd) {
-      let response = await lastValueFrom(this.httpService.createGroup(this.groupName))
-      if (response.id) {
-        this.groups.push(response)
-        this.error = ""
-        this.groupName = ""
-        this.isAdd = false
+      if (this.groupName != "") {
+        let response = await lastValueFrom(this.httpService.createGroup(this.groupName))
+        if (response.id) {
+          this.groups.push(response)
+          this.error = ""
+          this.groupName = ""
+          this.isAdd = false
+        } else {
+          this.error = "Группа с таким названием уже существует"
+        }
       } else {
-        this.error = response.error.message
+        this.error = "Название группы не может быть пустой строкой"
       }
+      
     } else {
       this.isAdd = true
     }

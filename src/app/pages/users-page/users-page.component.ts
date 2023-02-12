@@ -10,7 +10,7 @@ import { HttpService } from 'src/app/services/http-service/http.service';
   styleUrls: ['./users-page.component.css'],
   animations: [
     trigger('add', [
-      state('closed', 
+      state('closed',
         style(
           {
             height: "0px",
@@ -18,7 +18,7 @@ import { HttpService } from 'src/app/services/http-service/http.service';
           }
         )
       ),
-      state('open', 
+      state('open',
         style(
           {
             height: "60px",
@@ -26,9 +26,9 @@ import { HttpService } from 'src/app/services/http-service/http.service';
           }
         )
       ),
-      transition("*=>*", animate('0.2s'))      
+      transition("*=>*", animate('0.2s'))
     ])
-    
+
   ]
 })
 export class UsersPageComponent {
@@ -65,16 +65,21 @@ export class UsersPageComponent {
 
   async addUser() {
     if (this.add_user) {
-      let response = await lastValueFrom(this.httpService.register(this.user_login, this.user_password, "STUDENT"))
-      if (response.username) {
-        this.students.push(response.username)
-        this.error_user = ""
-        this.user_login = ""
-        this.user_password = ""
-        this.add_user = false
+      if (this.user_login != "" && this.user_password != "") {
+        let response = await lastValueFrom(this.httpService.register(this.user_login, this.user_password, "STUDENT"))
+        if (response.username) {
+          this.students.push(response.username)
+          this.error_user = ""
+          this.user_login = ""
+          this.user_password = ""
+          this.add_user = false
+        } else {
+          this.error_user = "Пользователь с таким именем уже существует"
+        }
       } else {
-        this.error_user = response.error.message
+        this.error_user = "Логин и пароль не могут быть пустыми строками"
       }
+      
     } else {
       this.add_user = true
     }
@@ -82,15 +87,19 @@ export class UsersPageComponent {
 
   async addTeacher() {
     if (this.add_teacher) {
-      let response = await lastValueFrom(this.httpService.register(this.teacher_login, this.teacher_password, "TEACHER"))
-      if (response.username) {
-        this.teachers.push(response.username)
-        this.error_teacher = ""
-        this.teacher_login = ""
-        this.teacher_password = ""
-        this.add_teacher = false
+      if (this.teacher_login != "" && this.teacher_password != "") {
+        let response = await lastValueFrom(this.httpService.register(this.teacher_login, this.teacher_password, "TEACHER"))
+        if (response.username) {
+          this.teachers.push(response.username)
+          this.error_teacher = ""
+          this.teacher_login = ""
+          this.teacher_password = ""
+          this.add_teacher = false
+        } else {
+          this.error_teacher = "Пользователь с таким именем уже существует"
+        }
       } else {
-        this.error_teacher = response.error.message
+        this.error_teacher = "Логин и пароль не могут быть пустыми строками"
       }
     } else {
       this.add_teacher = true
