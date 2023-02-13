@@ -9,18 +9,18 @@ import { AppComponent } from './app.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthService } from './services/auth-service/auth.service';
-import { LevelsPageComponent } from './pages/levels-page/levels-page.component';
-import { SolvePageComponent } from './pages/solve-page/solve-page.component';
-import { GroupPageComponent } from './pages/group-page/group-page.component';
+import { LevelsPageComponent } from './pages/student-pages/levels-page/levels-page.component';
+import { SolvePageComponent } from './pages/student-pages/solve-page/solve-page.component';
+import { GroupPageComponent } from './pages/teacher-pages/group-page/group-page.component';
 import { NavbarTeacherComponent } from './components/navbar-teacher/navbar-teacher.component';
-import { GroupEditPageComponent } from './pages/group-edit-page/group-edit-page.component';
-import { LevelEditPageComponent } from './pages/level-edit-page/level-edit-page.component';
-import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
+import { GroupEditPageComponent } from './pages/teacher-pages/group-edit-page/group-edit-page.component';
+import { LevelEditPageComponent } from './pages/teacher-pages/level-edit-page/level-edit-page.component';
+import { TasksPageComponent } from './pages/teacher-pages/tasks-page/tasks-page.component';
 import { NavbarStudentComponent } from './components/navbar-student/navbar-student.component';
-import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { UsersPageComponent } from './pages/admin-pages/users-page/users-page.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { RoleGuard } from './guards/role-guard/role.guard';
-import { GroupsAdminPageComponent } from './pages/groups-admin-page/groups-admin-page.component';
+import { GroupsAdminPageComponent } from './pages/admin-pages/groups-admin-page/groups-admin-page.component';
 
 
 @NgModule({

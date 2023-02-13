@@ -91,17 +91,17 @@
 
 /* cells */
 .target {
-    background-image: url('target-self.jpg');
+    background-image: url('images/target-self.jpg');
     background-size: contain;
 }
 
 .active {
-    background-image: url('grass-self.jpg');
+    background-image: url('images/grass-self.jpg');
     background-size: contain;
 }
 
 .disable {
-    background-image: url('brick-self.jpg');
+    background-image: url('images/brick-self.jpg');
     background-size: contain;
 }
 
