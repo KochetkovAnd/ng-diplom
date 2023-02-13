@@ -169,4 +169,14 @@ export class HttpService {
     return this.http.delete<boolean>(this.baseURL + "/user/deleteStudentById/" + id,  
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   } 
+
+  getAllStudentsWithoutGroup() {
+    return this.http.get<User[]>(this.baseURL + "/user/getAllStudentsWithoutGroup",  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getAllTeachers() {
+    return this.http.get<User[]>(this.baseURL + "/user/getAllTeachers",  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
 }

@@ -21,6 +21,7 @@ import { UsersPageComponent } from './pages/admin-pages/users-page/users-page.co
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { RoleGuard } from './guards/role-guard/role.guard';
 import { GroupsAdminPageComponent } from './pages/admin-pages/groups-admin-page/groups-admin-page.component';
+import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admin-page/group-edit-admin-page.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { GroupsAdminPageComponent } from './pages/admin-pages/groups-admin-page/
     NavbarStudentComponent,
     UsersPageComponent,
     AdminNavbarComponent,
-    GroupsAdminPageComponent
+    GroupsAdminPageComponent,
+    GroupEditAdminPageComponent
     
   ],
   imports: [

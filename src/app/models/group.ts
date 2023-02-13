@@ -5,5 +5,6 @@ export interface Group {
     id: number,
     name: string,
     teacher: User,
-    tasks: Task[]
+    tasks: Task[],
+    students?:User[]
 }

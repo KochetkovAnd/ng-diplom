@@ -1,0 +1,164 @@
+.main-container {
+    display: flex;
+}
+
+.container {
+    width: 50%;
+}
+
+.data-container {
+    display: flex;
+    margin: 10px 5%;
+    width: 90%;
+    height: 100px;
+    background-color: #fbf7ff;
+    border-radius: 10px;
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 0px 10px;
+}
+
+.group-name-container,.owner-container {
+    width: 50%;
+}
+
+.owner-container select {
+    margin: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    width: calc(100% - 20px);
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.data-container  p{
+    padding: 20px 0px 0px 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.group-name-container input[type="text"]{
+    margin: 10px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    width: calc(100% - 40px);
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.students-container {
+    margin: 10px 5%;
+    padding: 10px;
+    width: 90%;
+    height: calc(100vh - 230px);
+    background-color: #fbf7ff;
+    border-radius: 10px;
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);    
+    overflow-y:auto;
+}
+
+.tasks-container {
+    margin: 10px 5%;
+    width: 90%;
+    height: calc(100% - 100px); 
+    background-color: #fbf7ff;
+    border-radius: 10px;
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+}
+
+.left-side > p,.right-side > p {
+    display: block;
+    white-space: nowrap;
+    width: 0px;
+    font-size: 16px;
+    padding: 10px;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+
+.split-container {
+    display: flex;
+    width: 100%;
+}
+
+.left-side {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: 1s;
+}
+
+.right-side {
+    width: 0%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: 1s;
+}
+
+.split .left-side {
+    width: 50%;
+    transition: 1s;
+}
+
+.split .right-side {
+    width: 50%;
+    transition: 1s;
+}
+
+.card {
+    display: flex;
+    margin: 10px;
+    width: calc(100% - 20px);
+    height: 50px;
+    background-color: #569ed7;
+    border-radius: 10px;
+    /* box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3); */
+    overflow: hidden;    
+}
+
+.card .number{
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #f0e6fe;
+    font-size: 16px;  
+}
+
+.card .text {
+    margin: 10px 0;
+    width: 0px;
+    line-height: 30px;
+    color: #fbf7ff;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.add-card {
+    display: block;
+    margin: 10px;
+    border-radius: 10px;
+    line-height: 50px;
+    text-align: center;        
+    font-size: 25px;
+    background-color: #9692bf;
+}
+
+.add-card p {
+    color: #fbf7ff;
+}
+
+.save-button {
+    margin: 10px 30%;
+    width: 40%;
+    padding: 10px;
+    background-color: #569ed7;
+    border-radius: 10px;
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
+    border: none;
+    color: #fbf7ff;
+}

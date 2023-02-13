@@ -1,0 +1,72 @@
+<admin-navbar></admin-navbar>
+<div class="main-container" *ngIf="group">
+    <div class="container">
+        <div class="data-container">
+            <div class="group-name-container">
+                <p>Название группы</p>
+                <input type="text" placeholder="Название группы" [(ngModel)]=group.name>
+            </div>
+            <div class="owner-container">
+                <p>Ведущий учитель</p>
+                <select [(ngModel)] = "group.teacher">
+                    <option *ngFor= "let teacher of teachers" [ngValue] = "teacher">{{teacher.name}}</option>
+                </select>
+            </div>
+        </div>
+        
+
+        <div class="students-container">
+            <div class="split-container" [ngClass]="{split: addStudents}">
+                <div class="left-side">
+                    <p>Ученики в группе</p>
+                    <div class="card" *ngFor="let student of studentsInGroup; index as i">
+                        <p class="number" *ngIf="!addStudents; else elseBlock">{{i+1}}</p>
+                        <ng-template #elseBlock>
+                            <p class="number" (click) = "onTransferUserBack(i)">-</p>
+                        </ng-template>
+                        <p class="text">{{student.name}}</p>
+                    </div>
+                    <div class="add-card" (click) = "addStudents = !addStudents">
+                        <p *ngIf = "!addStudents; else elseBlock"> + </p>
+                        <ng-template #elseBlock> <p>-></p> </ng-template>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <p>Ученики без группы</p>
+                    <div class="card" *ngFor="let student of studentsWithoutGroup; index as i" >
+                        <p class="number" (click) = "onTransferUser(i)">+</p>
+                        <p class="text">{{student.name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tasks-container">
+            <div class="split-container" [ngClass]="{split: addTasks}">
+                <div class="left-side">
+                    <p>Прикрепленные задания</p>
+                    <div class="card" *ngFor="let task of group.tasks; index as i">
+                        <p class="number" *ngIf="!addTasks; else elseBlock">{{i+1}}</p>
+                        <ng-template #elseBlock>
+                            <p class="number" (click) = "onTransferTaskBack(i)">-</p>
+                        </ng-template>
+                        <p class="text">{{task.name}}</p>
+                    </div>
+                    <div class="add-card" (click) = "addTasks = !addTasks">
+                        <p *ngIf = "!addStudents; else elseBlock"> + </p>
+                        <ng-template #elseBlock> <p>-></p> </ng-template>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <p>Не прикрепленные задания</p>
+                    <div class="card" *ngFor="let task of unusedTasks; index as i" >
+                        <p class="number" (click) = "onTransferTask(i)">+</p>
+                        <p class="text">{{task.name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="save-button" (click) = "save()">Сохранить</button>
+    </div>
+</div>
