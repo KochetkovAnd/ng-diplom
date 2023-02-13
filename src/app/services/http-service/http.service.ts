@@ -33,7 +33,7 @@ export class HttpService {
   }
 
   register(username: string, password: string, role: string) {
-    return this.http.post(this.baseURL+ "/auth/register", 
+    return this.http.post<User>(this.baseURL+ "/auth/register", 
     {
       username,
       password,
@@ -138,5 +138,35 @@ export class HttpService {
       return of(error);
     }))
   }
-  
+
+  deleteGroupById(id: number) {
+    return this.http.delete<boolean>(this.baseURL + "/group/deleteById/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})   
+    .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    })) 
+  }  
+
+  sureDeleteGroupById(id: number) {
+    return this.http.delete<boolean>(this.baseURL + "/group/sureDeleteById/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})  
+  }  
+
+  deleteUserById(id: number) {
+    return this.http.delete<boolean>(this.baseURL + "/user/deleteById/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})   
+    .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    })) 
+  }  
+
+  sureDeleteTeacherById(id: number) {
+    return this.http.delete<boolean>(this.baseURL + "/user/deleteTeacherById/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  } 
+
+  deleteStudentById(id: number) {
+    return this.http.delete<boolean>(this.baseURL + "/user/deleteStudentById/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  } 
 }

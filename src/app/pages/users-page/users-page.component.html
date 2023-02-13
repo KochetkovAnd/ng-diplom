@@ -4,10 +4,18 @@
         <p class="title">Ученики</p>
         <div class="card" *ngFor="let student of students;index as i">
             <p class="number">{{i + 1}}</p>
-            <p class="text">{{student}}</p>
+            <p class="text">{{student.name}}</p>
+
+            <div class="edit-box">
+                <img src="assets/pen.png">
+            </div>
+    
+            <div class="delete-box">
+                <img src="assets/box.png" (click) = "deleteUser(student, i)">                
+            </div>
         </div>
 
-        <div class="card add">
+        <div class="add-card">
             <div class="register-block" *ngIf="add_user" [@add] = "add_user ? 'open' : 'closed'">
                 <div style="display: flex;">
                     <input class="input" type="text" placeholder="Логин" [(ngModel)] = "user_login">
@@ -24,11 +32,28 @@
     </div>
     <div class="container">
         <p class="title">Учителя</p>
-        <div class="card" *ngFor="let teacher of teachers;index as i">
+        <div class="card" *ngFor="let teacher of teachers;index as i" [ngClass] = "{delete: delete[i]}">
             <p class="number">{{i + 1}}</p>
-            <p class="text">{{teacher}}</p>
+            <p class="text">{{teacher.name}}</p>
+
+            <div class="edit-box">
+                <img src="assets/pen.png">
+            </div>
+    
+            <div class="delete-box">
+                <img src="assets/box.png" (click) = "deleteUser(teacher, i)">
+                <div class="sure-box">
+                    <p>Вы уверены? Учитель прикреплен к группе</p>
+                    <div style="display: flex;">
+                        <button (click) = "sureDelete(teacher, i)">да</button>
+                        <button (click) = "closeDelete(i)">нет</button>
+                    </div>
+                    
+    
+                </div>
+            </div>
         </div>
-        <div class="card add">
+        <div class="add-card">
             <div class="register-block" *ngIf="add_teacher" [@add] = "add_teacher ? 'open' : 'closed'">
                 <div style="display: flex;">
                     <input class="input" type="text" placeholder="Логин" [(ngModel)] = "teacher_login">

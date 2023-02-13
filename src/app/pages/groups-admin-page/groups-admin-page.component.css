@@ -8,9 +8,13 @@
     overflow-y: auto;
 }
 
+
+/* Before click delete */
+
 .group-card {
     margin: 10px 20px;
     width: calc(100% - 40px);
+    min-width: 450px;
     height: 100px;
     border-radius: 15px;
     background-color: #569ed7;
@@ -35,8 +39,17 @@
     display: block;
     margin: 25px 0;
     line-height: 50px;
+    height: 50px;
+    width: calc(100% - 250px);
     color: #fbf7ff;
+    overflow: hidden ;
     font-size: 20px;
+    transition: 1s;
+}
+
+.delete .text {
+    width: calc(100% - 450px);
+    transition: 1s;
 }
 
 .group-card:hover  .text{
@@ -82,7 +95,7 @@
     margin: 0px 10px;
     height: 0px;
     overflow: hidden;
-}
+} 
 
 .input {
     font-size: 20px;
@@ -106,10 +119,17 @@
     border-radius: 10px;
     background-color: #9692bf;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    transition: 1s;
+}
+
+.delete .edit-box {
+    left: calc(100% - 350px);
+    transition: 1s;
 }
 
 .delete-box {
     position: sticky;
+    display: flex;
     width: 50px;
     height: 50px;
     margin-top: 25px;
@@ -117,10 +137,43 @@
     border-radius: 10px;
     background-color: #9692bf;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    transition: 1s;
 }
 
-img {
-    margin: 20%;
-    width: 60%;
-    height: 60%;
+.delete .delete-box {
+    left: calc(100% - 285px);
+    width: 250px;
+    transition: 1s;
+}
+
+.delete-box img, .edit-box img {
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.sure-box {
+    margin: 5px 10px;
+    width: 180px;
+    line-height: 10px;
+    height: 40px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.sure-box p {
+    display: block;
+    font-size: 10px;
+    width: 180px;
+    height: 20px;
+}
+
+.sure-box button {
+    border: none;
+    background-color: #fbf7ff;
+    margin: 5px 10% 0px 10%;
+    width: 30%;
+    border-radius: 10px;
+    height: 15px;
+    font-size: 12px;
 }

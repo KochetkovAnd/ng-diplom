@@ -38,8 +38,8 @@ export class UsersPageComponent {
   ) { }
 
   users: User[] = []
-  teachers: string[] = []
-  students: string[] = []
+  teachers: User[] = []
+  students: User[] = []
 
   user_login = ""
   user_password = ""
@@ -52,13 +52,16 @@ export class UsersPageComponent {
   add_user = false
   add_teacher = false
 
+  delete: boolean[] = []
+
   async ngOnInit() {
     this.users = await lastValueFrom(this.httpService.getAllUsers())
     this.users.forEach(user => {
       if (user.role == "STUDENT") {
-        this.students.push(user.name)
+        this.students.push(user)
       } else if (user.role == "TEACHER") {
-        this.teachers.push(user.name)
+        this.teachers.push(user)
+        this.delete.push(false)
       }
     })
   }
@@ -67,8 +70,8 @@ export class UsersPageComponent {
     if (this.add_user) {
       if (this.user_login != "" && this.user_password != "") {
         let response = await lastValueFrom(this.httpService.register(this.user_login, this.user_password, "STUDENT"))
-        if (response.username) {
-          this.students.push(response.username)
+        if (response.id) {
+          this.students.push(response)
           this.error_user = ""
           this.user_login = ""
           this.user_password = ""
@@ -89,8 +92,9 @@ export class UsersPageComponent {
     if (this.add_teacher) {
       if (this.teacher_login != "" && this.teacher_password != "") {
         let response = await lastValueFrom(this.httpService.register(this.teacher_login, this.teacher_password, "TEACHER"))
-        if (response.username) {
-          this.teachers.push(response.username)
+        if (response.id) {
+          this.teachers.push(response)
+          this.delete.push(false)
           this.error_teacher = ""
           this.teacher_login = ""
           this.teacher_password = ""
@@ -115,4 +119,35 @@ export class UsersPageComponent {
     this.error_user = ""
     this.add_user = false
   }
+
+
+
+  async deleteUser(user: User, i: number) {
+    if (user.role == "TEACHER") {
+      if (!this.delete[i]) {
+        let response = await lastValueFrom(this.httpService.deleteUserById(user.id))
+        if (response.error) {
+          this.delete[i] = true
+        } else {
+          this.teachers.splice(i,1)
+          this.delete.splice(i,1)
+        }
+      }
+    } else {
+      await lastValueFrom(this.httpService.deleteStudentById(user.id))      
+      this.students.splice(i,1)
+    }
+    
+  }
+
+  async sureDelete(user: User, i: number) {
+    let response = await lastValueFrom(this.httpService.sureDeleteTeacherById(user.id))
+    this.teachers.splice(i,1)
+    this.delete.splice(i,1)
+  }
+
+  closeDelete(i: number) {
+    this.delete[i] = false
+  }
+
 }

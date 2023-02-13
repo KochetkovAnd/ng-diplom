@@ -11,6 +11,7 @@ const sleepTime = 300;
 const defaultTask: Task = {
   id: 0,
   owner: {
+    id: 0,
     name: "",
     role: ""
   },

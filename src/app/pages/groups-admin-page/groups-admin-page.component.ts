@@ -43,8 +43,15 @@ export class GroupsAdminPageComponent {
   groupName = ""
   error = ""
 
+
+  delete: boolean[] = []
+
   async ngOnInit() {
     this.groups = await lastValueFrom(this.httpService.getAllGroups())
+    this.delete = []
+    for (let i = 0; i < this.delete.length; i++) {
+      this.delete.push(false)
+    }
   }
 
 
@@ -54,6 +61,7 @@ export class GroupsAdminPageComponent {
         let response = await lastValueFrom(this.httpService.createGroup(this.groupName))
         if (response.id) {
           this.groups.push(response)
+          this.delete.push(false)
           this.error = ""
           this.groupName = ""
           this.isAdd = false
@@ -72,5 +80,28 @@ export class GroupsAdminPageComponent {
   hide() {
     this.error = ""
     this.isAdd = false
+  }
+
+  async deleteGroup(group: Group, i: number) {
+    if (!this.delete[i]) {
+      let response = await lastValueFrom(this.httpService.deleteGroupById(group.id))
+      if (response.error) {
+        this.delete[i] = true
+      } else {
+        this.groups.splice(i,1)
+        this.delete.splice(i,1)
+      }
+    }
+  }
+
+  async sureDelete(group: Group, i: number) {
+    let response = await lastValueFrom(this.httpService.sureDeleteGroupById(group.id))
+    console.log(response)
+    this.groups.splice(i,1)
+    this.delete.splice(i,1)
+  }
+
+  closeDelete(i: number) {
+    this.delete[i] = false
   }
 }
