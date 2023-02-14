@@ -144,6 +144,7 @@ export class SolvePageComponent {
   forOptions = [2, 3, 4, 5, 6, 7, 8]
   win = false
   isButtonActive = true
+  isInfoActive = true
   result = false
   resultText = ""
 

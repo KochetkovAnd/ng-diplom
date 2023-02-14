@@ -79,6 +79,7 @@
                 </div>
             </li>
         </ul>
+        <button (click) = "isInfoActive = true" class="play-button"> i </button>
         <button (click) = "clickRun()" class="play-button" [disabled] = "!isButtonActive">Запустить</button>
         <button (click) = "save()" class="play-button">Сохранить и отправить</button>
     </div>
@@ -117,4 +118,16 @@
             <button (click) = "clickOk()">ок</button>    
         </div>
     </div>    
+</div>
+
+<div class="info" *ngIf="isInfoActive">
+    <div class="info-container">
+        <div class="img-box">
+            <img src="assets/help.gif">
+            <div>
+                <p>Необходимо дойти исполнителем до всех ключевых точек обозначенных желтым квадратом</p>
+            </div>            
+        </div>
+        <button (click) = "isInfoActive = false">Хорошо</button>
+    </div>
 </div>
