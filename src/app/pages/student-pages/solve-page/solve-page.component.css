@@ -133,38 +133,6 @@
     background-size: contain;
 }
 
-.popup {
-    position: absolute;
-    background-color: white;
-    width: 40%;
-    height: 40%;
-    left: 30%;
-    top: 20%;
-    border: 5px solid green;
-    border-radius: 10px;
-}
-
-.exit-button {
-    position: absolute;
-    margin-left: calc(100% - 50px);
-    margin-top: 25px;
-    width: 25px;
-    height: 25px;
-    line-height: 25px;
-    font-size: 20px;
-    background-color: transparent;
-    border: none;
-}
-
-.popup .main-message {
-    width: 100%;
-    text-align: center;
-    margin-top: 10%;
-    font-size: 5vh;
-    color: rgb(0, 60, 0);
-}
-
-
 .result-container {
     position: sticky;
     background-color: #569dd7dd;

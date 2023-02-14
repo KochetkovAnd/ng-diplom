@@ -91,7 +91,6 @@
             [@horizontal] = "{value: task.x, params :{x:task.x * cellSize, time : animationTime}}"
             [@vertical] = "{value: task.y, params :{y:task.y * cellSize, time : animationTime}}"
             [@rotate] = "{value: task.angle, params :{angle:task.angle, time : animationTime}}"
-            [@shake] = "{value: shake, params :{time : animationTime}}"
             [ngStyle]= "{
                 'width' : this.cellSize +'%',
                 'height' : this.cellSize +'%'
@@ -117,14 +116,5 @@
             </div>    
             <button (click) = "clickOk()">ок</button>    
         </div>
-    </div>
-
-    
+    </div>    
 </div>
-
-<div class="popup" @win *ngIf="win" >
-    <button class="exit-button" (click) = "win = false">
-        x
-    </button>
-    <p class="main-message">Уровень пройден</p>    
-</div> 

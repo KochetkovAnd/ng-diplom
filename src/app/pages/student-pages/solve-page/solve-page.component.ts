@@ -118,37 +118,6 @@ const findEndBrace = (line: string, start: number) => {
         }
       ),
       transition("*=>*", animate('{{time}}'), { params: { time: 2000 } })
-    ]),
-    trigger('shake', [
-      transition("*=>*",
-        animate('{{time}}', keyframes([
-          style({ background: "rgba(211, 15, 15, 0.5)" }),
-          style({ background: "rgba(211, 15, 15, 0)" }),
-          style({ background: "rgba(211, 15, 15, 0.5)" }),
-          style({ background: "rgba(211, 15, 15, 0)" })
-        ])),
-        { params: { time: 2000 } }
-      )
-    ]),
-    trigger('win', [
-      transition(':enter', [
-        style({
-          opacity: 0,
-          top: '-40%'
-        }),
-        animate('0.5s', style({
-          opacity: 1,
-          top: '20%'
-        })),
-      ]),
-      transition(':leave', [
-        style({
-        }),
-        animate('0.5s', style({
-          opacity: 0,
-          top: '-40%'
-        })),
-      ])
     ])
   ]
 })
@@ -173,11 +142,7 @@ export class SolvePageComponent {
   animationTime = '0s'
   max = 0; cellSize = 0;
   forOptions = [2, 3, 4, 5, 6, 7, 8]
-  shake = false
   win = false
-
-
-
   isButtonActive = true
   result = false
   resultText = ""
@@ -291,25 +256,6 @@ export class SolvePageComponent {
       this.resultText = "Собраны не все ключевые блоки"
     }
     this.result = true
-
-
-
-
-
-    // this.animationTime = '0s'
-    // let solution = this.unparse(this.program)
-    // if (this.checkWin()) {
-    //   this.win = true      
-    // }
-    // this.task = cloneTask(this.taskClone || defaultTask)
-    // this.cells = Array.from(this.task.grid);
-
-    // await lastValueFrom(this.httpService.updateUserTask({
-    //  task: this.task,
-    //  solved: this.win,
-    //  solution
-    // }))
-
   }
 
   async save() {
