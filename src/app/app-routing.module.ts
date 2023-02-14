@@ -11,6 +11,7 @@ import { SolvePageComponent } from './pages/student-pages/solve-page/solve-page.
 import { TasksPageComponent } from './pages/teacher-pages/tasks-page/tasks-page.component';
 import { UsersPageComponent } from './pages/admin-pages/users-page/users-page.component';
 import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admin-page/group-edit-admin-page.component';
+import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/group-stats-page.component';
 
 const routes: Routes = [  
   { path: 'login', component: LoginPageComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'users', component: UsersPageComponent, canActivate: [RoleGuard]},
   { path: 'groups-admin', component: GroupsAdminPageComponent, canActivate: [RoleGuard]},
   { path: 'edit-group/:id', component: GroupEditAdminPageComponent, canActivate: [RoleGuard]},
+  { path: 'group-stats', component: GroupStatsPageComponent, canActivate: [RoleGuard]},
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

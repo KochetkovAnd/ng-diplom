@@ -22,4 +22,8 @@ export class GroupPageComponent {
     this.groups = await lastValueFrom(this.httpService.getGroupsByTeacher())
   }
 
+  onClick(id: number) {
+    this.router.navigate(['group-stats'], {state: {id}})
+  }
+
 }

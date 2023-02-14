@@ -47,7 +47,11 @@ export class RoleGuard implements CanActivate {
           if (isAdmin) { return true }
           break
         case 'edit-group/:id':
-          if (isAdmin) { return true}
+          if (isAdmin) { return true }
+          break
+        case 'group-stats':
+          if (isTeacher) { return true }
+          break          
       }
     }
     this.router.navigate(['/login'])

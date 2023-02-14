@@ -1,8 +1,16 @@
 <navbar-teacher></navbar-teacher>
 <div class="container">
-    <div class="group-card" *ngFor="let group of groups; index as i" routerLink="/group/{{group.id}}">
+    <div class="group-card" *ngFor="let group of groups; index as i" >
         <p class="number">{{i+1}}</p>
-        <p class="text">{{group.name}}</p>        
+        <p class="text">{{group.name}}</p>   
+        
+        <div class="edit-box" routerLink="/group/{{group.id}}">
+            <img src="assets/pen.png">
+        </div>
+
+        <div class="delete-box" (click) = "onClick(group.id)">
+            <img src="assets/stats.png">
+        </div>
     </div>
 </div>
 

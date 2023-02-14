@@ -22,6 +22,7 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { RoleGuard } from './guards/role-guard/role.guard';
 import { GroupsAdminPageComponent } from './pages/admin-pages/groups-admin-page/groups-admin-page.component';
 import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admin-page/group-edit-admin-page.component';
+import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/group-stats-page.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admi
     UsersPageComponent,
     AdminNavbarComponent,
     GroupsAdminPageComponent,
-    GroupEditAdminPageComponent
+    GroupEditAdminPageComponent,
+    GroupStatsPageComponent
     
   ],
   imports: [
