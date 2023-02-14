@@ -79,7 +79,8 @@
                 </div>
             </li>
         </ul>
-        <button (click) = "runProgram(program)" class="play-button">Запустить</button>
+        <button (click) = "clickRun()" class="play-button" [disabled] = "!isButtonActive">Запустить</button>
+        <button (click) = "save()" class="play-button">Сохранить и отправить</button>
     </div>
 
     <div class="grid-container">
@@ -110,7 +111,15 @@
                 </div>
             </div>
         </div>
+        <div class="result-container" *ngIf="result">
+            <div class="title">
+                <p>{{resultText}}</p>                
+            </div>    
+            <button (click) = "clickOk()">ок</button>    
+        </div>
     </div>
+
+    
 </div>
 
 <div class="popup" @win *ngIf="win" >

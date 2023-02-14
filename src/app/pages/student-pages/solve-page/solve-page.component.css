@@ -10,7 +10,7 @@
 .program-ul {    
     border-radius: 10px;
     background-color: white;
-    min-height: 40px;
+    min-height: 60px;
     min-width: calc(20vw - 31px);
     /* border: 1px solid rgba(0, 0, 0, 0.25); */
     margin-left: 25px;  
@@ -163,3 +163,42 @@
     font-size: 5vh;
     color: rgb(0, 60, 0);
 }
+
+
+.result-container {
+    position: sticky;
+    background-color: #569dd7dd;
+    width: 100%;
+    height: 100%;
+    margin-top: -100%; 
+}
+
+
+.title {
+    width: 100%;
+    height: calc(100% - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-container p {
+    display: block;
+    font-size: 20px;
+    
+}
+
+
+.result-container button {
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+    width: 80%;
+    margin: 10px 10%;
+    background-color: #9692BF;
+    color:#fbf7ff;
+    font-size: 20px;
+}
+
