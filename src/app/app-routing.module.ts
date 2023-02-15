@@ -12,6 +12,7 @@ import { TasksPageComponent } from './pages/teacher-pages/tasks-page/tasks-page.
 import { UsersPageComponent } from './pages/admin-pages/users-page/users-page.component';
 import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admin-page/group-edit-admin-page.component';
 import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/group-stats-page.component';
+import { ExaminationPageComponent } from './pages/teacher-pages/examination-page/examination-page.component';
 
 const routes: Routes = [  
   { path: 'login', component: LoginPageComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'groups-admin', component: GroupsAdminPageComponent, canActivate: [RoleGuard]},
   { path: 'edit-group/:id', component: GroupEditAdminPageComponent, canActivate: [RoleGuard]},
   { path: 'group-stats/:id', component: GroupStatsPageComponent, canActivate: [RoleGuard]},
+  { path: 'examination/:userId/:taskId', component: ExaminationPageComponent, canActivate: [RoleGuard]},
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

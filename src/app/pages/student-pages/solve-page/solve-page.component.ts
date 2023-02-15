@@ -262,7 +262,7 @@ export class SolvePageComponent {
   async save() {
     let solution = this.unparse(this.program)
     if (this.taskClone) {
-      await lastValueFrom(this.httpService.updateUserTask({
+      await lastValueFrom(this.httpService.updateUserTaskByStudent({
         task: this.taskClone,
         solved: this.win,
         solution

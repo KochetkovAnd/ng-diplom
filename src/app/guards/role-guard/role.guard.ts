@@ -60,11 +60,27 @@ export class RoleGuard implements CanActivate {
                     return true
                   }
                 }
-                this.router.navigate(['/groups-admin'])
+                this.router.navigate(['/groups'])
                 return false
               }
             ))
-          }         
+          }
+          break
+        case 'examination/:userId/:taskId':
+          if (isTeacher) {
+            return this.httpService.existUserTaskForTeacher(route.params['userId'], route.params['taskId']).pipe(map(
+              res => {
+                if (res) {
+                  return true
+                }
+                else {
+                  this.router.navigate(['/groups'])
+                  return false
+                }
+              }
+            ))
+          }
+          break
       }
     }
     this.router.navigate(['/login'])

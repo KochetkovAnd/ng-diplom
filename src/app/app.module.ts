@@ -23,6 +23,7 @@ import { RoleGuard } from './guards/role-guard/role.guard';
 import { GroupsAdminPageComponent } from './pages/admin-pages/groups-admin-page/groups-admin-page.component';
 import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admin-page/group-edit-admin-page.component';
 import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/group-stats-page.component';
+import { ExaminationPageComponent } from './pages/teacher-pages/examination-page/examination-page.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/
     AdminNavbarComponent,
     GroupsAdminPageComponent,
     GroupEditAdminPageComponent,
-    GroupStatsPageComponent
+    GroupStatsPageComponent,
+    ExaminationPageComponent
     
   ],
   imports: [

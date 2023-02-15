@@ -68,6 +68,24 @@ export class HttpService {
     }))
   }
 
+
+  getUserTaskByUserIdAndTaskId(userId: number, taskId: number) {
+    return this.http.get<UserTask>(this.baseURL + "/userTask/getByUserIdAndTaskId/" + userId +"/" + taskId,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}).
+    pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    }))
+  }
+
+  existUserTaskForTeacher(userId: number, taskId: number) {
+    return this.http.get<boolean>(this.baseURL + "/userTask/exist/" + userId +"/" + taskId,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}).
+    pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    }))
+  }
+
+
   getTaskById(id: number) {
     return this.http.get<Task>(this.baseURL + "/task/getById/" + id,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
@@ -75,6 +93,11 @@ export class HttpService {
 
   updateUserTask(userTask: UserTask) {
     return this.http.post<UserTask>(this.baseURL + "/userTask/update", userTask,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  updateUserTaskByStudent(userTask: UserTask) {
+    return this.http.post<UserTask>(this.baseURL + "/userTask/updateByStudent", userTask,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 

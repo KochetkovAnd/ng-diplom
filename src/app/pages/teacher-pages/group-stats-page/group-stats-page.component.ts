@@ -38,8 +38,7 @@ export class GroupStatsPageComponent {
     for (let i = 0; i < tasks.length; i++) {
       let task: UserTask[] = []
       for (let j = 0; j < this.students.length; j++) {
-        let res = this.getSolution(this.solutions, tasks[i].id || 1, this.students[j].id)
-        console.log(res)
+        let res = this.getSolution(this.solutions, tasks[i].id || 1, this.students[j].id)        
         if (res) {
           task.push(res)
         } else {

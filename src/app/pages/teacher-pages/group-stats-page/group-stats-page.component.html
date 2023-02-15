@@ -13,9 +13,8 @@
             <p class="solved">{{isSolved(gS.solution)}}</p>            
             <p class="mark">{{isGetMark(gS.mark || 0)}}</p>
             <div class="check">
-                <button *ngIf="gS.solution !=''" >Проверить</button>
+                <button *ngIf="gS.solution !=''" routerLink="/examination/{{students[j].id}}/{{group.tasks[i].id}}">Проверить</button>
             </div>
         </div>
     </div>
-
 </div>

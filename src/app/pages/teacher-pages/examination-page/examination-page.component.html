@@ -1,0 +1,88 @@
+<navbar-teacher></navbar-teacher>
+
+<div class="main-container" *ngIf="userTask">
+
+    <div class="program-block">
+        <ul class="program-ul">
+            <li *ngFor="let item of program" [class.simple-block]="item.type == 'simple'"
+                [class.composite-block]="item.type == 'composite'" class="program-li" [ngStyle]="{
+                'background-color' : item.color
+            }">
+                {{item.text}}
+                <span *ngIf="item.text == 'Повторить'">
+                    <select [(ngModel)] = "item.numberOfRepeats" [disabled] = "true">
+                        <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
+                    </select>
+                    Раз
+                </span>
+                <ng-template #recusiveItem let-item="item">
+                    <ul  class="program-ul">
+                        <li *ngFor="let innerItem of item.include" [class.simple-block]="innerItem.type == 'simple'"
+                            [class.composite-block]="innerItem.type == 'composite'" class="program-li" [ngStyle]="{
+                            'background-color' : innerItem.color
+                        }">                            
+                            {{innerItem.text}}
+                            <span *ngIf="innerItem.text == 'Повторить'">
+                                <select [(ngModel)] = "innerItem.numberOfRepeats" [disabled] = "true">
+                                    <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
+                                </select>
+                                Раз
+                            </span>
+                            <div *ngIf="innerItem.type == 'composite'">
+                                <ng-container *ngTemplateOutlet="recusiveItem; context:{ item: innerItem}">
+                                </ng-container>
+                            </div>
+
+                        </li>
+                    </ul>
+                </ng-template>
+
+                <div *ngIf="item.type == 'composite'">
+                    <ng-container *ngTemplateOutlet="recusiveItem; context:{ item: item}"></ng-container>
+                </div>
+            </li>
+        </ul>        
+        <button class="play-button" (click) = "clickRun()">Запустить</button>        
+    </div>
+
+    <div class="grid-container" *ngIf="taskClone">
+        
+        <div class="grid-block" style="position: relative;">
+            <div class="movebox"
+            style="position: absolute;"
+            [@horizontal] = "{value: taskClone.x, params :{x:taskClone.x * cellSize, time : animationTime}}"
+            [@vertical] = "{value: taskClone.y, params :{y:taskClone.y * cellSize, time : animationTime}}"
+            [@rotate] = "{value: taskClone.angle, params :{angle:taskClone.angle, time : animationTime}}"
+            [ngStyle]= "{
+                'width' : this.cellSize +'%',
+                'height' : this.cellSize +'%'
+            }"> <img src="assets/arrow.png"/></div>
+        
+            <div class="grid" [ngStyle] ="{
+                'grid-template-columns': 'repeat(' + this.taskClone.m + ','+ this.cellSize +'%)',
+                'grid-auto-rows' : this.cellSize + '%',
+                'width' : (this.cellSize*max) +'%',
+                'height' : (this.cellSize*max) +'%'
+            }">
+                <div class="cell" *ngFor = "let symbol of cells"
+                [class.target]="symbol == '2'"
+                [class.active]="symbol == '1'"
+                [class.disable]="symbol == '0'"
+                >
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="mark-block" *ngIf="userTask.user">
+        <p class="name">Выполнил: {{userTask.user.name}}</p>
+        <div class="mark-div">
+            <p class="mark">Оценка</p>
+            <select [(ngModel)] = "userTask.mark">
+                <option *ngFor= "let option of markOptions" [value] = "option">{{option}}</option>
+            </select>
+        </div>
+        <button class="save-button" (click) = "save()">Сохранить</button>        
+    </div>
+
+</div>
