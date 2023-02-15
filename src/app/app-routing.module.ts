@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'users', component: UsersPageComponent, canActivate: [RoleGuard]},
   { path: 'groups-admin', component: GroupsAdminPageComponent, canActivate: [RoleGuard]},
   { path: 'edit-group/:id', component: GroupEditAdminPageComponent, canActivate: [RoleGuard]},
-  { path: 'group-stats', component: GroupStatsPageComponent, canActivate: [RoleGuard]},
+  { path: 'group-stats/:id', component: GroupStatsPageComponent, canActivate: [RoleGuard]},
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

@@ -23,7 +23,6 @@ export class LoginPageComponent {
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       let role = this.authService.getRole()
-      console.log(role)
       if (role == "TEACHER") {
         this.router.navigate(['/groups'])
       } else if (role == "STUDENT") {

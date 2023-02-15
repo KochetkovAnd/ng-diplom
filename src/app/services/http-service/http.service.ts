@@ -179,4 +179,9 @@ export class HttpService {
     return this.http.get<User[]>(this.baseURL + "/user/getAllTeachers",  
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
+
+  getAllUserTaskByGroupId(id: number) {
+    return this.http.get<UserTask[]>(this.baseURL + "/userTask/getAllByGroupId/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
 }

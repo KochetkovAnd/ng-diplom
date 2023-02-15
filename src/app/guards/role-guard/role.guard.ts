@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { lastValueFrom, map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { HttpService } from 'src/app/services/http-service/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class RoleGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
+    private httpService: HttpService,
     private router: Router
   ) { }
 
@@ -49,9 +51,20 @@ export class RoleGuard implements CanActivate {
         case 'edit-group/:id':
           if (isAdmin) { return true }
           break
-        case 'group-stats':
-          if (isTeacher) { return true }
-          break          
+        case 'group-stats/:id':
+          if (isTeacher) {
+            return this.httpService.getGroupsByTeacher().pipe(map(
+              res => {
+                for (let i = 0; i < res.length; i++) {
+                  if (res[i].id == route.params['id']) {
+                    return true
+                  }
+                }
+                this.router.navigate(['/groups-admin'])
+                return false
+              }
+            ))
+          }         
       }
     }
     this.router.navigate(['/login'])

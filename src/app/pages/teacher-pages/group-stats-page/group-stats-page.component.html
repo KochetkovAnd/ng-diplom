@@ -1,1 +1,21 @@
-<p>group-stats-page works!</p> {{id}}
+<navbar-teacher></navbar-teacher>
+<div class="main-contaiter" *ngIf="group">
+    <div class="task-container" *ngFor = "let groupSolution of groupSolutions; index as i">
+        <p class="task-name">{{group.tasks[i].name}}</p>
+        <div class="task-user" style="border-bottom: 3px solid #569ed7; ">
+            <p class="student">Имя ученика</p>            
+            <p class="solved">Есть ли решение</p>            
+            <p class="mark">Оценка</p>
+            <div class="check">Проверка</div>
+        </div>
+        <div class="task-user" *ngFor = "let gS of groupSolution; index as j">
+            <p class="student">{{students[j].name}}</p>            
+            <p class="solved">{{isSolved(gS.solution)}}</p>            
+            <p class="mark">{{isGetMark(gS.mark || 0)}}</p>
+            <div class="check">
+                <button *ngIf="gS.solution !=''" >Проверить</button>
+            </div>
+        </div>
+    </div>
+
+</div>
