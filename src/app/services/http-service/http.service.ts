@@ -162,6 +162,15 @@ export class HttpService {
     }))
   }
 
+  deleteGroupByIdEmpty(id: number) {
+    return this.http.delete<boolean>(this.baseURL + "/group/deleteByIdEmpty/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})   
+    .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    })) 
+  }  
+
+
   deleteGroupById(id: number) {
     return this.http.delete<boolean>(this.baseURL + "/group/deleteById/" + id,  
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})   

@@ -84,12 +84,13 @@ export class GroupsAdminPageComponent {
 
   async deleteGroup(group: Group, i: number) {
     if (!this.delete[i]) {
-      let response = await lastValueFrom(this.httpService.deleteGroupById(group.id))
-      if (response.error) {
-        this.delete[i] = true
-      } else {
+      let response = await lastValueFrom(this.httpService.deleteGroupByIdEmpty(group.id))
+
+      if (response) {
         this.groups.splice(i,1)
         this.delete.splice(i,1)
+      } else{
+        this.delete[i] = true
       }
     }
   }
