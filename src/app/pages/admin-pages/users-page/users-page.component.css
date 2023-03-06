@@ -48,7 +48,7 @@
 .card .text {
     display: block;
     margin: 10px 0px;
-    width: calc(100% - 140px);
+    width: calc(100% - 180px);
     line-height: 30px;
     height: 30px;
     color: #fbf7ff;
@@ -73,7 +73,6 @@
     width: calc(100% - 20px);
     margin: 0px 10px;
     height: 0px;
-    /* border: 1px solid gray; */
     overflow: hidden;
 }
 
@@ -81,7 +80,6 @@
 .input-container {
     position: relative;
     width: 50%;
-    /* margin: 15px 0px 0px 0px; */
 }
 
 .input {
@@ -97,15 +95,12 @@
     transition: 0.3s;
 }
 
-
 .error {
     text-align: left;
     font-size: 12px;
     margin-left: 5%;
     line-height: 20px;
 }
-
-
 
 .button-block {
     width: 100%;
@@ -123,12 +118,6 @@
     border:none;
     color: white;
     font-size: 20px;
-    /* width: 40%;
-    margin: 5px 5%;
-    height: 100%;
-    background-color: transparent;
-    color: white;
-    line-height: 40px; */
 }
 
 .edit-box {
@@ -173,32 +162,51 @@
     height: 20px;
 }
 
-.sure-box {
-    margin: 3px 10px;
-    width: 230px;
-    height: 24px;
-    text-align: center;
-    overflow: hidden;
+/* DELETE POPUP */
+.delete-popup {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    background-color: rgba(0, 0, 0, 0.5);    
+    width: 100vw;
+    height: 100vh;
+
 }
 
-.sure-box p {
-    display: block;
-    font-size: 10px;
-    width: 230px;
-    height: 10px;
-    line-height: 10px;
-}
-
-.sure-box button {
-    display: block;
-    height: 10px;
-    border: none;
-    background-color: #fbf7ff;
-    width: 30%;
-    margin-top: 4px;
-    margin: 4px 10% 0px 10%;
+.delete-popup .content {
+    position: relative;
     border-radius: 10px;
-    font-size: 10px;
-    line-height: 10px;
-   
+    padding: 10px;
+    background-color: #fbf7ff;
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
+    width: calc(40vw - 20px);
+    height: calc(40vh - 20px);
+    margin: 30vh 30vw;
+}
+
+.delete-popup .content p {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: 18px;
+}
+
+.delete-popup .content > div {
+    display: flex;
+    width: 100%;
+    height: 20%;
+}
+
+.delete-popup .content > div button {
+    border: none;
+    width: 40%;
+    margin: 0px 5%;
+    background-color: #569ed7;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    color: #fbf7ff;
 }

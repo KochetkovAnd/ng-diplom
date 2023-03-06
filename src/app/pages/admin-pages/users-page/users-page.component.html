@@ -1,3 +1,4 @@
+
 <admin-navbar></admin-navbar>
 <div style="display: flex;">
     <div class="container">
@@ -10,8 +11,8 @@
                 <img src="assets/pen.png">
             </div>
     
-            <div class="delete-box">
-                <img src="assets/box.png" (click) = "deleteUser(student, i)">                
+            <div class="delete-box" (click) = "deleteStudent(student, i)">
+                <img src="assets/box.png" >                
             </div>
         </div>
 
@@ -32,7 +33,7 @@
     </div>
     <div class="container">
         <p class="title">Учителя</p>
-        <div class="card" *ngFor="let teacher of teachers;index as i" [ngClass] = "{delete: delete[i]}">
+        <div class="card" *ngFor="let teacher of teachers;index as i">
             <p class="number">{{i + 1}}</p>
             <p class="text">{{teacher.name}}</p>
 
@@ -40,17 +41,8 @@
                 <img src="assets/pen.png">
             </div>
     
-            <div class="delete-box">
-                <img src="assets/box.png" (click) = "deleteUser(teacher, i)">
-                <div class="sure-box">
-                    <p>Вы уверены? Учитель прикреплен к группе</p>
-                    <div style="display: flex;">
-                        <button (click) = "sureDelete(teacher, i)">да</button>
-                        <button (click) = "closeDelete(i)">нет</button>
-                    </div>
-                    
-    
-                </div>
+            <div class="delete-box" (click) = "deleteTeacher(teacher, i)">
+                <img src="assets/box.png">                
             </div>
         </div>
         <div class="add-card">
@@ -66,6 +58,16 @@
                 <button *ngIf= "add_teacher"(click) = "hideTeacher()"> ^  </button>
             </div> 
             
+        </div>
+    </div>
+</div>
+
+<div class="delete-popup" *ngIf="isDelete">
+    <div class="content">
+        <p>Вы уверены? Учитель {{deletedTeacher.name}} прикреплен к группе и/или имеет созданные задания</p>
+        <div>
+            <button (click) = "sureDeleteTeacher()">Удалить</button>
+            <button (click) = "isDelete = false">Отмена</button>
         </div>
     </div>
 </div>

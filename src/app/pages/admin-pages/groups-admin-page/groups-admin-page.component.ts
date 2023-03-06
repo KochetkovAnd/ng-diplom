@@ -11,7 +11,7 @@ import { HttpService } from 'src/app/services/http-service/http.service';
   styleUrls: ['./groups-admin-page.component.css'],
   animations: [
     trigger('add', [
-      state('closed', 
+      state('closed',
         style(
           {
             height: "0px",
@@ -19,7 +19,7 @@ import { HttpService } from 'src/app/services/http-service/http.service';
           }
         )
       ),
-      state('open', 
+      state('open',
         style(
           {
             height: "100px",
@@ -27,14 +27,14 @@ import { HttpService } from 'src/app/services/http-service/http.service';
           }
         )
       ),
-      transition("*=>*", animate('0.2s'))      
-    ])    
+      transition("*=>*", animate('0.2s'))
+    ])
   ]
 })
 export class GroupsAdminPageComponent {
 
   constructor(
-    private httpService : HttpService,
+    private httpService: HttpService,
     private router: Router
   ) { }
 
@@ -44,14 +44,14 @@ export class GroupsAdminPageComponent {
   error = ""
 
 
-  delete: boolean[] = []
+  isDelete = false
+  deletedGroup: Group | undefined
+  deletedI = -1
+
+
 
   async ngOnInit() {
     this.groups = await lastValueFrom(this.httpService.getAllGroups())
-    this.delete = []
-    for (let i = 0; i < this.delete.length; i++) {
-      this.delete.push(false)
-    }
   }
 
 
@@ -61,7 +61,6 @@ export class GroupsAdminPageComponent {
         let response = await lastValueFrom(this.httpService.createGroup(this.groupName))
         if (response.id) {
           this.groups.push(response)
-          this.delete.push(false)
           this.error = ""
           this.groupName = ""
           this.isAdd = false
@@ -71,7 +70,7 @@ export class GroupsAdminPageComponent {
       } else {
         this.error = "Название группы не может быть пустой строкой"
       }
-      
+
     } else {
       this.isAdd = true
     }
@@ -82,27 +81,24 @@ export class GroupsAdminPageComponent {
     this.isAdd = false
   }
 
-  async deleteGroup(group: Group, i: number) {
-    if (!this.delete[i]) {
-      let response = await lastValueFrom(this.httpService.deleteGroupByIdEmpty(group.id))
 
-      if (response) {
-        this.groups.splice(i,1)
-        this.delete.splice(i,1)
-      } else{
-        this.delete[i] = true
-      }
+
+  async deleteGroup(group: Group, i: number) {
+    let response = await lastValueFrom(this.httpService.deleteGroupByIdEmpty(group.id))
+    if (response) {
+      this.groups.splice(i, 1)
+    } else {
+      this.deletedGroup = group
+      this.deletedI = i
+      this.isDelete = true
     }
   }
 
-  async sureDelete(group: Group, i: number) {
-    let response = await lastValueFrom(this.httpService.sureDeleteGroupById(group.id))
-    console.log(response)
-    this.groups.splice(i,1)
-    this.delete.splice(i,1)
-  }
-
-  closeDelete(i: number) {
-    this.delete[i] = false
+  async sureDeleteGroup() {
+    if (this.deletedGroup) {
+      let response = await lastValueFrom(this.httpService.sureDeleteGroupById(this.deletedGroup.id))
+      this.groups.splice(this.deletedI, 1)
+      this.isDelete = false
+    }    
   }
 }
