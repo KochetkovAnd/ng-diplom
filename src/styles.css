@@ -13,6 +13,19 @@ body {
     /* background: linear-gradient(90deg, #7a81f2,#a630b6,#e8664c); */
 }
 
+*::-webkit-scrollbar {
+  width: 10px;
+  background-color: #a2e6fb;
+  border-radius: 10px;
+  border: 1px solid #569ed7;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #569ed7;
+  border-radius: 10px;
+  /* background-color: rgb(177 124 203 / 19%); */
+}
+
 /* *::-webkit-scrollbar {
     width: 12px;
     background-color: #a2e6fb;

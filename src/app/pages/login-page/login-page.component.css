@@ -94,10 +94,12 @@
     border-radius: 10px;
     color: #fbf7ff;
     background-color: #569ed7;
+    transition: 0.5s;
 }
 
 .login-button:hover {
-    color: #f0e6fe;;
+    background-color: #338dd6;
+    transition: 0.5s;
 }
 
 

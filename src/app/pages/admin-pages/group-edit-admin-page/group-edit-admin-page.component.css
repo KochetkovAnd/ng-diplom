@@ -134,6 +134,13 @@
     border-radius: 10px;
     background-color: #f0e6fe;
     font-size: 16px;  
+    transition: 0.5s;
+    cursor:default;
+}
+
+.card .number:hover {
+    background-color: #d8c3f5;
+    transition: 0.5s;
 }
 
 .card .text {
@@ -153,6 +160,13 @@
     text-align: center;        
     font-size: 25px;
     background-color: #9692bf;
+    transition: 0.5s; 
+    
+}
+
+.add-card:hover {
+    background-color: #807bbe;
+    transition: 0.5s; 
 }
 
 .add-card p {
@@ -168,4 +182,10 @@
     box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);
     border: none;
     color: #fbf7ff;
+    transition: 0.5s;
+}
+
+.save-button:hover {
+    background-color: #338dd6;
+    transition: 0.5s;
 }

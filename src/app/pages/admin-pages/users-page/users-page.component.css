@@ -28,7 +28,10 @@
     border-radius: 10px;
     background-color: #569ed7;    
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+    transition: 0.5s;
 }
+
+
 
 .card:hover {
     /* background-color: rgba(0, 0, 0, 0.3); */
@@ -108,6 +111,12 @@
     background-color: #9692bf;    
     display: flex;
     align-items: center;
+    transition: 0.5s;   
+}
+
+.button-block:hover {    
+    background-color: #807bbe;
+    transition: 0.5s;    
 }
 
 .button-block button {
@@ -147,13 +156,13 @@
     border-radius: 10px;
     background-color: #9692bf;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-    transition: 1s;
+    transition: 0.5s;
 }
 
-.delete .delete-box {
-    left: calc(100% - 290px);
-    width: 280px;
-    transition: 1s;
+
+.edit-box:hover, .delete-box:hover {
+    background-color: #807bbe;
+    transition: 0.5s;
 }
 
 .delete-box img, .edit-box img {
@@ -209,4 +218,10 @@
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
     color: #fbf7ff;
+    transition: 0.5s;
+}
+
+.delete-popup .content > div button:hover {
+    background-color: #338dd6;
+    transition: 0.5s;
 }

@@ -24,10 +24,14 @@ nav a {
     font-size: 1vw;
     text-decoration: none;
     text-align: center;
+    background-color: #12263a;
+    transition: 0.5s;
+    cursor: default;
 }
 
 nav a:hover {
-    color: #f0e6fe;
+    background-color: #031930;
+    transition: 0.5s;
 }
 
 .placeholder {    

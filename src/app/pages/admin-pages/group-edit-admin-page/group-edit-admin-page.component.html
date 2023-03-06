@@ -56,7 +56,7 @@
                         <p class="text">{{task.name}}</p>
                     </div>
                     <div class="add-card" (click) = "addTasks = !addTasks">
-                        <p *ngIf = "!addStudents; else elseBlock"> + </p>
+                        <p *ngIf = "!addTasks; else elseBlock"> + </p>
                         <ng-template #elseBlock> <p>-></p> </ng-template>
                     </div>
                 </div>

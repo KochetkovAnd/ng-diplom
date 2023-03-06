@@ -37,10 +37,12 @@
     line-height: calc(12vw - 26px);
     border: 3px solid;
     font-size: 40px;
+    transition: 0.5s;
 }
 
 .block:hover {
-    background-color: #4B8ABD;
+    background-color: #338dd6;
+    transition: 0.5s;
 }
 
 .marker {

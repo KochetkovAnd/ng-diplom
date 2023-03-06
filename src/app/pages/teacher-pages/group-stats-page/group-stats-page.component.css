@@ -81,12 +81,17 @@
 }
 
 .check button{
-    margin: 10px 0px;
+    margin: 5px 0px;
     width: 100%;
-    height: calc(100% - 20px);
+    height: calc(100% - 10px);
     background-color: #9692bf;
     color: #fbf7ff;
     border:none;
     border-radius: 10px;
+    transition: 0.5s;
+}
 
+.check button:hover {
+    background-color: #807bbe;
+    transition: 0.5s;
 }

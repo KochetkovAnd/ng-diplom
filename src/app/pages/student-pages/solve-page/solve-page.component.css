@@ -110,11 +110,13 @@
     border: none;
     border-radius: 10px;
     background-color: #569ed7;
+    transition: 0.5s;
 }
 
 
 .play-button:hover {
-    background-color: #4B8ABD;  
+    background-color: #338dd6;
+    transition: 0.5s;
 }
 
 /* cells */
@@ -168,7 +170,14 @@
     background-color: #9692BF;
     color:#fbf7ff;
     font-size: 20px;
+    transition: 0.5s;
 }
+
+.result-container button:hover {
+    background-color: #807bbe;
+    transition: 0.5s;
+}
+
 
 .info {
     position: absolute;
@@ -216,7 +225,13 @@
     font-size: 16px;
     border: none;
     border-radius: 10px;
+    transition: 0.5s;
 }
+.info-container button:hover {
+    background-color: #338dd6;
+    transition: 0.5s;
+}
+
 
 
 

@@ -52,7 +52,7 @@
     border-radius: 10px;
     background-color: #9692bf;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-    transition: 1s;
+    transition: 0.5s;
 }
 
 .delete-box {
@@ -65,8 +65,14 @@
     border-radius: 10px;
     background-color: #9692bf;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-    transition: 1s;
+    transition: 0.5s;
 }
+
+.edit-box:hover, .delete-box:hover {
+    background-color: #807bbe;
+    transition: 0.5s;
+}
+
 
 .delete-box img, .edit-box img {
     margin: 10px;

@@ -175,6 +175,12 @@ img {
     border-radius: 10px;
     border: none;
     background-color: #9692bf;   
+    transition: 0.5s;
+}
+
+.rotate-block button:hover {
+    background-color: #807bbe;
+    transition: 0.5s;
 }
 
 .rotate-block button img {
@@ -196,6 +202,12 @@ img {
     border: none;
     font-size: 1vw;
     color: #fbf7ff;
+    transition: 0.5s;
+}
+
+.buttons-block button:hover {
+    background-color: #338dd6;
+    transition: 0.5s;
 }
 
 .buttons-block button:hover {
