@@ -3,16 +3,18 @@
     <div class="container">
         <div class="data-container">
             <div class="group-name-container">
-                <p>Название группы</p>
+                <p class="main">Название группы</p>
                 <input type="text" placeholder="Название группы" [(ngModel)]=group.name>
+                <p class="error">{{text_error}}</p>
             </div>
             <div class="owner-container">
-                <p>Ведущий учитель</p>
+                <p class="main">Ведущий учитель</p>
                 <select [(ngModel)] = "group.teacher">
                     <option *ngFor= "let teacher of teachers" [ngValue] = "teacher">{{teacher.name}}</option>
-                </select>
+                </select>                
             </div>
         </div>
+        
         
 
         <div class="students-container">

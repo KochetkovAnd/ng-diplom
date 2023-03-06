@@ -61,6 +61,7 @@ export class LevelEditPageComponent {
   cells: string[] = [];
   max = 0; cellSize = 0;
   a = 90
+  text_error = ""
 
   items: number[][] = []
 
@@ -126,18 +127,22 @@ export class LevelEditPageComponent {
 
   async save() {
     if (this.task) {
-      for (let i = 0; i < this.task.n; i++) {
-        for (let j = 0; j < this.task.m; j++) {
-          if (this.items[i * this.task.m + j].length > 0) {
-            this.task.x = j
-            this.task.y = i
+      if (this.task.name != "") {
+        for (let i = 0; i < this.task.n; i++) {
+          for (let j = 0; j < this.task.m; j++) {
+            if (this.items[i * this.task.m + j].length > 0) {
+              this.task.x = j
+              this.task.y = i
+            }
           }
         }
-      }
-      let str = ""
-      this.cells.forEach(s => str += s)
-      this.task.grid = str
-      this.task = await lastValueFrom(this.httpService.updateTask(this.task))
+        let str = ""
+        this.cells.forEach(s => str += s)
+        this.task.grid = str
+        this.task = await lastValueFrom(this.httpService.updateTask(this.task))
+      } else {
+        this.text_error = "Название не может быть пустым"
+      }     
     }
   }
 

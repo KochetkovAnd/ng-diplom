@@ -24,8 +24,9 @@
 
     <div class="central-container">
         <div class="group-name-container">
-            <p>Название задания</p>
+            <p class="main">Название задания</p>
             <input type="text" placeholder="Название задания" [(ngModel)]=task.name>
+            <p class="error">{{text_error}}</p>
         </div>
 
         <div class="params-container">
@@ -36,7 +37,7 @@
                         <label>n = </label> <input type="number" [(ngModel)]="task.n" (change)="NMChange()" min="4" max="18" />
                     </div>
                     <div class="number-block">
-                        <label>n = </label> <input type="number" [(ngModel)]="task.m" (change)="NMChange()" min="4" max="18" />
+                        <label>m = </label> <input type="number" [(ngModel)]="task.m" (change)="NMChange()" min="4" max="18" />
                     </div>
                 </div>
                 <div class="rotate-block">
@@ -52,8 +53,9 @@
         </div>
 
         <div class="help-container">
-            Здесь будет небольшой гайд по созданию заданию
-
+            В левой части можно выбрать команды доступные для использования в уровне, 
+            в правой части поле уровня, его размеры можно установить меняя n и m, тип клеток поля меняется нажатием по ним, по кругу,
+            Исполнитель перетаскивается по полю нажатием и поворачивается, нажатием на стрелки поворота в середине экрана.  
         </div>
     </div>
 

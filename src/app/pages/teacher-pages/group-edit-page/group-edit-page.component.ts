@@ -60,6 +60,7 @@ export class GroupEditPageComponent {
   students: User[] = []
   tasks: Task[] = []
   unusedTasks: Task[] = []
+  text_error = ""
 
   async ngOnInit() {
     this.group = await lastValueFrom(this.httpService.getGroupById(this.id))
@@ -100,7 +101,11 @@ export class GroupEditPageComponent {
 
   async save() {
     if (this.group) {
-      await lastValueFrom(this.httpService.updateGroup(this.group))
+      if (this.group.name != "") {
+        await lastValueFrom(this.httpService.updateGroup(this.group))
+      } else {
+        this.text_error = "Название не может быть пустым"
+      }      
     }    
   }
 }

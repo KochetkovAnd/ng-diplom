@@ -2,8 +2,9 @@
 <div class="main-container" *ngIf="group">
     <div class="container left">
         <div class="group-name-container">
-            <p>Название группы</p>
+            <p class="main">Название группы</p>
             <input type="text"  placeholder="Название группы" [(ngModel)] = group.name>
+            <p class="error">{{text_error}}</p>
         </div>
 
         <div class="students-container" *ngIf= "students">
@@ -11,7 +12,7 @@
             <div class="card" *ngFor = "let student of students; index as i">
                 <p class="number">{{i+1}}</p>
                 <p class="text">{{student.name}}</p>
-            </div>
+            </div>            
         </div>
         
         

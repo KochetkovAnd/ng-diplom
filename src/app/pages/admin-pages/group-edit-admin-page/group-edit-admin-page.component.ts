@@ -26,7 +26,7 @@ export class GroupEditAdminPageComponent {
   tasks: Task[] = []
   unusedTasks: Task[] = []
   teachers: User[] = []
-
+  text_error = ""
   addStudents = false
   addTasks = false
 
@@ -63,19 +63,23 @@ export class GroupEditAdminPageComponent {
   onTransferTask(i: number) {
     if (this.group) {
       transferArrayItem(this.unusedTasks, this.group.tasks, i, this.unusedTasks.length)
-    }    
+    }
   }
 
   onTransferTaskBack(i: number) {
     if (this.group) {
       transferArrayItem(this.group.tasks, this.unusedTasks, i, this.unusedTasks.length)
-    }    
+    }
   }
 
   async save() {
     if (this.group) {
-      this.group.students = this.studentsInGroup
-      await lastValueFrom(this.httpService.updateGroup(this.group))
-    }    
+      if (this.group.name != "") {
+        this.group.students = this.studentsInGroup
+        await lastValueFrom(this.httpService.updateGroup(this.group))
+      } else {
+        this.text_error = "Название не может быть пустым"
+      }
+    }
   }
 }
