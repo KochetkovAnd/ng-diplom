@@ -24,6 +24,7 @@ import { GroupsAdminPageComponent } from './pages/admin-pages/groups-admin-page/
 import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admin-page/group-edit-admin-page.component';
 import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/group-stats-page.component';
 import { ExaminationPageComponent } from './pages/teacher-pages/examination-page/examination-page.component';
+import { InfoPageComponent } from './pages/info-page/info-page.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ExaminationPageComponent } from './pages/teacher-pages/examination-page
     GroupsAdminPageComponent,
     GroupEditAdminPageComponent,
     GroupStatsPageComponent,
-    ExaminationPageComponent
+    ExaminationPageComponent,
+    InfoPageComponent
     
   ],
   imports: [

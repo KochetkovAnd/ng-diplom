@@ -13,9 +13,11 @@ import { UsersPageComponent } from './pages/admin-pages/users-page/users-page.co
 import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admin-page/group-edit-admin-page.component';
 import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/group-stats-page.component';
 import { ExaminationPageComponent } from './pages/teacher-pages/examination-page/examination-page.component';
+import { InfoPageComponent } from './pages/info-page/info-page.component';
 
 const routes: Routes = [  
   { path: 'login', component: LoginPageComponent },
+  { path: 'info', component: InfoPageComponent},
   { path: 'levels', component: LevelsPageComponent, canActivate: [RoleGuard]},
   { path: 'level/:id', component: SolvePageComponent, canActivate: [RoleGuard]},
   { path: 'groups', component: GroupPageComponent, canActivate: [RoleGuard]},
