@@ -22,6 +22,8 @@ export class HttpService {
     private authService: AuthService
   ) { }
 
+  // * LOGIN / REGISTER
+
   login(username: string, password: string) {
     return this.http.post<RegisterUser>(this.baseURL + "/auth/login",
       {
@@ -45,21 +47,87 @@ export class HttpService {
     }))
   }
 
+  // * GET METHODS 
+
+  // GET COMMANDS
+
+  getAllCommands() {
+    return this.http.get<Block[]>(this.baseURL + "/command",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  // GET GROUP
+
+  canDeleteGroupById(id: number) {
+    return this.http.get<boolean>(this.baseURL + "/group/canDeleteById/" + id,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getGroupsByTeacher() {
+    return this.http.get<Group[]>(this.baseURL + "/group/getAllByTeacher",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getGroupById(id: number) {
+    return this.http.get<Group>(this.baseURL + "/group/getById/" + id,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getAllGroups() {
+    return this.http.get<Group[]>(this.baseURL + "/group",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  // GET TASK
+
   getAvailableTasks() {
     return this.http.get<Task[]>(this.baseURL+ "/task/getAvailableTasks", 
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}) 
   }
 
-  getSolveTasks() {
-    return this.http.get<Task[]>(this.baseURL+ "/task/getSolveTasks", 
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}) 
+  getTaskById(id: number) {
+    return this.http.get<Task>(this.baseURL + "/task/getById/" + id,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 
-  getSolvedTasks() {
-    return this.http.get<Task[]>(this.baseURL+ "/task/getSolvedTasks", 
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}) 
+  getAllTasks() {
+    return this.http.get<Task[]>(this.baseURL + "/task",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 
+  getAllTasksByUser() {
+    return this.http.get<Task[]>(this.baseURL + "/task/getAllByUser",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  // GET USER
+
+  canDeleteUserById(id: number) {
+    return this.http.get<boolean>(this.baseURL + "/user/canDeleteById/" + id,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getUsersByGroupId(id: number) {
+    return this.http.get<User[]>(this.baseURL + "/user/getAllByGroupId/" + id,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getAllUsers() {
+    return this.http.get<User[]>(this.baseURL + "/user",
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getAllStudentsWithoutGroup() {
+    return this.http.get<User[]>(this.baseURL + "/user/getAllStudentsWithoutGroup",  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  getAllTeachers() {
+    return this.http.get<User[]>(this.baseURL + "/user/getAllTeachers",  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  // GET USERTASK
 
   getAllUserTaskByUser() {
     return this.http.get<UserTask[]>(this.baseURL+ "/userTask/getAllByUser", 
@@ -73,7 +141,6 @@ export class HttpService {
       return of(error);
     }))
   }
-
 
   getUserTaskByUserIdAndTaskId(userId: number, taskId: number) {
     return this.http.get<UserTask>(this.baseURL + "/userTask/getByUserIdAndTaskId/" + userId +"/" + taskId,
@@ -91,71 +158,14 @@ export class HttpService {
     }))
   }
 
-
-  getTaskById(id: number) {
-    return this.http.get<Task>(this.baseURL + "/task/getById/" + id,
+  getAllUserTaskByGroupId(id: number) {
+    return this.http.get<UserTask[]>(this.baseURL + "/userTask/getAllByGroupId/" + id,  
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 
-  updateUserTask(userTask: UserTask) {
-    return this.http.post<UserTask>(this.baseURL + "/userTask/update", userTask,
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
+  // * POST METHODS
 
-  updateUserTaskByStudent(userTask: UserTask) {
-    return this.http.post<UserTask>(this.baseURL + "/userTask/updateByStudent", userTask,
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getGroupsByTeacher() {
-    return this.http.get<Group[]>(this.baseURL + "/group/getAllByTeacher",
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getGroupById(id: number) {
-    return this.http.get<Group>(this.baseURL + "/group/getById/" + id,
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getUsersByGroupId(id: number) {
-    return this.http.get<User[]>(this.baseURL + "/user/getAllByGroupId/" + id,
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getAllTasks() {
-    return this.http.get<Task[]>(this.baseURL + "/task",
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  updateGroup(group: Group) {
-    return this.http.post<Group>(this.baseURL + "/group/update", group,
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getAllCommands() {
-    return this.http.get<Block[]>(this.baseURL + "/command",
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  updateTask(task: Task) {
-    return this.http.post<Task>(this.baseURL + "/task/update", task,
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getAllTasksByUser() {
-    return this.http.get<Task[]>(this.baseURL + "/task/getAllByUser",
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getAllUsers() {
-    return this.http.get<User[]>(this.baseURL + "/user",
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getAllGroups() {
-    return this.http.get<Group[]>(this.baseURL + "/group",
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
+  // POST GROUP
 
   createGroup(name: String) {
     return this.http.post<Group>(this.baseURL + "/group/create", 
@@ -168,15 +178,36 @@ export class HttpService {
     }))
   }
 
-  deleteGroupByIdEmpty(id: number) {
-    return this.http.delete<boolean>(this.baseURL + "/group/deleteByIdEmpty/" + id,  
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})   
-    .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
-      return of(error);
-    })) 
-  }  
+  updateGroup(group: Group) {
+    return this.http.post<Group>(this.baseURL + "/group/update", group,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
 
+  // POST TASK
 
+  updateTask(task: Task) {
+    return this.http.post<Task>(this.baseURL + "/task/update", task,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  // POST USER
+
+  // POST USERTASK
+
+  updateUserTask(userTask: UserTask) {
+    return this.http.post<UserTask>(this.baseURL + "/userTask/update", userTask,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  updateUserTaskByStudent(userTask: UserTask) {
+    return this.http.post<UserTask>(this.baseURL + "/userTask/updateByStudent", userTask,
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
+  // * DELETE METHODS
+
+  // DELETE GROUP
+  
   deleteGroupById(id: number) {
     return this.http.delete<boolean>(this.baseURL + "/group/deleteById/" + id,  
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})   
@@ -188,7 +219,9 @@ export class HttpService {
   sureDeleteGroupById(id: number) {
     return this.http.delete<boolean>(this.baseURL + "/group/sureDeleteById/" + id,  
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})  
-  }  
+  }
+
+  // DELETE USER
 
   deleteUserById(id: number) {
     return this.http.delete<boolean>(this.baseURL + "/user/deleteById/" + id,  
@@ -198,28 +231,8 @@ export class HttpService {
     })) 
   }  
 
-  sureDeleteTeacherById(id: number) {
-    return this.http.delete<boolean>(this.baseURL + "/user/deleteTeacherById/" + id,  
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  sureDeleteUserById(id: number) {
+    return this.http.delete<boolean>(this.baseURL + "/user/sureDeleteById/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})  
   } 
-
-  deleteStudentById(id: number) {
-    return this.http.delete<boolean>(this.baseURL + "/user/deleteStudentById/" + id,  
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  } 
-
-  getAllStudentsWithoutGroup() {
-    return this.http.get<User[]>(this.baseURL + "/user/getAllStudentsWithoutGroup",  
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getAllTeachers() {
-    return this.http.get<User[]>(this.baseURL + "/user/getAllTeachers",  
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
-
-  getAllUserTaskByGroupId(id: number) {
-    return this.http.get<UserTask[]>(this.baseURL + "/userTask/getAllByGroupId/" + id,  
-    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
-  }
 }

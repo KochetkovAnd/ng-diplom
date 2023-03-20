@@ -52,13 +52,18 @@ export class UsersPageComponent {
   add_user = false
   add_teacher = false
 
-  isDelete = false
-  deletedI = -1
-  deletedTeacher: User = {
-    id: 0,
-    name: "",
-    role : ""
-  } 
+
+  isTeacherDelete = false
+  deletedTeacher: User | undefined
+  canDeleteTeacher = true
+  deletedTeacherI = -1
+
+  isStudentDelete = false
+  deletedStudent: User | undefined
+  canDeleteStudent = true
+  deletedStudentI = -1
+
+
 
   async ngOnInit() {
     this.users = await lastValueFrom(this.httpService.getAllUsers())
@@ -87,7 +92,7 @@ export class UsersPageComponent {
       } else {
         this.error_user = "Логин и пароль не могут быть пустыми строками"
       }
-      
+
     } else {
       this.add_user = true
     }
@@ -124,26 +129,36 @@ export class UsersPageComponent {
     this.add_user = false
   }
 
-  async deleteTeacher(teacher: User, i: number) {
-    let response = await lastValueFrom(this.httpService.deleteUserById(teacher.id))
-    if (response.error) {
-      this.deletedTeacher = teacher
-      this.deletedI = i
-      this.isDelete = true
-    } else {
-      this.teachers.splice(i,1)
+  async deleteStudent(student: User, i: number) {
+    this.deletedStudent = student
+    this.deletedStudentI = i
+    this.canDeleteStudent = await lastValueFrom(this.httpService.canDeleteUserById(student.id))
+    this.isStudentDelete = true
+  }
+
+  async deleteTeacher(student: User, i: number) {
+    this.deletedTeacher = student
+    this.deletedTeacherI = i
+    this.canDeleteTeacher = await lastValueFrom(this.httpService.canDeleteUserById(student.id))
+    this.isTeacherDelete = true
+  }
+
+
+  async sureDeleteStudent() {
+    if (this.deletedStudent) {
+      let response = await lastValueFrom(this.httpService.sureDeleteUserById(this.deletedStudent.id))
+      console.log(response)
+      this.students.splice(this.deletedStudentI, 1)
+      this.isStudentDelete = false
     }    
   }
 
   async sureDeleteTeacher() {
-    let response = await lastValueFrom(this.httpService.sureDeleteTeacherById(this.deletedTeacher.id))
-    this.teachers.splice(this.deletedI,1)
-    this.isDelete = false
+    if (this.deletedTeacher) {
+      let response = await lastValueFrom(this.httpService.sureDeleteUserById(this.deletedTeacher.id))
+      
+      this.teachers.splice(this.deletedTeacherI, 1)
+      this.isTeacherDelete = false
+    }    
   }
-
-
-  async deleteStudent(student: User, i: number) {
-    await lastValueFrom(this.httpService.deleteStudentById(student.id))      
-    this.students.splice(i,1)    
-  } 
 }

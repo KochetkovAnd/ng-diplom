@@ -62,12 +62,35 @@
     </div>
 </div>
 
-<div class="delete-popup" *ngIf="isDelete">
-    <div class="content">
-        <p>Вы уверены? Учитель {{deletedTeacher.name}} прикреплен к группе и/или имеет созданные задания</p>
+<div class="delete-popup" *ngIf="isTeacherDelete">
+    <div class="content" *ngIf="deletedTeacher">        
+
+        <p>
+            <ng-container *ngIf = "canDeleteTeacher; else elseBlock">Вы уверены, что хотите удалить учителя {{deletedTeacher.name}}?</ng-container>
+            <ng-template #elseBlock>Вы уверены, что хотите удалить учителя {{deletedTeacher.name}}, он прикреплен к группе и/или имеет созданные задания?</ng-template>
+
+        </p>
         <div>
             <button (click) = "sureDeleteTeacher()">Удалить</button>
-            <button (click) = "isDelete = false">Отмена</button>
+            <button (click) = "isTeacherDelete = false">Отмена</button>
         </div>
     </div>
 </div>
+
+
+<div class="delete-popup" *ngIf="isStudentDelete">
+    <div class="content" *ngIf="deletedStudent">        
+
+        <p>
+            <ng-container *ngIf = "canDeleteStudent; else elseBlock">Вы уверены, что хотите удалить ученика {{deletedStudent.name}}?</ng-container>
+            <ng-template #elseBlock>Вы уверены, что хотите удалить ученика {{deletedStudent.name}}, у него есть выполненные задания?</ng-template>
+
+        </p>
+        <div>
+            <button (click) = "sureDeleteStudent()">Удалить</button>
+            <button (click) = "isStudentDelete = false">Отмена</button>
+        </div>
+    </div>
+</div>
+
+

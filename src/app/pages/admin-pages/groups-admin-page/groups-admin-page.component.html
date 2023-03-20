@@ -30,7 +30,11 @@
 <div class="delete-popup" *ngIf="isDelete">
     <ng-container *ngIf= "deletedGroup">
         <div class="content">
-            <p>Вы уверены? Группа {{deletedGroup.name}} включает учеников и задания</p>
+            <p>
+                <ng-container *ngIf = "canDeleteGroup; else elseBlock">Вы уверены, что хотите удалить группу {{deletedGroup.name}}?</ng-container>
+                <ng-template #elseBlock>Вы уверены, что хотите удалить группу {{deletedGroup.name}}, она включает учеников и задания?</ng-template>
+
+            </p>
             <div>
                 <button (click) = "sureDeleteGroup()">Удалить</button>
                 <button (click) = "isDelete = false">Отмена</button>

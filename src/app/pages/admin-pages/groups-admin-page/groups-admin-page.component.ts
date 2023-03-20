@@ -46,6 +46,7 @@ export class GroupsAdminPageComponent {
 
   isDelete = false
   deletedGroup: Group | undefined
+  canDeleteGroup = true
   deletedI = -1
 
 
@@ -81,17 +82,11 @@ export class GroupsAdminPageComponent {
     this.isAdd = false
   }
 
-
-
   async deleteGroup(group: Group, i: number) {
-    let response = await lastValueFrom(this.httpService.deleteGroupByIdEmpty(group.id))
-    if (response) {
-      this.groups.splice(i, 1)
-    } else {
-      this.deletedGroup = group
-      this.deletedI = i
-      this.isDelete = true
-    }
+    this.deletedGroup = group
+    this.deletedI = i    
+    this.canDeleteGroup = await lastValueFrom(this.httpService.canDeleteGroupById(group.id))
+    this.isDelete = true
   }
 
   async sureDeleteGroup() {
