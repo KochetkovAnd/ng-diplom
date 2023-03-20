@@ -1,4 +1,4 @@
-.legend-box {
+/* .legend-box {
     width: 30vw;
     display: flex;
     justify-content: center;
@@ -71,27 +71,74 @@
     border-radius: 20px;
 }
 
-.completed {
-    border: 3px solid #00FF3D;
+*/
+
+.container {    
+    width: 60%;   
+    margin: 20px 20%;
+    height: calc(100vh - 120px);
+    border-radius: 10px;
+    background-color: #fbf7ff;
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
 }
 
-.completed .marker {
-    background-color: #00FF3D;
+.task-card {
+    margin: 10px 20px;
+    width: calc(100% - 40px);
+    height: 70px;
+    border-radius: 15px;
+    background-color: #569ed7;
+    display: flex;
+    font-size: 20px;
+    line-height: 50px; 
 }
 
-.new {
-    border: 3px solid #FF8F00;
+
+.task-card .number{
+    display: block;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 10px;
 }
 
-.new .marker {
-    background-color: #FF8F00;
+.legend .number{
+    text-align: center;
+    margin: 10px;
+    width: 50px;
 }
 
-
-.in_process {
-    border: 3px solid #F2EA00;
+.task-name {
+    text-align: center;
+    width: calc(60% - 90px);
+    margin: 10px;
 }
 
-.in_process .marker {
-    background-color: #F2EA00;
+.task-status {
+    text-align: center;
+    width: calc(30% - 20px);
+    margin: 10px;
+}
+
+.task-mark {
+    text-align: center;
+    width: calc(10% - 10px);
+    margin: 10px;
+}
+
+.legend {
+    margin: 10px 20px;
+    width: calc(100% - 40px);
+    height: 50px;
+    border-radius: 15px 15px;
+    background-color: #12263a;    
+    display: flex;
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
+    line-height: 30px
+}
+
+.legend .number,  .legend .task-name,  .legend .task-status,  .legend .task-mark {
+    color: #fbf7ff;
 }

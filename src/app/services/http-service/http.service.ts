@@ -60,6 +60,12 @@ export class HttpService {
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}) 
   }
 
+
+  getAllUserTaskByUser() {
+    return this.http.get<UserTask[]>(this.baseURL+ "/userTask/getAllByUser", 
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}) 
+  }
+
   getUserTaskByUserAndTask(task: Task) {
     return this.http.post<UserTask>(this.baseURL + "/userTask/getByUserAndTask", task,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())}).

@@ -1,42 +1,23 @@
 <navbar-student></navbar-student>
 
-<div style= "display: flex;">
-   
-    
-    <div class="main-container">
-        <div class="block" *ngFor="let task of tasks, index as i" routerLink="/level/{{task.id}}"
-        [class.completed]="getColor(task) == 'completed'"
-        [class.in_process]="getColor(task) == 'in process'"
-        [class.new]="getColor(task) == 'new'">            
-            {{i + 1}}
-            <div class="marker"></div>
-        </div>
+<div class="container">
+    <div class="legend">
+        <p class="number">№</p>
+        <p class="task-name">Название задания</p>
+        <p class="task-status">Статус</p>
+         <p class="task-mark">Оценка</p>
     </div>
-
-    <div class="legend-box">
-        <div class="legend">
-            <div class="box">
-                <div class="marker-legend " style="background-color: #00FF3D;"></div>
-                <p>- Cделанные</p>
-            </div>
-            <div class="box">
-                <div class="marker-legend " style="background-color: #F2EA00;"></div>
-                <p>- В процессе</p>
-            </div>
-            <div class="box">
-                <div class="marker-legend " style="background-color: #FF8F00;"></div>
-                <p>- Новые</p>
-            </div>
-        </div>
-    </div>    
+    <div class="task-card" *ngFor="let card of cards; index as i"
+    routerLink="/level/{{card.task.id}}"
+    [ngStyle] = "{
+        'box-shadow' : '1px 1px 1px 1px ' + card.color
+    }">
+        <p class="number"
+        [ngStyle] = "{
+            'background-color' : card.color
+        }">{{i+1}}</p>
+        <p class="task-name">{{card.task.name}}</p>
+        <p class="task-status">{{card.status}}</p>
+        <p class="task-mark">{{card.mark}}</p>
+    </div>
 </div>
-
-
-<!-- <div class="main-container">
-    <div class="block" *ngFor="let task of colorTasks, index as i" routerLink="/level/{{task.task.id}}">
-        <div class="marker" [ngStyle] = "{
-            'background-color': task.color
-        }"></div>
-        {{i + 1}}
-    </div>    
-</div> -->
