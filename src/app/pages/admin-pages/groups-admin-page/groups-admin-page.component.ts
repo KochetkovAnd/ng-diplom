@@ -58,7 +58,7 @@ export class GroupsAdminPageComponent {
 
   async add() {
     if (this.isAdd) {
-      if (this.groupName.length >= 6 && this.groupName.length <= 15) {
+      if (this.groupName.length >= 6 && this.groupName.length <= 25) {
         let response = await lastValueFrom(this.httpService.createGroup(this.groupName))
         if (response.id) {
           this.groups.push(response)
@@ -69,7 +69,7 @@ export class GroupsAdminPageComponent {
           this.error = "Группа с таким названием уже существует"
         }
       } else {
-        this.error = "Название группы должно быть от 6 до 15 символов"
+        this.error = "Название группы должно быть от 6 до 25 символов"
       }
 
     } else {
