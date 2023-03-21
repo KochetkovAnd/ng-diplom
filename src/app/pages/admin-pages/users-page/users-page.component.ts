@@ -78,7 +78,7 @@ export class UsersPageComponent {
 
   async addUser() {
     if (this.add_user) {
-      if (this.user_login != "" && this.user_password != "") {
+      if (this.user_login.length >= 6 && this.user_login.length <= 15 && this.user_password.length >= 6 && this.user_password.length <= 15) {
         let response = await lastValueFrom(this.httpService.register(this.user_login, this.user_password, "STUDENT"))
         if (response.id) {
           this.students.push(response)
@@ -90,7 +90,7 @@ export class UsersPageComponent {
           this.error_user = "Пользователь с таким именем уже существует"
         }
       } else {
-        this.error_user = "Логин и пароль не могут быть пустыми строками"
+        this.error_user = "Логин и пароль должны быть от 6 до 15 символов"
       }
 
     } else {
@@ -100,7 +100,7 @@ export class UsersPageComponent {
 
   async addTeacher() {
     if (this.add_teacher) {
-      if (this.teacher_login != "" && this.teacher_password != "") {
+      if (this.teacher_login.length >= 6 && this.teacher_login.length <= 15 && this.teacher_password.length >= 6 && this.teacher_password.length <= 15) {
         let response = await lastValueFrom(this.httpService.register(this.teacher_login, this.teacher_password, "TEACHER"))
         if (response.id) {
           this.teachers.push(response)
@@ -112,7 +112,7 @@ export class UsersPageComponent {
           this.error_teacher = "Пользователь с таким именем уже существует"
         }
       } else {
-        this.error_teacher = "Логин и пароль не могут быть пустыми строками"
+        this.error_teacher = "Логин и пароль должны быть от 6 до 15 символов"
       }
     } else {
       this.add_teacher = true
@@ -142,7 +142,6 @@ export class UsersPageComponent {
     this.canDeleteTeacher = await lastValueFrom(this.httpService.canDeleteUserById(student.id))
     this.isTeacherDelete = true
   }
-
 
   async sureDeleteStudent() {
     if (this.deletedStudent) {
