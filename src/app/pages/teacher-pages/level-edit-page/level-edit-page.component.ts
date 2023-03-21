@@ -127,7 +127,7 @@ export class LevelEditPageComponent {
 
   async save() {
     if (this.task) {
-      if (this.task.name != "") {
+      if (this.task.name.length >= 6 && this.task.name.length <= 15) {
         for (let i = 0; i < this.task.n; i++) {
           for (let j = 0; j < this.task.m; j++) {
             if (this.items[i * this.task.m + j].length > 0) {
@@ -139,9 +139,16 @@ export class LevelEditPageComponent {
         let str = ""
         this.cells.forEach(s => str += s)
         this.task.grid = str
-        this.task = await lastValueFrom(this.httpService.updateTask(this.task))
+        let response = await lastValueFrom(this.httpService.updateTask(this.task))
+        if (response.error) {
+          this.text_error = "Задание с таким названием уже существует"
+        } else {
+          this.task = response
+          this.text_error = ""
+        }       
+        
       } else {
-        this.text_error = "Название не может быть пустым"
+        this.text_error = "Название должно быть от 6 до 15 символов"
       }     
     }
   }

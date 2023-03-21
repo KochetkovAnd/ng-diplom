@@ -101,11 +101,15 @@ export class GroupEditPageComponent {
 
   async save() {
     if (this.group) {
-      if (this.group.name != "") {
-        await lastValueFrom(this.httpService.updateGroup(this.group))
+      if (this.group.name.length >= 6 && this.group.name.length <= 15) {
+        let response = await lastValueFrom(this.httpService.updateGroup(this.group))
+        this.text_error = ""
+        if (response.error) {
+          this.text_error = "Группа с таким названием уже существует"
+        }
       } else {
-        this.text_error = "Название не может быть пустым"
-      }      
-    }    
+        this.text_error = "Название группы должно быть от 5 до 16 символов"
+      }
+    }
   }
 }

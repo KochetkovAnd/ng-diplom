@@ -181,6 +181,9 @@ export class HttpService {
   updateGroup(group: Group) {
     return this.http.post<Group>(this.baseURL + "/group/update", group,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+    .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    }))
   }
 
   // POST TASK
@@ -188,6 +191,9 @@ export class HttpService {
   updateTask(task: Task) {
     return this.http.post<Task>(this.baseURL + "/task/update", task,
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+    .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+      return of(error);
+    }))
   }
 
   // POST USER
