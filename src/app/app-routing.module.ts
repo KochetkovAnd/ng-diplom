@@ -14,6 +14,7 @@ import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admi
 import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/group-stats-page.component';
 import { ExaminationPageComponent } from './pages/teacher-pages/examination-page/examination-page.component';
 import { InfoPageComponent } from './pages/info-page/info-page.component';
+import { ChartPageComponent } from './pages/teacher-pages/chart-page/chart-page.component';
 
 const routes: Routes = [  
   { path: 'login', component: LoginPageComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'edit-group/:id', component: GroupEditAdminPageComponent, canActivate: [RoleGuard]},
   { path: 'group-stats/:id', component: GroupStatsPageComponent, canActivate: [RoleGuard]},
   { path: 'examination/:userId/:taskId', component: ExaminationPageComponent, canActivate: [RoleGuard]},
+  { path: 'charts/:id', component: ChartPageComponent, canActivate :[RoleGuard]},
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

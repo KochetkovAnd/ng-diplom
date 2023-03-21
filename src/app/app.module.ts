@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,8 @@ import { GroupEditAdminPageComponent } from './pages/admin-pages/group-edit-admi
 import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/group-stats-page.component';
 import { ExaminationPageComponent } from './pages/teacher-pages/examination-page/examination-page.component';
 import { InfoPageComponent } from './pages/info-page/info-page.component';
+import { ChartPageComponent } from './pages/teacher-pages/chart-page/chart-page.component';
+import { MainChartComponent } from './components/main-chart/main-chart.component';
 
 
 @NgModule({
@@ -45,7 +48,9 @@ import { InfoPageComponent } from './pages/info-page/info-page.component';
     GroupEditAdminPageComponent,
     GroupStatsPageComponent,
     ExaminationPageComponent,
-    InfoPageComponent
+    InfoPageComponent,
+    ChartPageComponent,
+    MainChartComponent
     
   ],
   imports: [
@@ -54,7 +59,8 @@ import { InfoPageComponent } from './pages/info-page/info-page.component';
     AppRoutingModule,
     DragDropModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule
   ],
   providers: [AuthService, RoleGuard],
   bootstrap: [AppComponent]

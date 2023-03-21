@@ -24,33 +24,24 @@ export class RoleGuard implements CanActivate {
       let isTeacher = role == "TEACHER"
       let isAdmin = role == "ADMIN"
       switch (route.routeConfig?.path) {
+
         case 'levels':
-          if (isStudent) { return true }
-          break
         case 'level/:id':
           if (isStudent) { return true }
           break
         case 'groups':
-          if (isTeacher) { return true }
-          break
-        case 'group/:id':
-          if (isTeacher) { return true }
-          break
         case 'edit-level':
-          if (isTeacher) { return true }
-          break
         case 'tasks':
           if (isTeacher) { return true }
           break
         case 'users':
-          if (isAdmin) { return true }
-          break
-        case 'groups-admin':
-          if (isAdmin) { return true }
-          break
+        case 'groups-admin':          
         case 'edit-group/:id':
           if (isAdmin) { return true }
           break
+          
+        case 'group/:id':
+        case 'charts/:id':
         case 'group-stats/:id':
           if (isTeacher) {
             return this.httpService.getGroupsByTeacher().pipe(map(

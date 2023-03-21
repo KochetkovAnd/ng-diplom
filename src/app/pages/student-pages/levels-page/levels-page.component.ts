@@ -72,7 +72,7 @@ export class LevelsPageComponent {
 
   async ngOnInit() {
     this.tasks = await lastValueFrom(this.httpService.getAvailableTasks())
-    this.userTasks = await lastValueFrom(this.httpService.getAllUserTaskByUser())
+    this.userTasks = await lastValueFrom(this.httpService.getAllUserTaskByUserToken())
     this.tasks.forEach(task => {
       this.cards.push(getStatus(this.userTasks, task))
     })
