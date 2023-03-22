@@ -1,2 +1,14 @@
 <navbar-teacher></navbar-teacher>
-<main-chart [id] = "id"></main-chart>
+<div class="container">
+    <main-chart [id] = "id"></main-chart>
+</div>
+
+
+
+
+<div class="container">
+    <div class="box" *ngFor = "let user of users">
+        <p>{{user.name}}</p>
+        <pie-chart [user] = "user" [max] = "max"></pie-chart>
+    </div>       
+</div>

@@ -11,6 +11,7 @@ body {
     height: 100vh;
     background-color: #E2DFE6;
     /* background: linear-gradient(90deg, #7a81f2,#a630b6,#e8664c); */
+    overflow-x: hidden;
 }
 
 *::-webkit-scrollbar {

@@ -127,7 +127,7 @@ export class LevelEditPageComponent {
 
   async save() {
     if (this.task) {
-      if (this.task.name.length >= 6 && this.task.name.length <= 15) {
+      if (this.task.name.length >= 6 && this.task.name.length <= 25) {
         for (let i = 0; i < this.task.n; i++) {
           for (let j = 0; j < this.task.m; j++) {
             if (this.items[i * this.task.m + j].length > 0) {
@@ -148,7 +148,7 @@ export class LevelEditPageComponent {
         }       
         
       } else {
-        this.text_error = "Название должно быть от 6 до 15 символов"
+        this.text_error = "Название должно быть от 6 до 25 символов"
       }     
     }
   }

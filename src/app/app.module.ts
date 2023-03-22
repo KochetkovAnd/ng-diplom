@@ -28,6 +28,7 @@ import { ExaminationPageComponent } from './pages/teacher-pages/examination-page
 import { InfoPageComponent } from './pages/info-page/info-page.component';
 import { ChartPageComponent } from './pages/teacher-pages/chart-page/chart-page.component';
 import { MainChartComponent } from './components/main-chart/main-chart.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { MainChartComponent } from './components/main-chart/main-chart.component
     ExaminationPageComponent,
     InfoPageComponent,
     ChartPageComponent,
-    MainChartComponent
+    MainChartComponent,
+    PieChartComponent
     
   ],
   imports: [
