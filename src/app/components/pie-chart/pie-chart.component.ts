@@ -22,7 +22,6 @@ export class PieChartComponent {
 
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    skipNull: true,
     plugins: {
       legend: {
         display: false

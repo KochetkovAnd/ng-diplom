@@ -168,6 +168,11 @@ export class HttpService {
     {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
   }
 
+  getUserTaskOrCreateByUserAndTaskId(id: number) {
+    return this.http.get<UserTask>(this.baseURL + "/userTask/getOrCreateByUserAndTaskId/" + id,  
+    {headers: new HttpHeaders().append('Authorization', this.authService.getToken())})
+  }
+
   // * POST METHODS
 
   // POST GROUP

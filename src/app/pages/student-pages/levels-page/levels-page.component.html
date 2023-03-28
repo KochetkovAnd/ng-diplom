@@ -8,13 +8,10 @@
          <p class="task-mark">Оценка</p>
     </div>
     <div class="task-card" *ngFor="let card of cards; index as i"
-    routerLink="/level/{{card.task.id}}"
-    [ngStyle] = "{
-        'box-shadow' : '1px 1px 1px 1px ' + card.color
-    }">
+    routerLink="/level/{{card.task.id}}">
         <p class="number"
         [ngStyle] = "{
-            'background-color' : card.color
+            'border' : '5px solid' + card.color
         }">{{i+1}}</p>
         <p class="task-name">{{card.task.name}}</p>
         <p class="task-status">{{card.status}}</p>
