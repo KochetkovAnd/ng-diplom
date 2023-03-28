@@ -45,7 +45,6 @@ export class GroupStatsPageComponent {
           task.push({
             user: this.students[j],
             task: tasks[i],
-            solved: false,
             solution: ""
           })
         }

@@ -1,17 +1,17 @@
 <navbar-student></navbar-student>
 
-<div style="display: flex;" *ngIf= "task">
+<div style="display: flex;" *ngIf= "userTask">
     <div class="command-block">
         <ul
             cdkDropList
-            [cdkDropListData]="task.commands"
+            [cdkDropListData]="userTask.task.commands"
             [cdkDropListConnectedTo]="dls"
             cdkDropListSortingDisabled
             (cdkDropListDropped)="delete($event)"
             id = "from"
         >
             <li 
-                *ngFor="let item of task.commands" 
+                *ngFor="let item of userTask.task.commands" 
                 [class.simple-block]="item.type == 'simple'"
                 [class.composite-block]="item.type == 'composite'"
                 class="program-li"
@@ -89,16 +89,16 @@
         <div class="grid-block" style="position: relative;">
             <div class="movebox"
             style="position: absolute;"
-            [@horizontal] = "{value: task.x, params :{x:task.x * cellSize, time : animationTime}}"
-            [@vertical] = "{value: task.y, params :{y:task.y * cellSize, time : animationTime}}"
-            [@rotate] = "{value: task.angle, params :{angle:task.angle, time : animationTime}}"
+            [@horizontal] = "{value: userTask.task.x, params :{x:userTask.task.x * cellSize, time : animationTime}}"
+            [@vertical] = "{value: userTask.task.y, params :{y:userTask.task.y * cellSize, time : animationTime}}"
+            [@rotate] = "{value: userTask.task.angle, params :{angle:userTask.task.angle, time : animationTime}}"
             [ngStyle]= "{
                 'width' : this.cellSize +'%',
                 'height' : this.cellSize +'%'
             }"> <img src="assets/arrow.png"/></div>
         
             <div class="grid" [ngStyle] ="{
-                'grid-template-columns': 'repeat(' + this.task.m + ','+ this.cellSize +'%)',
+                'grid-template-columns': 'repeat(' + this.userTask.task.m + ','+ this.cellSize +'%)',
                 'grid-auto-rows' : this.cellSize + '%',
                 'width' : (this.cellSize*max) +'%',
                 'height' : (this.cellSize*max) +'%'

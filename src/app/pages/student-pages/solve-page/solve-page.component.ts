@@ -5,26 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { asapScheduler, async, lastValueFrom } from 'rxjs';
 import { Block } from 'src/app/models/block';
 import { Task } from 'src/app/models/task';
+import { UserTask } from 'src/app/models/userTask';
 import { HttpService } from 'src/app/services/http-service/http.service';
 
 const sleepTime = 300;
-const defaultTask: Task = {
-  id: 0,
-  owner: {
-    id: 0,
-    name: "",
-    role: ""
-  },
-  n: 0,
-  m: 0,
-  grid: "",
-  x: 0,
-  y: 0,
-  angle: 0,
-  name: '',
-  commands: []
-}
-
 
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -127,22 +111,25 @@ export class SolvePageComponent {
     private route: ActivatedRoute,
     private httpService: HttpService,
   ) { }
+
   // CDK
   @ViewChildren(CdkDropList)
   private dlq?: QueryList<CdkDropList>;
   public dls: CdkDropList[] = [];
+
   // Routes
-  id = Number(this.route.snapshot.paramMap.get('id'))
+  task_id = Number(this.route.snapshot.paramMap.get('id'))
+
   // Task 
-  task: Task | undefined;
+  userTask: UserTask | undefined
   taskClone: Task | undefined;
   program: Block[] = []
   cells: string[] = [];
+
   // Variable
   animationTime = '0s'
   max = 0; cellSize = 0;
   forOptions = [2, 3, 4, 5, 6, 7, 8]
-  win = false
   isButtonActive = true
   isInfoActive = true
   result = false
@@ -151,16 +138,12 @@ export class SolvePageComponent {
 
 
   async ngOnInit() {
-    this.task = await lastValueFrom(this.httpService.getTaskById(this.id))
-    this.taskClone = cloneTask(this.task)
-    this.max = this.task.n > this.task.m ? this.task.n : this.task.m;
+    this.userTask = await lastValueFrom(this.httpService.getUserTaskOrCreateByUserAndTaskId(this.task_id))
+    this.taskClone = cloneTask(this.userTask.task)
+    this.max = this.userTask.task.n > this.userTask.task.m ? this.userTask.task.n : this.userTask.task.m
     this.cellSize = 100 / this.max
-    this.cells = Array.from(this.task.grid);
-
-    let userTask = await lastValueFrom(this.httpService.getUserTaskByUserAndTask(this.task))
-    if (!userTask.error) {
-      this.parse(userTask.solution, this.program)
-    }
+    this.cells = Array.from(this.userTask.task.grid)
+    this.parse(this.userTask.solution, this.program)
   }
 
   ngAfterViewChecked() {
@@ -205,9 +188,11 @@ export class SolvePageComponent {
   }
 
   getBlockById(id: number) {
-    for (let i = 0; i < (this.task || defaultTask).commands.length; i++) {
-      if ((this.task || defaultTask).commands[i].id == id) {
-        return cloneBlock((this.task || defaultTask).commands[i])
+    if (this.userTask?.task) {
+      for (let i = 0; i < this.userTask.task.commands.length; i++) {
+        if (this.userTask.task.commands[i].id == id) {
+          return cloneBlock(this.userTask.task.commands[i])
+        }
       }
     }
     return undefined
@@ -251,7 +236,6 @@ export class SolvePageComponent {
     let win = this.checkWin()
     if (win) {
       this.resultText = "Уровень пройден"
-      this.win = true
     }
     if (!(win || error)) {
       this.resultText = "Собраны не все ключевые блоки"
@@ -260,22 +244,21 @@ export class SolvePageComponent {
   }
 
   async save() {
-    let solution = this.unparse(this.program)
-    if (this.taskClone) {
-      await lastValueFrom(this.httpService.updateUserTaskByStudent({
-        task: this.taskClone,
-        solved: this.win,
-        solution
-      }))
+    if (this.userTask && this.taskClone) {
+      this.userTask.solution = this.unparse(this.program)
+      this.userTask.task = this.taskClone
+      await lastValueFrom(this.httpService.updateUserTask(this.userTask))
     }
   }
 
   clickOk() {
-    this.result = false
-    this.animationTime = '0s'
-    this.task = cloneTask(this.taskClone || defaultTask)
-    this.cells = Array.from(this.task.grid)
-    this.isButtonActive = true
+    if (this.userTask?.task && this.taskClone) {
+      this.result = false
+      this.animationTime = '0s'
+      this.userTask.task = cloneTask(this.taskClone)
+      this.cells = Array.from(this.userTask.task.grid)
+      this.isButtonActive = true
+    }
   }
 
   async runProgram(commands: Block[]): Promise<boolean> {
@@ -312,15 +295,23 @@ export class SolvePageComponent {
     return error
   }
 
-  rotateRight(): void { (this.task || defaultTask).angle += 90 }
+  rotateRight(): void {
+    if (this.userTask?.task) {
+      this.userTask.task.angle += 90
+    }
+  }
 
   rotateLeft(): void {
-    (this.task || defaultTask).angle -= 90
+    if (this.userTask?.task) {
+      this.userTask.task.angle -= 90
+    }
   }
 
   tryRecolor() {
-    if (this.cells[(this.task || defaultTask).y * (this.task || defaultTask).m + (this.task || defaultTask).x] == "2") {
-      this.cells[(this.task || defaultTask).y * (this.task || defaultTask).m + (this.task || defaultTask).x] = "1"
+    if (this.userTask?.task) {
+      if (this.cells[this.userTask.task.y * this.userTask.task.m + this.userTask.task.x] == "2") {
+        this.cells[this.userTask.task.y * this.userTask.task.m + this.userTask.task.x] = "1"
+      }
     }
   }
 
@@ -329,55 +320,57 @@ export class SolvePageComponent {
   }
 
   stepForward(): void {
-    if ((this.task || defaultTask).angle % 360 == 0) {
-      (this.task || defaultTask).y -= 1
-    } else if ((this.task || defaultTask).angle % 360 == 90 || (this.task || defaultTask).angle % 360 == -270) {
-      (this.task || defaultTask).x += 1
-    } else if ((this.task || defaultTask).angle % 360 == 180 || (this.task || defaultTask).angle % 360 == -180) {
-      (this.task || defaultTask).y += 1
-    } else {
-      (this.task || defaultTask).x -= 1
+    if (this.userTask?.task) {
+      if (this.userTask.task.angle % 360 == 0) {
+        this.userTask.task.y -= 1
+      } else if (this.userTask.task.angle % 360 == 90 || this.userTask.task.angle % 360 == -270) {
+        this.userTask.task.x += 1
+      } else if (this.userTask.task.angle % 360 == 180 || this.userTask.task.angle % 360 == -180) {
+        this.userTask.task.y += 1
+      } else {
+        this.userTask.task.x -= 1
+      }
+      this.cells[this.userTask.task.y * this.userTask.task.m + this.userTask.task.x] = "1"
     }
-    this.cells[(this.task || defaultTask).y * (this.task || defaultTask).m + (this.task || defaultTask).x] = "1"
   }
 
   canTakeStep(): boolean {
-    if (this.task) {
-      if (this.task.angle % 360 == 0) {
-        if (this.task.y - 1 < 0) {
+    if (this.userTask?.task) {
+      if (this.userTask.task.angle % 360 == 0) {
+        if (this.userTask.task.y - 1 < 0) {
           this.resultText = "Ошибка, выход за границы экрана"
         } else {
-          if (this.cells[(this.task.y - 1) * this.task.m + this.task.x] == "0") {
+          if (this.cells[(this.userTask.task.y - 1) * this.userTask.task.m + this.userTask.task.x] == "0") {
             this.resultText = "Ошибка, столкновение со стеной"
           } else {
             return true
           }
         }
-      } else if (this.task.angle % 360 == 90 || this.task.angle % 360 == -270) {
-        if (this.task.x + 1 >= this.task.m) {
+      } else if (this.userTask.task.angle % 360 == 90 || this.userTask.task.angle % 360 == -270) {
+        if (this.userTask.task.x + 1 >= this.userTask.task.m) {
           this.resultText = "Ошибка, выход за границы экрана"
         } else {
-          if (this.cells[this.task.y * this.task.m + this.task.x + 1] == "0") {
+          if (this.cells[this.userTask.task.y * this.userTask.task.m + this.userTask.task.x + 1] == "0") {
             this.resultText = "Ошибка, столкновение со стеной"
           } else {
             return true
           }
         }
-      } else if (this.task.angle % 360 == 180 || this.task.angle % 360 == -180) {
-        if (this.task.y + 1 >= this.task.n) {
+      } else if (this.userTask.task.angle % 360 == 180 || this.userTask.task.angle % 360 == -180) {
+        if (this.userTask.task.y + 1 >= this.userTask.task.n) {
           this.resultText = "Ошибка, выход за границы экрана"
         } else {
-          if (this.cells[(this.task.y + 1) * this.task.m + this.task.x] == "0") {
+          if (this.cells[(this.userTask.task.y + 1) * this.userTask.task.m + this.userTask.task.x] == "0") {
             this.resultText = "Ошибка, столкновение со стеной"
           } else {
             return true
           }
         }
       } else {
-        if (this.task.x - 1 < 0) {
+        if (this.userTask.task.x - 1 < 0) {
           this.resultText = "Ошибка, выход за границы экрана"
         } else {
-          if (this.cells[this.task.y * this.task.m + this.task.x - 1] == "0") {
+          if (this.cells[this.userTask.task.y * this.userTask.task.m + this.userTask.task.x - 1] == "0") {
             this.resultText = "Ошибка, столкновение со стеной"
           } else {
             return true
@@ -387,6 +380,4 @@ export class SolvePageComponent {
     }
     return false
   }
-
-
 }
