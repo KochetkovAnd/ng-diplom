@@ -1,78 +1,3 @@
-/* .legend-box {
-    width: 30vw;
-    display: flex;
-    justify-content: center;
-}
-
-.legend {
-    width: 250px;
-    margin-top: 30px;
-    padding: 10px;
-    height: 100px;
-    background-color: #fbf7ff;
-    border-radius: 10px;
-    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.main-container {
-    margin: 30px 0% 30px 10%;
-    width: 60vw;
-    height: calc(100vh - 140px);    
-    overflow-y: auto;
-    background-color: #fbf7ff;
-    border-radius: 10px;
-    
-    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-.block {
-    width: calc(12vw - 26px);
-    height: calc(12vw - 26px);
-    border-radius: 50px;
-    margin: 10px;
-    background-color: #569ed7;
-    display: inline-block;
-    text-align: center;
-    line-height: calc(12vw - 26px);
-    border: 3px solid;
-    font-size: 40px;
-    transition: 0.5s;
-}
-
-.block:hover {
-    background-color: #338dd6;
-    transition: 0.5s;
-}
-
-.marker {
-    width: 20px;
-    height: 20px;    
-    position: sticky;
-    border-radius: 20px;
-    margin-top: calc(30px - 100%);
-    margin-left: calc(100% - 50px);
-}
-
-.legend .box {
-    margin: 10px;
-    display: flex;
-}
-
-.legend p {
-    line-height: 20px;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-.marker-legend {
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-}
-
-*/
-
 .container {    
     width: 60%;   
     margin: 20px 20%;
@@ -82,6 +7,7 @@
     box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
 }
+
 
 .task-card {
     margin: 10px 20px;
@@ -115,7 +41,7 @@
 
 .task-name {
     text-align: center;
-    width: calc(60% - 90px);
+    width: calc(100% - 200px);
     margin: 10px;
 }
 
@@ -127,21 +53,61 @@
 
 .task-mark {
     text-align: center;
-    width: calc(10% - 10px);
+    width: 90px;
     margin: 10px;
 }
 
-.legend {
+.help {
+    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
     margin: 10px 20px;
     width: calc(100% - 40px);
-    height: 50px;
-    border-radius: 15px 15px;
-    background-color: #12263a;    
+    background-color: #12263a;   
+    border-radius: 15px;
+}
+
+.status {
     display: flex;
-    box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid #fbf7ff;
+}
+
+.f {
+    width: 10%;
+    margin: 0px 5%;
+    height: 50px;
+    line-height: 50px;
+    color: #fbf7ff;
+}
+
+.status .block {
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    display: flex;
+
+}
+
+.status p {
+    color: #fbf7ff;
+}
+
+.status .block .square {
+    margin: 10px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 10px;
+    background-color: #f0e6fe;
+    text-align: center;   
+
+}
+
+
+.legend {    
+    height: 50px;  
+    display: flex;    
     line-height: 30px
 }
 
-.legend .number,  .legend .task-name,  .legend .task-status,  .legend .task-mark {
+.legend .number,  .task-name,  .legend .task-status,  .task-mark {
     color: #fbf7ff;
 }
