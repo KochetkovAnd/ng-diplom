@@ -20,9 +20,16 @@ const cloneBlock = (block: Block) => {
     text: block.text,
     color: block.color,
     include: [],
+    secondInclude: [],
   }
   if (block.numberOfRepeats) {
     clone.numberOfRepeats = block.numberOfRepeats
+  }
+  if (block.condition) {
+    clone.condition = block.condition
+  }
+  if (block.secondText) {
+    clone.secondText = block.secondText
   }
   return clone
 }
@@ -130,6 +137,7 @@ export class SolvePageComponent {
   animationTime = '0s'
   max = 0; cellSize = 0;
   forOptions = [2, 3, 4, 5, 6, 7, 8]
+  ifOptions = ["Дорога справа", "Дорога слева", "Дорога сверху", "Дорога снизу"]
   isButtonActive = true
   isInfoActive = true
   result = false
@@ -204,12 +212,29 @@ export class SolvePageComponent {
       let command = this.getBlockById(parseInt(line[i]))
       if (command) {
         items.push(command)
-        if (command.text == "Повторить") {
-          command.numberOfRepeats = parseInt(line[i + 1])
-          let endBrace = findEndBrace(line, i + 2)
-          this.parse(line.slice(i + 3, endBrace), command.include)
-          i = endBrace
-        }
+        if (command.type == "composite") {
+          if (command.text == "Повторить") {
+            command.numberOfRepeats = parseInt(line[i + 1])
+            let endBrace = findEndBrace(line, i + 2)
+            this.parse(line.slice(i + 3, endBrace), command.include)
+            i = endBrace
+          } else if (command.text == "Если") {
+            command.condition = this.getIfOptionByNumber(parseInt(line[i + 1]))
+            let endBrace = findEndBrace(line, i + 2)
+            this.parse(line.slice(i + 3, endBrace), command.include)
+            i = endBrace
+          }
+        } else if (command.type == "double") {
+          if (command.text == "Если") {
+            command.condition = this.getIfOptionByNumber(parseInt(line[i + 1]))
+            let endBrace = findEndBrace(line, i + 2)
+            this.parse(line.slice(i + 3, endBrace), command.include)
+            i = endBrace
+            endBrace = findEndBrace(line, i + 1)
+            this.parse(line.slice(i + 2, endBrace), command.secondInclude)
+            i = endBrace
+          }
+        }       
       }
       i++
     }
@@ -219,15 +244,53 @@ export class SolvePageComponent {
     let str = ""
     items.forEach(item => {
       str += item.id
-      if (item.text == "Повторить") {
-        str += item.numberOfRepeats
-        str += "{"
-        str += this.unparse(item.include)
-        str += "}"
+
+      if (item.type == "composite") {
+        if (item.text == "Повторить") {
+          str += item.numberOfRepeats
+          str += "{"
+          str += this.unparse(item.include)
+          str += "}"
+        } else if (item.text == "Если") {
+          str += this.getIfOptionNumber(item)
+          str += "{"
+          str += this.unparse(item.include)
+          str += "}"
+        }
+      } else if (item.type == "double") {
+        if (item.text == "Если") {
+          str += this.getIfOptionNumber(item)
+          str += "{"
+          str += this.unparse(item.include)
+          str += "}"
+          str += "{"
+          str += this.unparse(item.secondInclude || [])
+          str += "}"
+        }
       }
     })
     return str
   }
+
+
+  getIfOptionNumber(item: Block) {
+    if (item.condition) {
+      if (item.condition == "Дорога справа") { return 1 }
+      else if (item.condition == "Дорога слева") { return 2 }
+      else if (item.condition == "Дорога сверху") { return 3 }
+      else if (item.condition == "Дорога снизу") { return 4 }
+    }
+    return 1
+  }
+
+  getIfOptionByNumber(i: number) {
+    if (i == 1) {return "Дорога справа"}
+    else if (i == 2) {return "Дорога слева"}
+    else if (i == 3) {return "Дорога сверху"}
+    else {return "Дорога снизу"}    
+  }
+
+
 
   async clickRun() {
     this.isButtonActive = false
@@ -282,11 +345,37 @@ export class SolvePageComponent {
           this.rotateRight()
           await sleep(sleepTime)
         }
-      } else {
+      } else if (commands[i].type == "composite") {
         if (commands[i].text == "Повторить") {
           for (let j = 0; j < (commands[i].numberOfRepeats || 2); j++) {
             error = await this.runProgram(commands[i].include)
             if (error) { break }
+          }
+        } else if (commands[i].text == "Если") {          
+          if (commands[i].condition == "Дорога справа") {
+            if (this.isRoad(1, 0)) { error = await this.runProgram(commands[i].include) }
+          } else if (commands[i].condition == "Дорога слева") {
+            if (this.isRoad(-1, 0)) { error = await this.runProgram(commands[i].include) }
+          } else if (commands[i].condition == "Дорога сверху") {
+            if (this.isRoad(0, -1)) { error = await this.runProgram(commands[i].include) }
+          } else if (commands[i].condition == "Дорога снизу") {
+            if (this.isRoad(0, 1)) { error = await this.runProgram(commands[i].include) }
+          }
+        }
+      } else if (commands[i].type == "double") {
+        if (commands[i].text == "Если") {          
+          if (commands[i].condition == "Дорога справа") {
+            if (this.isRoad(1, 0)) { error = await this.runProgram(commands[i].include) }
+            else { error = await this.runProgram(commands[i].secondInclude || []) }
+          } else if (commands[i].condition == "Дорога слева") {
+            if (this.isRoad(-1, 0)) { error = await this.runProgram(commands[i].include) }
+            else { error = await this.runProgram(commands[i].secondInclude || []) }
+          } else if (commands[i].condition == "Дорога сверху") {
+            if (this.isRoad(0, -1)) { error = await this.runProgram(commands[i].include) }
+            else { error = await this.runProgram(commands[i].secondInclude || []) }
+          } else if (commands[i].condition == "Дорога снизу") {
+            if (this.isRoad(0, 1)) { error = await this.runProgram(commands[i].include) }
+            else { error = await this.runProgram(commands[i].secondInclude || []) }
           }
         }
       }
@@ -332,6 +421,15 @@ export class SolvePageComponent {
       }
       this.cells[this.userTask.task.y * this.userTask.task.m + this.userTask.task.x] = "1"
     }
+  }
+
+  isRoad(shift_x: number, shift_y: number): boolean {
+    if (this.userTask?.task) {
+      let b1 = this.userTask.task.x + shift_x >= 0 && this.userTask.task.x + shift_x < this.userTask.task.m && this.userTask.task.y + shift_y >= 0 && this.userTask.task.y + shift_y < this.userTask.task.n
+      let b2 = this.cells[(this.userTask.task.y + shift_y) * this.userTask.task.m + (this.userTask.task.x + shift_x)] != "0"
+      return b1 && b2
+    }
+    return false
   }
 
   canTakeStep(): boolean {

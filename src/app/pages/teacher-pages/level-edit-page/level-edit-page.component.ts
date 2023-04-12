@@ -56,6 +56,7 @@ export class LevelEditPageComponent {
   }
 
   forOptions = [2, 3, 4, 5, 6, 7, 8]
+  ifOptions = ["Дорога справа", "Дорога слева", "Дорога сверху", "Дорога снизу"]
   commands: Block[] = []
   task: Task | undefined;
   cells: string[] = [];
@@ -156,7 +157,6 @@ export class LevelEditPageComponent {
   drop() {
     this.task = cloneTask(defaultTask)
     this.reset()
-    console.log(this.task)
   }
 
   transfer(event: CdkDragDrop<number[]>) {

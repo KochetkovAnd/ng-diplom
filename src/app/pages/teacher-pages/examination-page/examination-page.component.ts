@@ -16,9 +16,16 @@ const cloneBlock = (block: Block) => {
     text: block.text,
     color: block.color,
     include: [],
+    secondInclude: [],
   }
   if (block.numberOfRepeats) {
     clone.numberOfRepeats = block.numberOfRepeats
+  }
+  if (block.condition) {
+    clone.condition = block.condition
+  }
+  if (block.secondText) {
+    clone.secondText = block.secondText
   }
   return clone
 }
@@ -110,6 +117,7 @@ export class ExaminationPageComponent {
 
   forOptions = [2, 3, 4, 5, 6, 7, 8]
   markOptions = [1,2,3,4,5,6,7,8,9,10]
+  ifOptions = ["Дорога справа", "Дорога слева", "Дорога сверху", "Дорога снизу"]
 
   userId = Number(this.route.snapshot.paramMap.get('userId'))
   taskId = Number(this.route.snapshot.paramMap.get('taskId'))
@@ -149,16 +157,41 @@ export class ExaminationPageComponent {
       let command = this.getBlockById(parseInt(line[i]))
       if (command) {
         items.push(command)
-        if (command.text == "Повторить") {
-          command.numberOfRepeats = parseInt(line[i + 1])
-          let endBrace = findEndBrace(line, i + 2)
-          this.parse(line.slice(i + 3, endBrace), command.include)
-          i = endBrace
-        }
+        if (command.type == "composite") {
+          if (command.text == "Повторить") {
+            command.numberOfRepeats = parseInt(line[i + 1])
+            let endBrace = findEndBrace(line, i + 2)
+            this.parse(line.slice(i + 3, endBrace), command.include)
+            i = endBrace
+          } else if (command.text == "Если") {
+            command.condition = this.getIfOptionByNumber(parseInt(line[i + 1]))
+            let endBrace = findEndBrace(line, i + 2)
+            this.parse(line.slice(i + 3, endBrace), command.include)
+            i = endBrace
+          }
+        } else if (command.type == "double") {
+          if (command.text == "Если") {
+            command.condition = this.getIfOptionByNumber(parseInt(line[i + 1]))
+            let endBrace = findEndBrace(line, i + 2)
+            this.parse(line.slice(i + 3, endBrace), command.include)
+            i = endBrace
+            endBrace = findEndBrace(line, i + 1)
+            this.parse(line.slice(i + 2, endBrace), command.secondInclude)
+            i = endBrace
+          }
+        }       
       }
       i++
     }
   }
+
+  getIfOptionByNumber(i: number) {
+    if (i == 1) {return "Дорога справа"}
+    else if (i == 2) {return "Дорога слева"}
+    else if (i == 3) {return "Дорога сверху"}
+    else {return "Дорога снизу"}    
+  }
+
 
   async clickRun() {
     this.animationTime = '0.3s'
@@ -173,6 +206,7 @@ export class ExaminationPageComponent {
 
   async runProgram(commands: Block[]): Promise<boolean> {
 
+    
     let i = 0;
     let error = false
 
@@ -192,17 +226,54 @@ export class ExaminationPageComponent {
           this.rotateRight()
           await sleep(sleepTime)
         }
-      } else {
+      } else if (commands[i].type == "composite") {
         if (commands[i].text == "Повторить") {
           for (let j = 0; j < (commands[i].numberOfRepeats || 2); j++) {
             error = await this.runProgram(commands[i].include)
             if (error) { break }
+          }
+        } else if (commands[i].text == "Если") {          
+          if (commands[i].condition == "Дорога справа") {
+            
+            if (this.isRoad(1, 0)) { error = await this.runProgram(commands[i].include) }
+          } else if (commands[i].condition == "Дорога слева") {
+            if (this.isRoad(-1, 0)) { error = await this.runProgram(commands[i].include) }
+          } else if (commands[i].condition == "Дорога сверху") {
+            if (this.isRoad(0, -1)) { error = await this.runProgram(commands[i].include) }
+          } else if (commands[i].condition == "Дорога снизу") {
+            if (this.isRoad(0, 1)) { error = await this.runProgram(commands[i].include) }
+          }
+        }
+      } else if (commands[i].type == "double") {
+        if (commands[i].text == "Если") {          
+          if (commands[i].condition == "Дорога справа") {
+            if (this.isRoad(1, 0)) { error = await this.runProgram(commands[i].include) }
+            else { error = await this.runProgram(commands[i].secondInclude || []) }
+          } else if (commands[i].condition == "Дорога слева") {
+            if (this.isRoad(-1, 0)) { error = await this.runProgram(commands[i].include) }
+            else { error = await this.runProgram(commands[i].secondInclude || []) }
+          } else if (commands[i].condition == "Дорога сверху") {
+            if (this.isRoad(0, -1)) { error = await this.runProgram(commands[i].include) }
+            else { error = await this.runProgram(commands[i].secondInclude || []) }
+          } else if (commands[i].condition == "Дорога снизу") {
+            if (this.isRoad(0, 1)) { error = await this.runProgram(commands[i].include) }
+            else { error = await this.runProgram(commands[i].secondInclude || []) }
           }
         }
       }
       i++
     }
     return error
+  }
+
+
+  isRoad(shift_x: number, shift_y: number): boolean {
+    if (this.taskClone) {
+      let b1 = this.taskClone.x + shift_x >= 0 && this.taskClone.x + shift_x < this.taskClone.m && this.taskClone.y + shift_y >= 0 && this.taskClone.y + shift_y < this.taskClone.n
+      let b2 = this.cells[(this.taskClone.y + shift_y) * this.taskClone.m + (this.taskClone.x + shift_x)] != "0"
+      return b1 && b2
+    }
+    return false
   }
 
   rotateRight(): void {
@@ -246,7 +317,7 @@ export class ExaminationPageComponent {
     }    
   }
 
-  canTakeStep(): boolean {
+  canTakeStep(): boolean { 
     if (this.taskClone) {
       if (this.taskClone.angle % 360 == 0) {
         if (this.taskClone.y - 1 < 0) {

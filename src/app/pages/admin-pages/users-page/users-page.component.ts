@@ -146,7 +146,6 @@ export class UsersPageComponent {
   async sureDeleteStudent() {
     if (this.deletedStudent) {
       let response = await lastValueFrom(this.httpService.sureDeleteUserById(this.deletedStudent.id))
-      console.log(response)
       this.students.splice(this.deletedStudentI, 1)
       this.isStudentDelete = false
     }    

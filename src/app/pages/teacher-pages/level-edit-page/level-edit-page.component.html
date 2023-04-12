@@ -9,14 +9,39 @@
                 <input type="checkbox" (change)="onChange(command)" [checked]="getPos(command) != -1" />
                 <div class="command" [ngStyle]="{'background-color' : command.color }">
                     {{command.text}}
-                    <span *ngIf="command.text == 'Повторить'">
-                        <select [(ngModel)]="command.numberOfRepeats">
-                            <option *ngFor="let option of forOptions" [value]="option">{{option}}</option>
-                        </select>
-                        Раз
-                    </span>
-                    <ul *ngIf="command.type == 'composite'" class="program-ul">
-                    </ul>
+
+                    <ng-container *ngIf="command.type == 'composite'">
+
+                        <span *ngIf="command.text == 'Повторить'">
+                            <select [(ngModel)]="command.numberOfRepeats">
+                                <option *ngFor="let option of forOptions" [value]="option">{{option}}</option>
+                            </select>
+                            Раз
+                        </span>
+
+                        <span *ngIf="command.text == 'Если'">
+                            <select [(ngModel)]="command.condition">
+                                <option *ngFor="let option of ifOptions" [value]="option">{{option}}</option>
+                            </select>
+                        </span>
+
+                        
+
+                        <ul class="program-ul"></ul>
+                    </ng-container>
+
+                    <ng-container *ngIf="command.type == 'double'">
+
+                        <span *ngIf="command.text == 'Если'">
+                            <select [(ngModel)]="command.condition">
+                                <option *ngFor="let option of ifOptions" [value]="option">{{option}}</option>
+                            </select>
+                        </span>
+
+                        <ul class="program-ul"></ul>
+                        {{command.secondText}}
+                        <ul class="program-ul"></ul>
+                    </ng-container>
                 </div>
             </div>
         </div>

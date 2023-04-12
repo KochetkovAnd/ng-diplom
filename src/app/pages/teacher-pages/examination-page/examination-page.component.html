@@ -3,45 +3,116 @@
 <div class="main-container" *ngIf="userTask">
 
     <div class="program-block">
-        <ul class="program-ul">
+       <ul class="program-ul">
             <li *ngFor="let item of program" [class.simple-block]="item.type == 'simple'"
-                [class.composite-block]="item.type == 'composite'" class="program-li" [ngStyle]="{
+                [class.composite-block]="item.type == 'composite' || item.type == 'double'" class="program-li" [ngStyle]="{
                 'background-color' : item.color
             }">
                 {{item.text}}
-                <span *ngIf="item.text == 'Повторить'">
-                    <select [(ngModel)] = "item.numberOfRepeats" [disabled] = "true">
-                        <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
-                    </select>
-                    Раз
-                </span>
+                <ng-container *ngIf="item.type == 'composite'">
+                    <span *ngIf="item.text == 'Повторить'">
+                        <select [disabled]="true" [(ngModel)]="item.numberOfRepeats">
+                            <option *ngFor="let option of forOptions" [value]="option">{{option}}</option>
+                        </select>
+                        Раз
+                    </span>
+                    <span *ngIf="item.text == 'Если'">
+                        <select [disabled]="true" [(ngModel)]="item.condition">
+                            <option *ngFor="let option of ifOptions" [value]="option">{{option}}</option>
+                        </select>
+                    </span> 
+                </ng-container>
+
+                <ng-container *ngIf="item.type == 'double'">
+                    <span *ngIf="item.text == 'Если'">
+                        <select [disabled]="true" [(ngModel)]="item.condition">
+                            <option *ngFor="let option of ifOptions" [value]="option">{{option}}</option>
+                        </select>
+                    </span>
+                </ng-container>                
+
                 <ng-template #recusiveItem let-item="item">
-                    <ul  class="program-ul">
+                    <ul class="program-ul">
                         <li *ngFor="let innerItem of item.include" [class.simple-block]="innerItem.type == 'simple'"
-                            [class.composite-block]="innerItem.type == 'composite'" class="program-li" [ngStyle]="{
+                            [class.composite-block]="innerItem.type == 'composite' || innerItem.type == 'double'" class="program-li" 
+                            [ngStyle]="{
                             'background-color' : innerItem.color
-                        }">                            
+                        }">
+                            
                             {{innerItem.text}}
-                            <span *ngIf="innerItem.text == 'Повторить'">
-                                <select [(ngModel)] = "innerItem.numberOfRepeats" [disabled] = "true">
-                                    <option *ngFor= "let option of forOptions" [value] = "option">{{option}}</option>
-                                </select>
-                                Раз
-                            </span>
-                            <div *ngIf="innerItem.type == 'composite'">
+                            <ng-container *ngIf="innerItem.type == 'composite'">
+                                <span *ngIf="innerItem.text == 'Повторить'">
+                                    <select [disabled]="true" [(ngModel)]="innerItem.numberOfRepeats">
+                                        <option *ngFor="let option of forOptions" [value]="option">{{option}}</option>
+                                    </select>
+                                    Раз
+                                </span>
+                                <span *ngIf="innerItem.text == 'Если'">
+                                    <select [disabled]="true" [(ngModel)]="innerItem.condition">
+                                        <option *ngFor="let option of ifOptions" [value]="option">{{option}}</option>
+                                    </select>
+                                </span> 
+                            </ng-container>
+            
+                            <ng-container *ngIf="innerItem.type == 'double'">
+                                <span *ngIf="innerItem.text == 'Если'">
+                                    <select [disabled]="true" [(ngModel)]="innerItem.condition">
+                                        <option *ngFor="let option of ifOptions" [value]="option">{{option}}</option>
+                                    </select>
+                                </span>
+                            </ng-container>
+                            <div *ngIf="innerItem.type == 'composite' || innerItem.type == 'double'">
                                 <ng-container *ngTemplateOutlet="recusiveItem; context:{ item: innerItem}">
                                 </ng-container>
                             </div>
 
                         </li>
                     </ul>
+                    <ng-container *ngIf = "item.type == 'double'">
+                        {{item.secondText}} 
+                        <ul class="program-ul">
+                        <li *ngFor="let innerItem of item.secondInclude" [class.simple-block]="innerItem.type == 'simple'"
+                            [class.composite-block]="innerItem.type == 'composite' || innerItem.type == 'double'" class="program-li"
+                            [ngStyle]="{
+                            'background-color' : innerItem.color
+                        }">
+                            <div class="command-line" *cdkDragPlaceholder style="background-color: blueviolet;"></div>
+                            {{innerItem.text}}
+                            <ng-container *ngIf="innerItem.type == 'composite'">
+                                <span *ngIf="innerItem.text == 'Повторить'">
+                                    <select [disabled]="true" [(ngModel)]="innerItem.numberOfRepeats">
+                                        <option *ngFor="let option of forOptions" [value]="option">{{option}}</option>
+                                    </select>
+                                    Раз
+                                </span>
+                                <span *ngIf="innerItem.text == 'Если'">
+                                    <select [disabled]="true" [(ngModel)]="innerItem.condition">
+                                        <option *ngFor="let option of ifOptions" [value]="option">{{option}}</option>
+                                    </select>
+                                </span> 
+                            </ng-container>
+            
+                            <ng-container *ngIf="innerItem.type == 'double'">
+                                <span *ngIf="innerItem.text == 'Если'">
+                                    <select [(ngModel)]="innerItem.condition" [disabled] = "true">
+                                        <option *ngFor="let option of ifOptions" [value]="option">{{option}}</option>
+                                    </select>
+                                </span>
+                            </ng-container>
+                            <div *ngIf="innerItem.type == 'composite' || innerItem.type == 'double'">
+                                <ng-container *ngTemplateOutlet="recusiveItem; context:{ item: innerItem}">
+                                </ng-container>
+                            </div>
+                        </li>
+                    </ul>
+                    </ng-container>
                 </ng-template>
 
-                <div *ngIf="item.type == 'composite'">
+                <div *ngIf="item.type == 'composite' || item.type == 'double'">
                     <ng-container *ngTemplateOutlet="recusiveItem; context:{ item: item}"></ng-container>
                 </div>
             </li>
-        </ul>        
+        </ul>
         <button class="play-button" (click) = "clickRun()">Запустить</button>        
     </div>
 
