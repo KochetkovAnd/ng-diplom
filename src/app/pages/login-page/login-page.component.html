@@ -1,6 +1,9 @@
 <div class="login-form">
     <div class="image-side">
-        <img src="assets/logo.jpg"/>
+        <div class="image-block" (mouseleave)="onMouseOver()" (mousemove)="onMouseMove($event)">
+            <img src="assets/logo.jpg" />
+        </div>
+        
     </div>
     <div class="login-side">
         <p class="big">Вход</p>

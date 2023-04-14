@@ -49,4 +49,44 @@ export class LoginPageComponent {
       this.error = "неправильный логин или пароль"           
     }
   }
+
+  onMouseMove(event: MouseEvent) {
+    const image = document.querySelector('img');
+    const imageblock = document.querySelector('.image-block') as HTMLImageElement;
+    const imageside = document.querySelector('.image-side') as HTMLImageElement;
+    const loginform = document.querySelector('.login-form') as HTMLImageElement;
+    if (image) {
+      if (imageblock) {
+
+        const imageblockX = imageblock.offsetLeft
+        const imageblockY = imageblock.offsetTop
+
+        const imagesideX = imageside.offsetLeft
+        const imagesideY = imageside.offsetTop
+
+        const loginformX = loginform.offsetLeft
+        const loginformY = loginform.offsetTop
+
+        const mouseX = event.pageX - (imageblockX + imagesideX + loginformX + 150);
+        const mouseY = event.pageY - (imageblockY + imagesideY + loginformY + 110);
+        
+        const x = (mouseX / 320) * 100;
+        const y = (mouseY / 240) * 100;
+        image.style.transform = `rotateX(${-y}deg) rotateY(${x}deg)`;
+        
+      }      
+    }
+    
+  }
+
+  onMouseOver() {
+    const image = document.querySelector('img');
+    if (image) {
+      image.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    }
+  }
+
+  
+
+  
 }
