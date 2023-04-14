@@ -27,9 +27,10 @@
 }
 
 .left-container {
-    width: calc(30vw - 40px);
-    height: calc(100vh - 140px);
+    width: calc(30vw - 75px);
+    height: calc(100vh - 60px);
     margin: 20px;
+    margin-left: 90px ;
     background-color: #fbf7ff;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
@@ -37,12 +38,12 @@
 }
 
 .central-container {
-    width: 30vw;
+    width: calc(30vw - 35px);
 }
 
 .right-container {
     width: calc(40vw - 80px);
-    height: calc(100vh - 140px);
+    height: calc(100vh - 60px);
     margin: 20px;
     background-color: #fbf7ff;
     border-radius: 10px;

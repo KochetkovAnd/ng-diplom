@@ -1,6 +1,6 @@
 .container {     
-    width: calc(80% - 20px);
-    margin: 20px 10%;
+    width: calc(80% - 90px);
+    margin: 20px 10% 20px calc(10% + 70px);
     padding: 10px;
     border-radius: 10px;
     background-color: #fbf7ff;

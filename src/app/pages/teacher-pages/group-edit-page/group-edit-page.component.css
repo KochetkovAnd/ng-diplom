@@ -1,6 +1,6 @@
 .main-container {
     display: flex;
-    height: calc(100% - 80px);
+    height: 100%;
 }
 
 .container {
@@ -8,11 +8,12 @@
 }
 
 .left {
-    width: 40%;
+    width: calc(40% - 35px);
+    margin-left: 70px;
 }
 
 .right {
-    width: 60%;
+    width: calc(60% - 35px);
 }
 
 .group-name-container {
