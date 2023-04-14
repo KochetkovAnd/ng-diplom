@@ -1,10 +1,20 @@
+/* 
+Light shades #F3F1F0
+Light accent #585CB0
+Main brand color #4E88C2
+Dark accent #60447B
+Dark shades #16183E hover:#0d0e24
+*/
+
+
+
 .main-container {
     display: flex;
 }
 
 .container {
-    width: 50%;
-    height: calc(100vh - 80px);
+    width: calc(50% - 35px);
+    height: 100vh;
 }
 
 .data-container {
@@ -58,7 +68,7 @@
     margin: 10px 5%;
     padding: 10px;
     width: 90%;
-    height: calc(100vh - 250px);
+    height: calc(100vh - 170px);
     background-color: #fbf7ff;
     border-radius: 10px;
     box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.3);    

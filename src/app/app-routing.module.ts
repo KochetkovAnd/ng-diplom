@@ -34,7 +34,6 @@ const routes: Routes = [
   { path: 'group-stats/:id', component: GroupStatsPageComponent, canActivate: [RoleGuard]},
   { path: 'examination/:userId/:taskId', component: ExaminationPageComponent, canActivate: [RoleGuard]},
   { path: 'charts/:id', component: ChartPageComponent, canActivate :[RoleGuard]},
-  { path: 'ddd', component: StudentNavbarVComponent},
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

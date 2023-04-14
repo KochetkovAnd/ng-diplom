@@ -12,7 +12,7 @@ nav {
     left: 0;
     width: 70px;
     height: 100vh;
-    background-color: #16183E;
+    background-color: #12263a;
     transition: 0.5s;
     
 }
@@ -28,14 +28,14 @@ nav ul {
 }
 
 nav ul li {
-    background-color: #16183E;
+    background-color: #12263a;
     display: flex;
     overflow: hidden;
     
 }
 
 nav ul li:hover {
-    background-color: #0d0e24;
+    background-color: #031930;
 }
 
 nav ul li p{
