@@ -1,0 +1,23 @@
+<nav [class.open]= "isOpen">
+    <ul>
+        <li (click) = "isOpen = !isOpen" class = "open-button">
+            <img src="../../../assets/navbar/menu.png">
+        </li>
+        <li routerLink="/users">
+            <img src="../../../assets/navbar/user.png">
+            <p *ngIf="isOpen">Пользователи</p>
+        </li>
+        <li routerLink="/groups-admin">            
+            <img src="../../../assets/navbar/group.png">
+            <p *ngIf="isOpen">Группы</p>
+        </li>        
+        <li style="margin-top: calc(100vh - 350px);" routerLink="/info">
+            <img src="../../../assets/navbar/info.png">
+            <p *ngIf="isOpen">Справка</p>
+        </li>
+        <li (click) = "onClick()">
+            <img src="../../../assets/navbar/exit.png">
+            <p *ngIf="isOpen">Выход</p>
+        </li>     
+    </ul>
+</nav>

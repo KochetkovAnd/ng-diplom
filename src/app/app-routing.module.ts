@@ -15,6 +15,9 @@ import { GroupStatsPageComponent } from './pages/teacher-pages/group-stats-page/
 import { ExaminationPageComponent } from './pages/teacher-pages/examination-page/examination-page.component';
 import { InfoPageComponent } from './pages/info-page/info-page.component';
 import { ChartPageComponent } from './pages/teacher-pages/chart-page/chart-page.component';
+import { TeacherNavbarVComponent } from './components/vertical-navbars/teacher-navbar-v/teacher-navbar-v.component';
+import { AdminNavbarVComponent } from './components/vertical-navbars/admin-navbar-v/admin-navbar-v.component';
+import { StudentNavbarVComponent } from './components/vertical-navbars/student-navbar-v/student-navbar-v.component';
 
 const routes: Routes = [  
   { path: 'login', component: LoginPageComponent },
@@ -31,6 +34,7 @@ const routes: Routes = [
   { path: 'group-stats/:id', component: GroupStatsPageComponent, canActivate: [RoleGuard]},
   { path: 'examination/:userId/:taskId', component: ExaminationPageComponent, canActivate: [RoleGuard]},
   { path: 'charts/:id', component: ChartPageComponent, canActivate :[RoleGuard]},
+  { path: 'ddd', component: StudentNavbarVComponent},
   { path: '**', redirectTo: '/login', pathMatch: 'full'},
 ];
 

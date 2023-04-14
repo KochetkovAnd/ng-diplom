@@ -1,0 +1,62 @@
+/* 
+Light shades #F3F1F0
+Light accent #585CB0
+Main brand color #4E88C2
+Dark accent #60447B
+Dark shades #16183E #0d0e24
+*/
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 100vh;
+    background-color: #16183E;
+    transition: 0.5s;
+    
+}
+
+nav ul {
+    overflow: hidden;
+    
+}
+
+.open {
+    width: 280px;
+    transition: 0.5s;
+}
+
+nav ul li {
+    background-color: #16183E;
+    display: flex;
+    overflow: hidden;
+    
+}
+
+nav ul li:hover {
+    background-color: #0d0e24;
+}
+
+nav ul li p{
+    margin: 20px;
+    width: 160px;
+    line-height: 30px;
+    font-size: 16px;
+    color: #F3F1F0;
+    white-space: nowrap;
+}
+
+img {
+    width: 30px;
+    height: 30px; 
+    margin: 20px;   
+    object-fit: contain;
+    transition: 0.5s;
+}
+
+
+.open .open-button img{
+    rotate: 90deg;
+    transition: 0.5s;
+}

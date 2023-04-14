@@ -29,6 +29,9 @@ import { InfoPageComponent } from './pages/info-page/info-page.component';
 import { ChartPageComponent } from './pages/teacher-pages/chart-page/chart-page.component';
 import { MainChartComponent } from './components/main-chart/main-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { TeacherNavbarVComponent } from './components/vertical-navbars/teacher-navbar-v/teacher-navbar-v.component';
+import { AdminNavbarVComponent } from './components/vertical-navbars/admin-navbar-v/admin-navbar-v.component';
+import { StudentNavbarVComponent } from './components/vertical-navbars/student-navbar-v/student-navbar-v.component';
 
 
 @NgModule({
@@ -52,7 +55,10 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
     InfoPageComponent,
     ChartPageComponent,
     MainChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    TeacherNavbarVComponent,
+    AdminNavbarVComponent,
+    StudentNavbarVComponent
     
   ],
   imports: [
