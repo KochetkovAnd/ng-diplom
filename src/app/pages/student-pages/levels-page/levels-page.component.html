@@ -1,43 +1,45 @@
-<navbar-student></navbar-student>
+<student-navbar-v></student-navbar-v>
 
 
-
-<div class="container">
-    <div class="help">
-        <div class="status">
-            <div class="f">Статусы</div>
-            <div class="block">
-                <div class="square" style="border: 3px solid #FF8F00;">1</div>
-                <p> - Новый</p>
+<div style="display: flex;">
+    <div class="container">
+        <div class="help">
+            <div class="status">
+                <div class="f">Статусы</div>
+                <div class="block">
+                    <div class="square" style="border: 3px solid #FF8F00;">1</div>
+                    <p> - Новый</p>
+                </div>
+                <div class="block">
+                    <div class="square" style="border: 3px solid #F2EA00;">1</div>
+                    <p> - В процессе</p>
+                </div>
+                <div class="block">
+                    <div class="square" style="border: 3px solid #00FF3D;">1</div>
+                    <p> - На проверке</p>
+                </div>
+                <div class="block">
+                    <div class="square" style="border: 3px solid #009122;">1</div>
+                    <p> - Проверено</p>
+                </div>
+                
             </div>
-            <div class="block">
-                <div class="square" style="border: 3px solid #F2EA00;">1</div>
-                <p> - В процессе</p>
+            <div class="legend">
+                <p class="number">№</p>
+                <p class="task-name">Название задания</p>
+                <!-- <p class="task-status">Статус</p> -->
+                <p class="task-mark">Оценка</p>
             </div>
-            <div class="block">
-                <div class="square" style="border: 3px solid #00FF3D;">1</div>
-                <p> - На проверке</p>
-            </div>
-            <div class="block">
-                <div class="square" style="border: 3px solid #009122;">1</div>
-                <p> - Проверено</p>
-            </div>
-            
         </div>
-        <div class="legend">
-            <p class="number">№</p>
-            <p class="task-name">Название задания</p>
-            <!-- <p class="task-status">Статус</p> -->
-            <p class="task-mark">Оценка</p>
+        
+        <div class="task-card" *ngFor="let card of cards; index as i" routerLink="/level/{{card.task.id}}">
+            <p class="number" [ngStyle]="{
+                    'border' : '5px solid' + card.color
+                }">{{i+1}}</p>
+            <p class="task-name">{{card.task.name}}</p>
+            <!-- <p class="task-status">{{card.status}}</p> -->
+            <p class="task-mark">{{card.mark}}</p>
         </div>
-    </div>
-    
-    <div class="task-card" *ngFor="let card of cards; index as i" routerLink="/level/{{card.task.id}}">
-        <p class="number" [ngStyle]="{
-                'border' : '5px solid' + card.color
-            }">{{i+1}}</p>
-        <p class="task-name">{{card.task.name}}</p>
-        <!-- <p class="task-status">{{card.status}}</p> -->
-        <p class="task-mark">{{card.mark}}</p>
     </div>
 </div>
+
